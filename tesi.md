@@ -1,4 +1,4 @@
-![frontespizio](frontespizio.jpg)
+<img src="frontespizio.jpg" alt="frontespizio" style="zoom:200%;" />
 
 ------
 
@@ -3768,7 +3768,8 @@ Reference: "A Knowledge Base for Predicting Protein Localization  Sites in Eukar
 
 **Relevant Papers:**
 
-[^1]: Paul Horton & Kenta Nakai: "A Probablistic Classification System for Predicting the Cellular Localization Sites of  Proteins".Intelligent Systems in Molecular Biology, 109-115. St. Louis,  USA 1996. 
+Paul Horton & Kenta Nakai: "A Probablistic Classification System for Predicting the Cellular Localization Sites of  Proteins".Intelligent Systems in Molecular Biology, 109-115. St. Louis,  USA 1996. 
+
 ## optical_digits
 
 **Data Set Information:**
@@ -3784,8 +3785,10 @@ The last attribute is the class code 0..9
 
 **Relevant Papers:**
 
-[^1]: C. Kaynak (1995): Methods of Combining Multiple  Classifiers and Their Applications to Handwritten Digit Recognition, MSc Thesis, Institute of Graduate Studies in Science and Engineering,  Bogazici University. 
-[^2]: E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika. 
+C. Kaynak (1995): Methods of Combining Multiple  Classifiers and Their Applications to Handwritten Digit Recognition, MSc Thesis, Institute of Graduate Studies in Science and Engineering,  Bogazici University.
+
+E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika. 
+
 ## satimage
 
 **Dataset informations**
@@ -3840,8 +3843,9 @@ All input attributes are integers in the range 0..100. The last attribute is the
 
 **Relevant Papers:**
 
-[^1]: F. Alimoglu (1996)Combining Multiple Classifiers for  Pen-Based Handwritten Digit Recognition, MSc Thesis, Institute of  Graduate Studies in Science and Engineering, Bogazici University. 
-[^2]: F. Alimoglu, E. Alpaydin "Methods of Combining Multiple Classifiers Based on Different Representations for Pen-based Handwriting  Recognition," Proceedings of the Fifth Turkish Artificial Intelligence  and Artificial Neural Networks Symposium (TAINN 96), June 1996,  Istanbul, Turkey. 
+F. Alimoglu (1996)Combining Multiple Classifiers for  Pen-Based Handwritten Digit Recognition, MSc Thesis, Institute of  Graduate Studies in Science and Engineering, Bogazici University. 
+
+F. Alimoglu, E. Alpaydin "Methods of Combining Multiple Classifiers Based on Different Representations for Pen-based Handwriting  Recognition," Proceedings of the Fifth Turkish Artificial Intelligence  and Artificial Neural Networks Symposium (TAINN 96), June 1996,  Istanbul, Turkey. 
 
 ## abalone
 
@@ -3868,8 +3872,9 @@ Given is the attribute name, attribute type, the measurement unit and a brief de
 
 **Relevant Papers:**
 
-[^1]: Sam Waugh (1995) "Extending and benchmarking  Cascade-Correlation", PhD thesis, Computer Science Department,  University of Tasmania.
-[^2]: David Clark Zoltan Schreter, Anthony Adams "A Quantitative Comparison of  Dystal and Backpropagation", submitted to the Australian Conference on  Neural Networks (ACNN'96).
+Sam Waugh (1995) "Extending and benchmarking  Cascade-Correlation", PhD thesis, Computer Science Department,  University of Tasmania.
+
+David Clark Zoltan Schreter, Anthony Adams "A Quantitative Comparison of  Dystal and Backpropagation", submitted to the Australian Conference on  Neural Networks (ACNN'96).
 
 ## sick_euthyroid
 
@@ -3889,8 +3894,9 @@ N/A
 
 **Relevant Papers:**
 
-[^1]:Quinlan,J.R., Compton,P.J., Horn,K.A., &  Lazurus,L. (1986). Inductive knowledge acquisition: A case study. In  Proceedings of the Second Australian Conference on Applications of  Expert Systems.  Sydney, Australia. 
-[^2]: Quinlan,J.R. (1986). Induction of decision trees. Machine Learning, 1, 81--106. 
+Quinlan,J.R., Compton,P.J., Horn,K.A., &  Lazurus,L. (1986). Inductive knowledge acquisition: A case study. In  Proceedings of the Second Australian Conference on Applications of  Expert Systems.  Sydney, Australia. 
+
+Quinlan,J.R. (1986). Induction of decision trees. Machine Learning, 1, 81--106. 
 
 ## spectrometer
 
@@ -3925,7 +3931,7 @@ The original Fortran data file is given in spectra-2.data.  The file spectra-2.h
 
 **Relevant Papers:**
 
-[^1]: A NASA-Ames research group concerned with unsupervised learning tasks may have used this database during their empirical  studies of their algorithm/system (AUTOCLASS II).  See the 1988 Machine  Learning Conference Proceedings, 54-64, for a description of their  algorithm.
+A NASA-Ames research group concerned with unsupervised learning tasks may have used this database during their empirical  studies of their algorithm/system (AUTOCLASS II).  See the 1988 Machine  Learning Conference Proceedings, 54-64, for a description of their  algorithm.
 
 ## car_eval_34
 
@@ -3945,9 +3951,11 @@ The features are described in the paper by Cole and  Fanty cited above.  The fea
 
 **Relevant Papers:**
 
-[^1]:  Fanty, M., Cole, R. (1991). Spoken letter  recognition.  In Lippman, R. P., Moody, J., and Touretzky, D. S. (Eds).  Advances in Neural Information Processing Systems 3.  San Mateo, CA:  Morgan Kaufmann. 
-[^2]:  Dietterich, T. G., Bakiri, G. (1991) Error-correcting output codes: A general method for improving multiclass inductive learning programs.  Proceedings of the Ninth National Conference on Artificial Intelligence (AAAI-91), Anaheim, CA: AAAI Press. 
-[^3]: Dietterich, T. G., Bakiri, G. (1994) Solving Multiclass Learning Problems via Error-Correcting Output Codes. 
+Fanty, M., Cole, R. (1991). Spoken letter  recognition.  In Lippman, R. P., Moody, J., and Touretzky, D. S. (Eds).  Advances in Neural Information Processing Systems 3.  San Mateo, CA:  Morgan Kaufmann. 
+
+Dietterich, T. G., Bakiri, G. (1991) Error-correcting output codes: A general method for improving multiclass inductive learning programs.  Proceedings of the Ninth National Conference on Artificial Intelligence (AAAI-91), Anaheim, CA: AAAI Press. 
+
+Dietterich, T. G., Bakiri, G. (1994) Solving Multiclass Learning Problems via Error-Correcting Output Codes. 
 
 ## us_crime
 
@@ -3998,8 +4006,9 @@ Predicted Attribute: Localization site of protein. (non-numeric). The references
 
 **Relevant Papers:**
 
-[^1]: "Expert Sytem for Predicting Protein Localization Sites  in Gram-Negative Bacteria", Kenta Nakai & Minoru Kanehisa,  PROTEINS: Structure, Function, and Genetics 11:95-110, 1991. 
-[^2]: "A Knowledge Base for Predicting Protein Localization  Sites in Eukaryotic Cells", Kenta Nakai & Minoru Kanehisa, Genomics  14:897-911, 1992.http://rexa.info/paper/fbb500f26399f3ca970053524afd131478039353)
+"Expert Sytem for Predicting Protein Localization Sites  in Gram-Negative Bacteria", Kenta Nakai & Minoru Kanehisa,  PROTEINS: Structure, Function, and Genetics 11:95-110, 1991.
+
+"A Knowledge Base for Predicting Protein Localization  Sites in Eukaryotic Cells", Kenta Nakai & Minoru Kanehisa, Genomics  14:897-911, 1992.http://rexa.info/paper/fbb500f26399f3ca970053524afd131478039353)
 
 
 
@@ -4007,7 +4016,7 @@ Predicted Attribute: Localization site of protein. (non-numeric). The references
 
 No additional information provided by the source.
 
-[^1]:Matthew R. Boutell, Jiebo Luo, Xipeng Shen, and Christopher M. Brown.  Learning multi-label scene classification.  *Pattern Recognition*, 37(9):1757-1771, 2004.
+Matthew R. Boutell, Jiebo Luo, Xipeng Shen, and Christopher M. Brown.  Learning multi-label scene classification.  *Pattern Recognition*, 37(9):1757-1771, 2004.
 
 ## libras_move
 
@@ -4025,8 +4034,10 @@ In order to prepare these movements to be analysed by algorithms, we have carrie
 
 **Relevant Papers:**
 
-[^1]:DIAS, D. B.; MADEO, R. C. B.; ROCHA, T.; BÍSCARO, H. H.; PERES, S. M..  
+DIAS, D. B.; MADEO, R. C. B.; ROCHA, T.; BÍSCARO, H. H.; PERES, S. M..  
+
 Hand Movement Recognition for Brazilian Sign Language: A Study Using Distance-Based Neural Networks. In: 2009 International Joint Conference on Neural Networks, 2009, Atlanta, GA.  
+
 Proceedings of 2009 International Joint Conference on Neural Networks. Eau Claire, WI, USA : Documation LLC, 2009. p. 697-704.  Digital Object Identifier 10.1109/IJCNN.2009.5178917 
 
 ## thyroid_sick
@@ -4057,7 +4068,7 @@ N/A
 
 **Relevant Papers:**
 
-[^1]:P. van der Putten and M. van Someren (eds). CoIL  Challenge 2000: The Insurance Company Case. Published by Sentient  Machine Research, Amsterdam. Also a Leiden Institute of Advanced  Computer Science Technical Report 2000-09. June 22, 2000. 
+P. van der Putten and M. van Someren (eds). CoIL  Challenge 2000: The Insurance Company Case. Published by Sentient  Machine Research, Amsterdam. Also a Leiden Institute of Advanced  Computer Science Technical Report 2000-09. June 22, 2000. 
 
 ## arrhythmia
 
@@ -4075,19 +4086,15 @@ Different attributes for ECG measurement.
 
 **Relevant Papers:**
 
-[^1]: H. Altay Guvenir, Burak Acar, Gulsen Demiroz, Ayhan  Cekin "A Supervised Machine Learning Algorithm for Arrhythmia Analysis."  Proceedings of the Computers in Cardiology Conference, Lund, Sweden,  1997. 
+H. Altay Guvenir, Burak Acar, Gulsen Demiroz, Ayhan  Cekin "A Supervised Machine Learning Algorithm for Arrhythmia Analysis."  Proceedings of the Computers in Cardiology Conference, Lund, Sweden,  1997. 
 
 ## solar_flare_m0
 
 **Data Set Information:**
 
-Notes: 
-
-   -- The database contains 3 potential classes, one for the number  of times a certain type of solar flare occured in a 24 hour period. 
-   -- Each instance represents captured features for 1 active region on the sun. 
-   -- The data are divided into two sections. The second section  (flare.data2) has had much more error correction applied to the it, and  has consequently been treated as more reliable.
-
-
+- The database contains 3 potential classes, one for the number  of times a certain type of solar flare occured in a 24 hour period. 
+- Each instance represents captured features for 1 active region on the sun. 
+- The data are divided into two sections. The second section  (flare.data2) has had much more error correction applied to the it, and  has consequently been treated as more reliable.
 
 **Attribute Information:**
 
@@ -4133,7 +4140,7 @@ Gas Lift flow.
 
 **Relevant Papers:**
 
-[^1]:Vargas, Ricardo Emanuel Vaz, et al. "A realistic and public dataset with rare undesirable real events in oil wells." *Journal of Petroleum Science and Engineering* 181 (2019): 106223. 
+Vargas, Ricardo Emanuel Vaz, et al. "A realistic and public dataset with rare undesirable real events in oil wells." *Journal of Petroleum Science and Engineering* 181 (2019): 106223. 
 
 ## car_eval_4
 
@@ -4175,8 +4182,9 @@ Attributes:
 
 **Relevant Papers:**
 
-[^1]: M. Bohanec and V. Rajkovic. Knowledge acquisition and  explanation for multi-attribute decision making. In 8th Intl Workshop on Expert Systems and their Applications, Avignon, France. pages 59-78,  1988. 
-[^2]: B. Zupan, M. Bohanec, I. Bratko, J. Demsar. Machine learning by function decomposition. ICML-97, Nashville, TN. 1997 (to appear) 
+M. Bohanec and V. Rajkovic. Knowledge acquisition and  explanation for multi-attribute decision making. In 8th Intl Workshop on Expert Systems and their Applications, Avignon, France. pages 59-78,  1988. 
+
+B. Zupan, M. Bohanec, I. Bratko, J. Demsar. Machine learning by function decomposition. ICML-97, Nashville, TN. 1997 (to appear) 
 
 ## wine_quality
 
@@ -4185,8 +4193,6 @@ Attributes:
 The two datasets are related to red and white variants of the Portuguese "Vinho Verde" wine.  Due to privacy and logistic  issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand,  wine selling price, etc.).
 
 These datasets can be viewed as  classification or regression tasks.  The classes are ordered and not  balanced (e.g. there are many more normal wines than excellent or poor  ones). Outlier detection algorithms could be used to detect the few  excellent or poor wines. Also, we are not sure if all input variables  are relevant. So it could be interesting to test feature selection  methods.
-
-
 
 **Attribute Information:**
 
@@ -4206,17 +4212,13 @@ Input variables (based on physicochemical tests):
 Output variable (based on sensory data):  
    12 - quality (score between 0 and 10)
 
-
-
 **Relevant Papers:****Data Set Information:**
 
 The objective is to identify each of a large number of black-and-white rectangular pixel displays as one of the 26 capital  letters in the English alphabet.  The character images were based on 20  different fonts and each letter within these 20 fonts was randomly  distorted to produce a file of 20,000 unique stimuli.  Each stimulus was converted into 16 primitive numerical attributes (statistical moments  and edge counts) which were then scaled to fit into a range of integer  values from 0 through 15.  We typically train on the first 16000 items  and then use the resulting model to predict the letter category for the  remaining 4000.  See the article cited above for more details.
 
-
-
 **Attribute Information:**
 
-​	 
+ 
 
 1.	lettr	capital letter	(26 values from A to Z) 
 2.	x-box	horizontal position of box	(integer) 
@@ -4240,8 +4242,9 @@ The objective is to identify each of a large number of black-and-white rectangul
 
 **Relevant Papers:**
 
-[^1]: P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91)
-[^2]: P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J.  Reis. Modeling wine preferences by data mining from physicochemical  properties.  In Decision Support Systems, Elsevier, 47(4):547-553, 2009. 
+P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91)
+
+P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J.  Reis. Modeling wine preferences by data mining from physicochemical  properties.  In Decision Support Systems, Elsevier, 47(4):547-553, 2009. 
 
 ## letter_img
 
@@ -4251,29 +4254,27 @@ The objective is to identify each of a large number of black-and-white rectangul
 
 **Attribute Information:**
 
-	 1.	lettr	capital letter	(26 values from A to Z) 	 
-  	 2.	x-box	horizontal position of box	(integer) 
-    	 3.	y-box	vertical position of box	(integer) 
-      	 4.	width	width of box			(integer) 
-        	 5.	high 	height of box			(integer) 
-          	 6.	onpix	total # on pixels		(integer) 
-            	 7.	x-bar	mean x of on pixels in box	(integer)
-              	 8.	y-bar	mean y of on pixels in box	(integer) 
-                	 9.	x2bar	mean x variance			(integer) 
-                  	 10.	y2bar	mean y variance			(integer) 
-                    	 11.	xybar	mean x y correlation		(integer) 
-                      	 12.	x2ybr	mean of x * x * y		(integer)
-                        	 13.	xy2br	mean of x * y * y		(integer) 
-                          	 14.	x-ege	mean edge count left to right	(integer) 
-                            	 15.	xegvy	correlation of x-ege with y	(integer)
-                              	 16.	y-ege	mean edge count bottom to top	(integer) 
-                                	 17.	yegvx	correlation of y-ege with x	(integer)
-
-
+1. lettr	capital letter	(26 values from A to Z)
+1. x-box	horizontal position of box	(integer) 
+1. y-box	vertical position of box	(integer) 
+1. width	width of box			(integer) 
+1. high 	height of box			(integer) 
+1. onpix	total # on pixels		(integer) 
+1. x-bar	mean x of on pixels in box	(integer)
+1. y-bar	mean y of on pixels in box	(integer) 
+1. x2bar	mean x variance			(integer) 
+1. y2bar	mean y variance			(integer) 
+1. xybar	mean x y correlation		(integer) 
+1. x2ybr	mean of x * x * y		(integer)
+1. xy2br	mean of x * y * y		(integer) 
+1. x-ege	mean edge count left to right	(integer) 
+1. xegvy	correlation of x-ege with y	(integer)
+1. y-ege	mean edge count bottom to top	(integer) 
+1. yegvx	correlation of y-ege with x	(integer)
 
 **Relevant Papers:**
 
-[^1]: P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91) 
+P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91) 
 
 ## yeast_me2
 
@@ -4292,14 +4293,13 @@ N/A
 
 **Relevant Papers:**
 
-[^1] Mohammad, Rami, McCluskey, T.L. and Thabtah, Fadi  (2012) An Assessment of Features Related to Phishing Websites using an  Automated Technique. In: International Conferece For Internet Technology And Secured Transactions. ICITST 2012 . IEEE, London, UK, pp. 492-497.  ISBN 978-1-4673-5325-0
+Mohammad, Rami, McCluskey, T.L. and Thabtah, Fadi  (2012) An Assessment of Features Related to Phishing Websites using an  Automated Technique. In: International Conferece For Internet Technology And Secured Transactions. ICITST 2012 . IEEE, London, UK, pp. 492-497.  ISBN 978-1-4673-5325-0
 
 ## ozone_level
 
 **Data Set Information:**
 
 For a list of attributes, please refer to those two .names files.  They use the following naming convention.  All the attribute start with T means the temperature measured at  different time throughout the day; and those starts with WS indicate the wind speed at various time. 
-
 WSR_PK:     continuous. peek wind speed -- resultant (meaning average of wind vector) 
 WSR_AV:     continuous. average wind speed 
 T_PK:     continuous. Peak T 
@@ -4310,27 +4310,20 @@ U85:     continuous. (U wind - east-west direction wind at 850 hpa)
 V85:     continuous. V wind - N-S direction wind at 850 
 HT85:     continuous. Geopotential height at 850 hpa, it is about the same as height at low altitude 
 T70:     continuous. T at 700 hpa level (roughly 3100 m height) 
-
 RH70:     continuous. 
 U70:     continuous. 
 V70:     continuous. 
 HT70:     continuous. 
-
 T50:     continuous. T at 500 hpa level (roughly at 5500 m height) 
-
 RH50:     continuous. 
 U50:     continuous. 
 V50:     continuous. 
 HT50:     continuous. 
-
 KI:     continuous. K-Index [[Web Link\]](http://www.weather.gov/glossary/index.php?letter=k) 
 TT:     continuous. T-Totals [[Web Link\]](http://www.theweatherprediction.com/habyhints/302/) 
 SLP:     continuous. Sea level pressure 
 SLP_:     continuous. SLP change from previous day 
-
 Precp:    continuous. -- precipitation
-
-
 
 **Attribute Information:**
 
@@ -4349,7 +4342,7 @@ The following are specifications for several most  important attributes that are
 
 **Relevant Papers:**
 
-[^1]: Forecasting skewed biased stochastic ozone days:  analyses, solutions and beyond, Knowledge and Information Systems, Vol.  14, No. 3, 2008. 
+Forecasting skewed biased stochastic ozone days:  analyses, solutions and beyond, Knowledge and Information Systems, Vol.  14, No. 3, 2008. 
 
 ## mammography
 
@@ -4384,7 +4377,7 @@ Missing Attribute Values:
 
 **Relevant Papers:**
 
-[^1]: M. Elter, R. Schulz-Wendtland and T. Wittenberg (2007)  The prediction of breast cancer biopsy outcomes using two CAD approaches that both emphasize an intelligible decision process. Medical Physics 34(11), pp. 4164-4172
+M. Elter, R. Schulz-Wendtland and T. Wittenberg (2007)  The prediction of breast cancer biopsy outcomes using two CAD approaches that both emphasize an intelligible decision process. Medical Physics 34(11), pp. 4164-4172
 
 ## protein_homo
 
