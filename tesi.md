@@ -1,4 +1,6 @@
-**A Python implementation of ROSE for imbalanced data learning and an application to prediction of high growth enterprises.**
+![frontespizio](frontespizio.jpg)
+
+------
 
 
 
@@ -10,7 +12,7 @@
 
 > *“It is the time you have wasted for your rose that makes your rose so important.”*  - Antoine de Saint-Exupery
 
-Imbalanced learning refers to a classification or regression problems where the dataset classes are not represented equally. Common examples of such problems are churn, fraud and anomaly detection and clinical data, when one of the classes is rare because problematic, costly,  unethical, dangerous to produce, or unexpected. Class unbalancing, specified as the proportion in the number of samples in different classes, can reach values in the orders of $10^2\div 10^4 : 1$ and up to $10^5:1$ [^Provost, 2001]
+Imbalanced learning refers to a classification problems where the distribution of the target variable is extremely skewed: some classes are more frequent than others. Common examples of such problems are churn, fraud and anomaly detection and clinical data, when one of the classes is rare because problematic, costly,  unethical, dangerous to produce, or unexpected. Class unbalancing, specified as the proportion in the number of samples in different classes, can reach values in the orders of $10^2\div 10^4 : 1$ and up to $10^5:1$ [^Provost, 2001]
 
 ![image-20201013124846482](image-20201013124846482.png)
 
@@ -18,7 +20,7 @@ Imbalanced learning refers to a classification or regression problems where the 
 
 *Fig. 1 Examples of synthetic balanced and imbalanced datasets.*
 
-Most real datasets does not have exactly equal number of instances in each class, and while a small difference seldom matters, a heavy imbalance can quickly become a bottleneck in model training. Most learning methods have been conceived to identify the classification rules that better fits the data by some global accuracy criteria. Their target is to minimize the global error, that may be influenced enough from the minority class. Some methods, like the broadly used logistic regression, is more vulnerable to this effect, but even non-parametric methods, like trees, and association rules, are immune from this effect. For example tree generated from imbalanced datasets will have an high accuracy on the prevalent class and a very low precision in identifying the rare event. It appears evident how things become worse when the minority class is the event of interest, like a positive diagnosis of cancer in a patient.
+Most real datasets does not have exactly equal number of instances in each class, and while a small difference seldom matters, a heavy imbalance can quickly become a bottleneck in model training. Most learning methods have been conceived to identify the classification rules that better fits the data by some global accuracy criteria. Their target is to minimize the global error, that may not be influenced enough from the minority class. Some methods, like the broadly used logistic regression, is more vulnerable to this effect, but even non-parametric methods, like trees, and association rules, are not immune from this effect. For example tree generated from imbalanced datasets will have an high accuracy on the prevalent class and a very low precision in identifying the rare event. It appears evident how things become worse when the minority class is the event of interest, like a positive diagnosis of cancer in a patient.
 
 A brief description of the sections of this work:
 
@@ -28,9 +30,9 @@ A brief description of the sections of this work:
 
 **The Accuracy Paradox**. To assess the performance of a solution a metric is needed. When a class represent almost the totality of a dataset, a learning algorithm can achieve a good accuracy by classifying every test sample as belonging to the majority class. To avoid this problem, different metrics has been developed to assess the real model utility and assessing capabilities. Chapter 3 will review available metrics that can be used to effectively evaluate performance of resampling methods.
 
-**A method is as good as it is available.** To make ROSE easy to use, the main activity of this work involved incorporating it in the most used Python machine learning package, `scikit-learn` , and in particular in its sub-project `imbalanced-learn`. We will overview the development methods, CI/CD, software testing and documentation, in chapter 4.
+**A method is as good as it is available.** Rose is already available since 2014 with the R package ROSE, and it proved to be successful in many situations[^Menardi, 2014]. To make Rose available to a larger community of data scientists is one of the main goals of this work, and it involved incorporating it in the most used Python machine learning package, `scikit-learn` , and in particular in its sub-project `imbalanced-learn`. We will overview the development methods, CI/CD, software testing and documentation, in chapter 4.
 
-**But is it good?** In chapter 5 will set up a wide testing framework for evaluating performance of resampling methods over 27 different famous standard datasets commonly used for classification problems. Different supervised models has been trained and tested on imbalanced and balanced data, and their performance reported. But toy datasets are usually easier to balance. In chapter 6 we used ROSE to dramatically improve classification capabilities of different models in a real-world dataset, with the aim of forecasting the economic outcome of small firms.
+**But is it good?** In chapter 5 will set up a wide testing framework for evaluating performance of resampling methods over 27 different famous standard datasets commonly used for classification problems. Different supervised models has been trained and tested on imbalanced and balanced data, and their performance reported. But toy datasets are usually easier to balance. In chapter 6 we used ROSE to dramatically improve classification capabilities of some models for the analysis of a real-world dataset, with the aim of forecasting the economic outcome of small firms.
 
 **How can I use it?** In appendix 1 we will show code snippets, use cases and links to repositories that will facilitate user's experience with ROSE, and guarantee repeatability of all experiments included in the present world.
 
@@ -44,9 +46,9 @@ In many problem, imbalancing is intrinsically tied to the nature of the data, an
 
 Most learning methods' loss functions are supposed to be minimized globally, under the assumptions that all class have the same weight. When data are imbalanced, the learning process  often achieves this objective by focusing on majority class, leading to bad performance [^Ganganwar, 2012], with higher errors on minority classes. 
 
-The lack of model effectiveness in prediction of rare classes has been deeply discussed in literature. Both parametric and non parametric methods appear to be sensitive to imbalancing. As an example in logistic regression, one of the most used for binary classification, this effect depends from an underestimation of conditional probability of the rare class [^King, 2001],[^Menardi, 2009]. 
+The lack of model effectiveness in prediction of rare classes has been deeply discussed in literature. Both parametric and non parametric methods appear to be sensitive to imbalancing. As an example in logistic regression, one of the most used for binary classification, this effect depends from an underestimation of conditional probability of the rare class [^King, 2001],[^Menardi, 2014]. 
 
-Even the more flexible non-parametric methods, like classification trees and association rules are immune from the effect of asymmetric class distribution. Trees, for example, are being grown finding the recursive divisions of the parameter space that maximize the impurity reduction. The imbalance found is the dataset will be often mirrored in the imbalance of the accuracy over different classes [^Menardi, 2010], [^Chawla, 2003]. Even association rules, being selected by their supports, tend to underperform[^Gue, 2003],[^Ndour, 2012].
+Even the more flexible non-parametric methods, like classification trees and association rules are immune from the effect of asymmetric class distribution. Trees, for example, are being grown finding the recursive divisions of the parameter space that maximize the impurity reduction. The imbalance found in the dataset will be often mirrored in the imbalance of the accuracy over different classes [^Menardi, 2014], [^Chawla, 2003]. Even association rules, being selected by their supports, tend to underperform[^Gue, 2003],[^Ndour, 2012].
 
 ## Treating imbalanced datasets
 
@@ -56,7 +58,7 @@ Many solution has been advanced to treat imbalanced data problems. Most fall in 
 
 Cost sensitive learning is an umbrella term for algorithms in whose objective function it is possible to assign a different cost to misclassification of different classes. An intuitive example of this approach can be imagined when talking about a binary clinical cancer test: a false positive will lead to some extra exam, while a false negative will probably cost a life. The most logical decision is to estimate the relationship between these costs, and assign a larger (*hopefully, much larger*) cost to a false negative.
 
-For multiclass data, a cost matrix $\mathbf C$ is computed, where $\mathbf C_{i,j}$ will be the cost of misclassifying a sample belonging to the class $j$ as it were belonging to the class $i$ [^Liu, 2006], [^Zhou, 2010].
+For multiclass data, a cost matrix $\mathbf C$ is computed, where $\mathbf C_{i,j}$ will be the cost of misclassifying a sample belonging to the class $j$ as it were belonging to the class $i$ [^Liu, 2006], [^Zhou, 2010]. Note that introducing a different loss function to deal with different costs in some cases implies modifying the original algorithm.
 
 ### Resampling
 
@@ -93,7 +95,7 @@ Undersampling reduces the size of majority class to avoid imbalancing. In this p
 * **Neighborhood Cleaning Rule**[^Laurikkala, 2001] focuses on cleaning the data without condensing them.
 * **Instance Hardness Threshold** [^Smith, 2014] trains any classifier on the data, and the samples with lower probabilities are removed from the dataset. It is not guaranteed to output a balanced dataset, though.
 
-### Synthetic data generations
+### Oversampling and synthetic data generations
 
 In this section we present the most commonly used oversampling techniques and their variants:
 
@@ -152,7 +154,7 @@ Ensemble methods can be used generate undersampled subsets of many different ove
 
 # Random over-sampling examples (ROSE)
 
-ROSE provides a different methodology to deal with imbalanced samples. As its alternatives do, it alters the distribution of the classes, using the following solution, based on the generation of new artificial data from the classes, according to a smoothed bootstrap approach [^Efron, 1993]. It focuses on $\mathcal X$ domains included in $\Bbb R^d$ , that is $P(\pmb x)=f(\pmb x)$, a probability density function on $\mathcal X$. We consider that $n_j\lt n $ is the size of $\mathcal Y_j,j=0,1$. The ROSE procedure to generate a single new artificial sample consists in drawing a sample from $K_{\mathbf H_j}(\bullet,\mathbf x_i )$, with $K_{\mathbf H_j}$ a probability distribution centered at $\mathbf x_i $, and $\mathbf H_j$ a matrix of scale parameters, determining the width of the extracted sample neighborhood.
+ROSE[^Menardi, 2014] provides a different methodology to deal with imbalanced samples. As its alternatives do, it alters the distribution of the classes, using the following solution, based on the generation of new artificial data from the classes, according to a smoothed bootstrap approach [^Efron, 1993]. It focuses on $\mathcal X$ domains included in $\Bbb R^d$ , that is $P(\pmb x)=f(\pmb x)$, a probability density function on $\mathcal X$. We consider that $n_j\lt n $ is the size of $\mathcal Y_j,j=0,1$. The ROSE procedure to generate a single new artificial sample consists in drawing a sample from $K_{\mathbf H_j}(\bullet,\mathbf x_i )$, with $K_{\mathbf H_j}$ a probability distribution centered at $\mathbf x_i $, and $\mathbf H_j$ a matrix of scale parameters, determining the width of the extracted sample neighborhood.
 
 Usually $\mathbf H_j$ is chosen in the set of unimodal symmetric distributions. Once a class has been selected,
 $$
@@ -164,13 +166,13 @@ $$
 \end{align}
 $$
 
-such as, in this framework, the generation of new examples from the class $\mathcal Y_j$ will correspond to the generation of data from the kernel density estimate of $f(\mathbf X|\mathcal Y_j)$, to generate a new synthetic balanced training set $\mathbf T^*_m$. Usually $m$ is set to the size of majority class, but can be set lower to perform under-sampling. The choice of $K$ and $\mathbf H_j$ was addressed by a large specialized literature on kernel density estimation [^Bowman, 1997]. By choosing $\mathbf H_j \rightarrow 0$, ROSE collapses to a standard combination of over- and under-sampling.
+such as, in this framework, the generation of new examples from the class $\mathcal Y_j$ will correspond to the generation of data from the kernel density estimate of $f(\mathbf X|\mathcal Y_j)$, to generate a new synthetic balanced training set $\mathbf T^*_m$. Usually $m$ is set to the size of majority class, but can be set lower to perform under-sampling. The choice of $K$ and $\mathbf H_j$ was addressed by a large specialized literature on kernel density estimation [^Bowman, 1997]. By letting the elements of  $\mathbf H_j$ to be small or even zero, ROSE collapses to a standard combination of over- and under-sampling.
 
 Apart from enhancing learning, the generation of synthetic examples from an estimate of conditional densities of the classes may aid the estimation of learner accuracy and overcome the limits of both resubstitution and holdout methods. Resampled datasets can be efficiently employed in leave-K-out or bootstrap estimation. 
 
 ## Assumptions
 
-ROSE requires that the resampled variables are of numeric type, being impossible to fit a multivariate kernel on unordered categorical variables. This can include variables with limited  numeric support (e.g. $\{0,1\}$, or percentage values.). 
+ROSE requires that the resampled variables are of numeric type, being impossible to fit a multivariate kernel on unordered categorical variables. This can include variables with limited  numeric support (e.g. $\{0,1\}$, or percentage values. For the latter, problems rise near the extreme values 0 and 100).  In some cases, this problem can be solved using transformations, like taking the logarithm.
 
 Variables belonging to $\mathbb N$ could generate non-integer samples. This problem can be contained by rounding.
 
@@ -188,7 +190,7 @@ $$
 AMISE(h;r)=\frac{R(K^{(r)})}{nh^{2r+1}}+\frac{1}{4}h^4\mu_2^2(K)r(f^{(r+2)})
 \end{equation}
 $$
-Among all possible alternatives, Menardi and Torelli's proposal is to use Gaussian Kernels with diagonal smoothing matrices $\mathbf H_j = diag(h_1^{(j)},\dots,h_d^{(d)})$ , and minimize AMISE.
+Among all possible alternatives, Menardi and Torelli's proposal is to start by using   a Gaussian Kernel with diagonal smoothing matrices $\mathbf H_j = diag(h_1^{(j)},\dots,h_d^{(d)})$ , and minimize AMISE.
 
 This leads to:
 $$
@@ -237,7 +239,7 @@ Confusion Matrices (henceforth CM) are tables that can be used to describe the p
 
 On the diagonal we find correctly predicted samples (true negatives, or TN, and true positives, or TP), leaving misclassified data on other cells (false positives, or FP, and false negatives, or FN). Confusion matrices can be extended to multiclass classifiers, their size becoming $j\times j$, for classes in $\mathcal Y_j$. Sums over rows and column will describe the total of actual vs predicted predictions. We have seen how secondary indexes can be computed form these values and their ratios.
 
-When describing a model's performance, the most common classification metric is its $Accuracy$ , defined as 
+When describing a model's performance, the simplest yet most common classification metric is its $Accuracy$ , defined as 
 $$
 Accuracy = (TP + TN)/(TP + TN + FP + FN)
 $$
@@ -249,9 +251,9 @@ can help. Another metric is $Predicted\ positive\ condition\ rate$, defined as
 $$
 Predicted\ positive\ condition\ rate = \frac{TP+FP}{TP+FP+TN+FN}
 $$
-which identifies the proportion of the total population correctly identified. Two other commonly used index is $F1$ score and Matthews correlation coefficient.
+which identifies the proportion of the total population correctly identified. Two other commonly used index is $F1$ score and Matthews correlation coefficient. Is this case there is no need of considering a threshold for algorithms that outputs a probability score, instead of the guessed class.
 
-More informative visualizations of model performances can be given not by indices, but by plots, like Receiver Operating Characteristics and $Precision$ vs $Recall$ plots, that deserves a dedicated description in the following sub-chapters.
+More informative visualizations of model performances can be given not by indices, but by plots, like Receiver Operating Characteristics and $Precision$ vs $Recall$ plots and associated indexes like Area Unde the Curve (AUC), that deserve a dedicated description in the following sub-chapters.
 
 Additional metrics that can be extracted from CM are 
 
@@ -290,7 +292,7 @@ F_\beta&=(1+\beta^2)\frac{precision *recall}{(\beta^2*precision)+recall}
 &=\frac{(1+\beta^2)*TP}{(1+\beta^2)*TP+\beta^2*FN+FP}
 \end{align}
 $$
-where recall is considered $\beta$ times as important as precision. a $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Mattees Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
+where recall is considered $\beta$ times as important as precision. a $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Mattews Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
 
 
 
@@ -317,7 +319,7 @@ A Receiver Operating Characteristic (ROC) curve is a plot that summarizes the pe
 
 *Fig 7 : Example of ROC curve. AUC (Area under the curve) are shown in the bottom-right legend.*
 
-A ROC gives an intuitive visualization of a classifier performance: the dotted diagonal represent a classifier with no discriminative power, and the more the curve tends to the upper-left corner, the better the classifier is. The area under the curve (AUC) gives a commonly used single-valued index of performance. The threshold is applied to the cut-off point in probability between the positive and negative classes, which by default for any classifier would be set at 0.5, halfway between each outcome (0 and 1). A trade-off exists between the TP rate an FP rate, such that changing the threshold of classification will change the balance of predictions towards improving the TP rate at the expense of FP rate, or the reverse case.
+A ROC gives an intuitive visualization of a classifier performance: the dotted diagonal represent a classifier with no discriminative power, and the more the curve tends to the upper-left corner, the better the classifier is. The area under the curve (AUC) gives a commonly used single-valued index of performance. The threshold is applied to the cut-off point in probability between the positive and negative classes, which by default for any classifier would be set at 0.5, halfway between each outcome (0 and 1) or in some cases, the observed proportions of 1s in the dataset. A trade-off exists between the TP rate an FP rate, such that changing the threshold of classification will change the balance of predictions towards improving the TP rate at the expense of FP rate, or the reverse case.
 
 By evaluating the true positive and false positives for different threshold values, the ROC curve is drawn. An interesting property is that the ROC is unbiased towards model that performs well on the minority class at the expense of the majority class, or vice versa, making it an interesting choice when dealing with imbalanced data.
 
@@ -398,7 +400,7 @@ Documentation correctness is integral part of the review process. Functions API 
 
 # Empirical analysis
 
-With the aim of obtaining benchmark the effectiveness of ROSE, a simple test suite has been written, in a Jupyter Notebook.
+With the aim of obtaining benchmark the real effectiveness of ROSE, a simple test suite has been written, in a Jupyter Notebook.
 
 ## Materials & methods
 
@@ -406,7 +408,7 @@ The pipeline evaluates the performance every combination on a grid of models, re
 
 ### Datasets
 
-A total of 27 datasets has been used. Data comes from the following repositories, and are available for repeatability. All datasets are loaded from Zenodo repository through `imblearn.datasets.fetch_datasets()` API. Additional informations can be found on `imbalanced-learn` repository documentation.
+A total of 27 datasets has been used. All datasets come from the following repositories, and are available for repeatability. All datasets are loaded from Zenodo repository through `imblearn.datasets.fetch_datasets()` API. A detailed description of every dataset can be found in Appendix 3. Additional informations can be found on `imbalanced-learn` repository documentation.
 
 | Short name | Source                                                       | Website                                                  |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------- |
@@ -450,7 +452,7 @@ A total of 27 datasets has been used. Data comes from the following repositories
 
 ### Models
 
-The following list of models has been trained for every dataset/resampler combination. All models used `scikit-learn` implementation.
+The following list of models has been trained for every different dataset/resampler combination. All models used the relative `scikit-learn` implementation.
 
 * k-neighbors classifier
   * k=3
@@ -506,7 +508,7 @@ The following metrics has been collected, for every model/dataset/resampler comb
 
 ## Results
 
-We report the tables of Matthews Correlation Coefficient for every model.
+We report the tables of Matthews Correlation Coefficient for each model.
 
 ![image-20201013165631877](image-20201013165631877.png)
 
@@ -530,7 +532,11 @@ We report the tables of Matthews Correlation Coefficient for every model.
 
 Other metrics are reported in Appendix 2, for completeness.
 
+For different algorithms we can observe different effects of using Rose, compared to other algorithms, for resampling. For K-neighbors classifiers, random forest classifiers, or Gaussian naive Bayes, we observe no difference due to resampling methods.
 
+Some algorithms are not improved by Rose resampling, like support vector machines, on most datasets.
+
+For neural network based models like multi-layer perceptrons, decision tree classifiers, ADABoost classifiers, and quadratic discriminant analysis instead, Rose performs equally or even better that state-of-the-art resamplers, independently from cardinality, sample size, with a tendency to perform better for high imbalance ratio problems, in the lower part of the tables reported above. For some problems, nonetheless, Rose perform inexplicably much better or much worse than other resamplers. This effect nudge to the commonly shared knowledge that asserts than, in these kinds of problems, different resamplers should be tested and benchmarked, and the absence of a universally better algorithm.
 
 # ORBIS Dataset: a real world ROSE application
 
@@ -781,8 +787,7 @@ This is only the first part of ROSE development for Python. The algorithm still 
 [^Provost, 2001]: Provost, Foster & Fawcett, Tom. (2001). Robust Classification for Imprecise Environments. Machine Learning. 42. 203-231. 10.1023/A:1007601015854. 
 [^Ganganwar, 2012]: Ganganwar, Vaishali. (2012). An overview of classification algorithms for imbalanced datasets. International Journal of Emerging Technology and Advanced Engineering. 2. 42-47. 
 [^King, 2001]: King, Gary, and Langche Zeng. "Logistic regression in rare events data." *Political analysis* 9.2 (2001): 137-163.
-[^Menardi, 2009]: Menardi, G., Torelli, N. (2009) Some issues in building and assessing  classification rules with extremely skewed datasets. Proceedings of the  7th Meeting of the Classification and data Analysis Group of the Italian Statistical Society (Invited Papers), Catania, ISBN 978-88-6129-406-6,  Cleup (Padova). 
-[^Menardi, 2010]: Menardi, G., and N. Torelli. "Training and assessing classification rules with unbalanced data) Working Paper Series." *N* 2 (2010): 2010.
+[^Menardi, 2014]: Menardi, Giovanna, and Nicola Torelli. "Training and assessing classification rules with imbalanced data." *Data Mining and Knowledge Discovery* 28.1 (2014): 92-122.
 [^Chawla, 2003]: Chawla, Nitesh V., et al. "SMOTEBoost: Improving prediction of the minority class in boosting." *European conference on principles of data mining and knowledge discovery*. Springer, Berlin, Heidelberg, 2003.
 [^Gue, 2003]:Gue, Kevin R. "A dynamic distribution model for combat logistics." *Computers & Operations Research* 30.3 (2003): 367-381.
 [^Ndour, 2012]: Ndour, Cheikh, Aliou Diop, and Simplice Dossou-Gbété. "Classification  approach based on association rules mining for unbalanced data." *arXiv preprint arXiv:1202.5514* (2012).
@@ -820,7 +825,7 @@ This is only the first part of ROSE development for Python. The algorithm still 
 [^Flight, 2015]: Flight L, Julious SA. The disagreeable behaviour of the kappa statistic. Pharm Stat. 2015; 14:74–8.
 [^Sebastiani, 2015]:Sebastiani F. An axiomatically derived measure for the evaluation of  classification algorithms. In: Proceedings of ICTIR 2015 – the ACM SIGIR 2015 International Conference on the Theory of Information Retrieval.  New York City: ACM: 2015. p. 11–20.
 [^Powers, 2011]: Powers DMW. Evaluation: from precision, recall and F-measure to ROC,  informedness, markedness & correlation. J Mach Learn Technol. 2011;  2(1):37–63.
-[^ROSE CRAN]: https://cran.r-project.org/web/packages/ROSE/ROSE.pdf
+[^ROSE CRAN]: Nicola Lunardon, Giovanna Menardi, Nicola Torelli: https://cran.r-project.org/web/packages/ROSE/ROSE.pdf
 [^imblearn]: https://imbalanced-learn.org/stable/
 [^sklearn]:https://scikit-learn.org/stable/
 [^PEP8]: https://www.python.org/dev/peps/pep-0008/
@@ -3734,3 +3739,657 @@ In this section we will show tables of results, analogue to the ones shown in Ch
 
 ![image-20201014144314407](image-20201014144314407.png)
 
+# Appendix 3: benchmark datasets descriptions
+
+This appendix includes the information on the benchmark datasets, as reported from the source websites. Descriptions has been written by the dataset's author, so every "we" here is referred to the original authors.
+
+## ecoli
+
+**Data Set Information:**
+
+The references below describe a predecessor to this  dataset and its development. They also give results (not cross-validated) for classification by a rule-based expert system with  that version of the dataset. 
+
+Reference: "Expert Sytem for Predicting Protein Localization Sites  in Gram-Negative Bacteria", Kenta Nakai & Minoru Kanehisa,   PROTEINS: Structure, Function, and Genetics 11:95-110, 1991. 
+
+Reference: "A Knowledge Base for Predicting Protein Localization  Sites in Eukaryotic Cells", Kenta Nakai & Minoru Kanehisa, Genomics  14:897-911, 1992.
+
+**Attribute Information:**
+
+1. Sequence Name: Accession number for the SWISS-PROT database 
+1. mcg: McGeoch's method for signal sequence recognition.
+1. gvh: von Heijne's method for signal sequence recognition. 
+1. lip: von Heijne's Signal Peptidase II conensus sequence score. Binary attribute. 
+1. chg: Presence of charge on N-terminus of predicted lipoproteins. Binary attribute. 
+1. aac: score of discriminant analysis of the amino acid content of outer membrane and periplasmic proteins. 
+1. alm1: score of the ALOM membrane spanning region prediction program. 
+1. alm2: score of ALOM program after excluding putative cleavable signal regions from the sequence.
+
+
+
+**Relevant Papers:**
+
+[^1]: Paul Horton & Kenta Nakai: "A Probablistic Classification System for Predicting the Cellular Localization Sites of  Proteins".Intelligent Systems in Molecular Biology, 109-115. St. Louis,  USA 1996. 
+## optical_digits
+
+**Data Set Information:**
+
+We used preprocessing programs made available by NIST  to extract normalized bitmaps of handwritten digits from a preprinted  form. From a total of 43 people, 30 contributed to the training set and  different 13 to the test set. 32x32 bitmaps are divided into  nonoverlapping blocks of 4x4 and the number of on pixels are counted in  each block. This generates an input matrix of 8x8 where each element is  an integer in the range 0..16. This reduces dimensionality and gives  invariance to small distortions. 
+
+For info on NIST preprocessing routines, see M. D. Garris, J. L.  Blue, G. T. Candela, D. L. Dimmick, J. Geist, P. J. Grother, S. A.  Janet, and C. L. Wilson, NIST Form-Based Handprint Recognition System,  NISTIR 5469, 1994.
+
+**Attribute Information:**
+
+All input attributes are integers in the range 0..16. 
+The last attribute is the class code 0..9
+
+**Relevant Papers:**
+
+[^1]: C. Kaynak (1995): Methods of Combining Multiple  Classifiers and Their Applications to Handwritten Digit Recognition, MSc Thesis, Institute of Graduate Studies in Science and Engineering,  Bogazici University. 
+[^2]: E. Alpaydin, C. Kaynak (1998) Cascading Classifiers, Kybernetika. 
+## satimage
+
+**Dataset informations**
+
+The database consists of the multi-spectral values of pixels in 3x3  neighbourhoods in a satellite image, and the classification associated  with the central pixel in each neighbourhood. The aim is to predict this classification, given the multi-spectral values. In the sample  database, the class of a pixel is coded as a number.
+
+One frame of Landsat MSS imagery consists of four digital images of  the same scene in different spectral bands. Two of these are in the  visible region (corresponding approximately to green and red regions of  the visible spectrum) and two are in the (near) infra-red. Each pixel is a 8-bit binary word, with 0 corresponding to black and 255 to white.  The spatial resolution of a pixel is about 80m x 80m. Each image  contains 2340 x 3380 such pixels.
+
+The database is a (tiny) sub-area of a scene, consisting of 82 x 100  pixels. Each line of data corresponds to a 3x3 square neighbourhood of  pixels completely contained within the 82x100 sub-area. Each line  contains the pixel values in the four spectral bands (converted to  ASCII) of each of the 9 pixels in the 3x3 neighbourhood and a number  indicating the classification label of the central pixel.
+
+Each pixel is categorized as one of the following classes:
+
+1. red soil
+1. cotton crop
+1. grey soil
+1. damp grey soil
+1. soil with vegetation stubble
+1. mixture class (all types present)
+1. very damp grey soil
+
+NB. There are no examples with class 6 in this dataset.
+
+The data is given in random order and certain lines of data have been removed so you cannot reconstruct the original image from this dataset.
+
+**Attribute information** 
+
+There are 36 predictive attributes (= 4 spectral bands x 9 pixels in  neighborhood). In each line of data the four spectral values for the top-left pixel are given first followed by the four spectral values for the top-middle  pixel and then those for the top-right pixel, and so on with the pixels  read out in sequence left-to-right and top-to-bottom. Thus, the four  spectral values for the central pixel are given by attributes 17,18,19  and 20. If you like you can use only these four attributes, while  ignoring the others. This avoids the problem which arises when a 3x3  neighbourhood straddles a boundary.
+
+In this version, the pixel values 0…255 are normalized around 0.
+
+Note: it is unclear why the attributes are named Aattr - Fattr in  this version, since there are only 4 bands and 9 pixels, naming them A1, B1, C1, D1, A2, B2, C2, D2, … would have made more sense.
+
+## pen_digits
+
+**Data Set Information:**
+
+Authors created a digit database by collecting 250 samples  from 44 writers. The samples written by 30 writers are used for  training, cross-validation and writer dependent testing, and the digits  written by the other 14 are used for writer independent testing. This database is also available in the UNIPEN format. 
+
+Authors used a WACOM PL-100V pressure sensitive tablet with an integrated LCD display and a cordless stylus. The input and display areas are  located in the same place. Attached to the serial port of an Intel 486  based PC, it allows us to collect handwriting samples. The tablet sends  $x$ and $y$ tablet coordinates and pressure level values of the pen at  fixed time intervals (sampling rate) of 100 milliseconds.  
+
+These writers are asked to write 250 digits in random order inside  boxes of 500 by 500 tablet pixel resolution.  Subject are monitored only during the first entry screens. Each screen contains five boxes with  the digits to be written displayed above. Subjects are told to write  only inside these boxes.  If they make a mistake or are unhappy with  their writing, they are instructed to clear the content of a box by  using an on-screen button. The first ten digits are ignored because most writers are not familiar with this type of input devices, but subjects  are not aware of this.  
+
+In their study, authors use only ($x, y$) coordinate information. The stylus pressure level values are ignored. First we apply normalization  to make our representation invariant to translations and scale  distortions. The raw data that we capture from the tablet consist of  integer values between 0 and 500 (tablet input box resolution). The new  coordinates are such that the coordinate which has the maximum range  varies between 0 and 100. Usually $x$ stays in this range, since most  characters are taller than they are wide.   
+
+In order to train and test our classifiers, authors need to represent digits as constant length feature vectors. A commonly used technique  leading to good results is resampling the $( x_t, y_t)$ points. Temporal resampling (points regularly spaced in time) or spatial resampling  (points regularly spaced in arc length) can be used here. Raw point data are already regularly spaced in time but the distance between them is  variable. Previous research showed that spatial resampling to obtain a  constant number of regularly spaced points on the trajectory yields much better performance, because it provides a better alignment between  points. Our resampling algorithm uses simple linear interpolation  between pairs of points. The resampled digits are represented as a sequence of T points $( x_t, y_t )_{t=1}^T$, regularly spaced in arc  length, as opposed to the input sequence, which is regularly spaced in  time. 
+
+So, the input vector size is $2*T$, two times the number of points resampled. We considered spatial resampling to $T=8,12,16$ points in the experiments and found that T=8 gave the best trade-off between accuracy and complexity.
+
+**Attribute Information:**
+
+All input attributes are integers in the range 0..100. The last attribute is the class code 0..9
+
+**Relevant Papers:**
+
+[^1]: F. Alimoglu (1996)Combining Multiple Classifiers for  Pen-Based Handwritten Digit Recognition, MSc Thesis, Institute of  Graduate Studies in Science and Engineering, Bogazici University. 
+[^2]: F. Alimoglu, E. Alpaydin "Methods of Combining Multiple Classifiers Based on Different Representations for Pen-based Handwriting  Recognition," Proceedings of the Fifth Turkish Artificial Intelligence  and Artificial Neural Networks Symposium (TAINN 96), June 1996,  Istanbul, Turkey. 
+
+## abalone
+
+**Data Set Information:**
+
+Predicting the age of abalone from physical  measurements.  The age of abalone is determined by cutting the shell  through the cone, staining it, and counting the number of rings through a microscope -- a boring and time-consuming task.  Other measurements,  which are easier to obtain, are used to predict the age.  Further  information, such as weather patterns and location (hence food  availability) may be required to solve the problem. 
+
+From the original data examples with missing values were removed  (the majority having the predicted value missing), and the ranges of the continuous values have been scaled for use with an ANN (by dividing by  200).
+
+**Attribute Information:**
+
+Given is the attribute name, attribute type, the measurement unit and a brief description.  The number of rings is the  value to predict: either as a continuous value or as a classification  problem. 
+
+| Name           | Data Type   | Measurement Unit | Description               |
+| -------------- | ----------- | ---------------- | ------------------------- |
+| Sex            | nominal     |                  | {M, F, I}                 |
+| Diameter       | continuous  | mm               | perpendicular to length   |
+| Height         | continuous  | mm               | with meat in shell        |
+| Whole weight   | continuous  | g                | whole abalone             |
+| Shucked weight | continuous  | g                | weight of meat            |
+| Viscera weight | continuouos | g                | gut weight after bleeding |
+| Shell weight   | continuous  | g                | after dried               |
+| Rings          | integer     |                  | +1.5 gives age in years   |
+
+**Relevant Papers:**
+
+[^1]: Sam Waugh (1995) "Extending and benchmarking  Cascade-Correlation", PhD thesis, Computer Science Department,  University of Tasmania.
+[^2]: David Clark Zoltan Schreter, Anthony Adams "A Quantitative Comparison of  Dystal and Backpropagation", submitted to the Australian Conference on  Neural Networks (ACNN'96).
+
+## sick_euthyroid
+
+**Data Set Information:**
+
+​	A Thyroid database suited for training ANNs. It is one of a set of different datasets, for which only a general description is given. 2800 training (data) instances and 972 test instances. Plenty of missing data. 29 or so attributes, either Boolean or continuously-valued.  
+
+2 additional databases, also from Ross Quinlan, are also here 
+
+Hypothyroid.data and sick-euthyroid.data (the one we used). 
+Quinlan believes that these databases have been corrupted.
+Their format is highly similar to the other databases.  
+
+**Attribute Information:**
+
+N/A
+
+**Relevant Papers:**
+
+[^1]:Quinlan,J.R., Compton,P.J., Horn,K.A., &  Lazurus,L. (1986). Inductive knowledge acquisition: A case study. In  Proceedings of the Second Australian Conference on Applications of  Expert Systems.  Sydney, Australia. 
+[^2]: Quinlan,J.R. (1986). Induction of decision trees. Machine Learning, 1, 81--106. 
+
+## spectrometer
+
+**Data Set Information:**
+
+The Infra-Red Astronomy Satellite (IRAS) was the first attempt to map the full sky at infra-red wavelengths.  This could not  be done from ground observatories because large portions of the  infra-red spectrum is absorbed by the atmosphere.  The primary observing program was the full high resolution sky mapping performed by scanning  at 4 frequencies. The Low Resolution Observation (IRAS-LRS) program  observed high intensity sources over two continuous spectral bands.   This database derives from a subset of the higher quality LRS  observations taken between 12h and 24h right ascension.  
+
+This database contains 531 high quality spectra derived from the  IRAS-LRS database.  The original data contained 100 spectral  measurements in each of two overlapping bands.  Of these, 44 blue band  and 49 red band channels contain usable flux measurements.  Only these  are included here.  The original spectral intensities values are  compressed to 4-digits, and each spectrum includes 5 rescaling  parameters.  We have used the LRS specified algorithm to rescale these  to units of spectral intensity (Janskys).  Total intensity differences  have been eliminated by normalizing each spectrum to a mean value of  5000. 
+	 
+This database was originally obtained for use in development and  testing of our AutoClass system for Bayesian classification.  We have  not retained any results from this development, having concentrated our  efforts of a 5425 element version of the same data.  Our classifications were based upon simultaneous modeling of all 93 spectral intensities.  With the larger database we were able to find classes that correspond  well with known spectral types associated with particular stellar types. We also found classes that match with the spectra expected of certain  stellar processes under investigation by Ames astronomers.  These  classes have considerably enlarged the set of stars being investigated  by those researchers.   
+
+Original Data: 
+
+The original Fortran data file is given in spectra-2.data.  The file spectra-2.head contains information about the .data file contents and  how to rescale the compressed spectral intensities. 
+
+
+
+**Attribute Information:**
+
+1. LRS-name: (Suspected format: 5 digits, "+" or "-", 4 digits) 
+1. LRS-class: integer - The LRS-class values range from 0 - 99  with the 10's digit giving the basic class and the 1's digit giving the  subclass. These classes are based on features (peaks, valleys, and  trends) of the spectral curves. 
+1. ID-type: integer 
+1. Right-Ascension: float - Astronomical longitude. 1h = 15deg 
+1. Declination: float - Astronomical lattitude. -90 <= Dec <= 90 
+1. Scale Factor: float - Proportional to source strength 
+1. Blue base 1: integer - linear rescaling coefficient 
+1. Blue base 2: integer - linear rescaling coefficient 
+1. Red base 1: integer - linear rescaling coefficient 
+1. Red base 2: integer - linear rescaling coefficient 
+1. fluxes from the following 44 blue-band channel wavelengths: (all given as floating point numerals) 
+1. from 12 onwards: different wavelength signals
+
+**Relevant Papers:**
+
+[^1]: A NASA-Ames research group concerned with unsupervised learning tasks may have used this database during their empirical  studies of their algorithm/system (AUTOCLASS II).  See the 1988 Machine  Learning Conference Proceedings, 54-64, for a description of their  algorithm.
+
+## car_eval_34
+
+Similar to car_eval_4 (see below), but with 21 variables.
+
+## isolet
+
+**Data Set Information:**
+
+This data set was generated as follows. 150 subjects spoke the name of each letter of the alphabet twice. Hence, we have 52 training examples from each speaker. The speakers are grouped into sets  of 30 speakers each, and are referred to as isolet1, isolet2, isolet3,  isolet4, and isolet5. The data appears in isolet1+2+3+4.data in  sequential order, first the speakers from isolet1, then isolet2, and so  on.  The test set, isolet5, is a separate file. 
+
+You will note that 3 examples are missing.  I believe they were dropped due to difficulties in recording. I believe this is a good domain for a noisy, perceptual task.  It is also a very good domain for testing the scaling abilities of  algorithms. For example, C4.5 on this domain is slower than backpropagation!  I have formatted the data for C4.5 and provided a C4.5-style names file as well.
+
+**Attribute Information:**
+
+The features are described in the paper by Cole and  Fanty cited above.  The features include spectral coefficients; contour  features, sonorant features, pre-sonorant features, and post-sonorant  features.  Exact order of appearance of the features is not known.
+
+**Relevant Papers:**
+
+[^1]:  Fanty, M., Cole, R. (1991). Spoken letter  recognition.  In Lippman, R. P., Moody, J., and Touretzky, D. S. (Eds).  Advances in Neural Information Processing Systems 3.  San Mateo, CA:  Morgan Kaufmann. 
+[^2]:  Dietterich, T. G., Bakiri, G. (1991) Error-correcting output codes: A general method for improving multiclass inductive learning programs.  Proceedings of the Ninth National Conference on Artificial Intelligence (AAAI-91), Anaheim, CA: AAAI Press. 
+[^3]: Dietterich, T. G., Bakiri, G. (1994) Solving Multiclass Learning Problems via Error-Correcting Output Codes. 
+
+## us_crime
+
+**Data Set Information:**
+
+  Many variables are included so that algorithms that  select or learn weights for attributes could be tested. However, clearly unrelated attributes were not included; attributes were picked if there was any plausible connection to crime (N=122), plus the attribute to be predicted (Per Capita Violent Crimes). The variables included in the  dataset involve the community, such as the percent of the population  considered urban, and the median family income, and involving law  enforcement, such as per capita number of police officers, and percent  of officers assigned to drug units.  
+
+ The per capita violent crimes variable was calculated using  population and the sum of crime variables considered violent crimes in  the United States: murder, rape, robbery, and assault. There was  apparently some controversy in some states concerning the counting of  rapes. These resulted in missing values for rape, which resulted in  incorrect values for per capita violent crime. These cities are not  included in the dataset. Many of these omitted communities were from the midwestern USA. 
+
+  Data is described below based on original values. All numeric data was normalized into the decimal range  0.00-1.00 using an Unsupervised, equal-interval binning method. Attributes retain their distribution and skew (hence for example the population attribute has a mean value of   0.06 because most communities are small). E.g. An attribute described as 'mean people per household' is actually the normalized (0-1) version of that value. 
+
+  The normalization preserves rough ratios of values WITHIN an  attribute (e.g. double the value for double the population within the  available precision - except for extreme values (all values more than 3  SD above the mean are normalized to 1.00; all values more than 3 SD  below the mean are nromalized to  0.00)). 
+
+  However, the normalization does not preserve relationships between values BETWEEN attributes (e.g. it would not be meaningful to compare  the value for whitePerCap with the value for blackPerCap for a  community) 
+
+  A limitation was that the LEMAS survey was of the police  departments with at least 100 officers, plus a random sample of smaller  departments. For our purposes, communities not found in both census and  crime datasets were omitted. Many communities are missing LEMAS data. 
+
+**Attribute informations**
+
+There are too many attributes to report here. For details, check the dataset UCI repository at http://archive.ics.uci.edu/ml/datasets/communities+and+crime.
+
+**Relevant Papers:**
+
+  No published results using this specific dataset.  
+
+  Related dataset used in Redmond and Baveja 'A data-driven software tool for enabling cooperative information sharing among police  departments' in European Journal of Operational Research 141 (2002)  660-678;  
+  That article includes a description of the integration of the  three sources of data, however, this data is normalized differently and  more/different attributes are included. 
+
+## yeast_ml8
+
+**Data Set Information:**
+
+Predicted Attribute: Localization site of protein. (non-numeric). The references below describe a predecessor to this dataset and its  development. They also give results (not cross-validated) for  classification by a rule-based expert system with that version of the  dataset. 
+
+**Attribute Information:**
+
+| Attribute     | Description                                                  |
+| ------------- | ------------------------------------------------------------ |
+| Sequence Name | Accession number for the SWISS-PROT database                 |
+| mcg           | McGeoch's method for signal sequence recognition             |
+| gvh           | von Heijne's method for signal sequence recognition          |
+| alm           | Score of the ALOM membrane spanning region prediction program |
+| mit           | Score of discriminant analysis of the amino acid content  of the N-terminal region (20 residues long) of mitochondrial and  non-mitochondrial proteins |
+| erl           | Presence of "HDEL" substring (thought to act as a signal  for retention in the endoplasmic reticulum lumen). Binary attribute |
+| pox           | Peroxisomal targeting signal in the C-terminus               |
+| vac           | Score of discriminant analysis of the amino acid content of vacuolar and extracellular proteins. |
+| nuc           | Score of discriminant analysis of nuclear localization signals of nuclear and non-nuclear proteins |
+
+**Relevant Papers:**
+
+[^1]: "Expert Sytem for Predicting Protein Localization Sites  in Gram-Negative Bacteria", Kenta Nakai & Minoru Kanehisa,  PROTEINS: Structure, Function, and Genetics 11:95-110, 1991. 
+[^2]: "A Knowledge Base for Predicting Protein Localization  Sites in Eukaryotic Cells", Kenta Nakai & Minoru Kanehisa, Genomics  14:897-911, 1992.http://rexa.info/paper/fbb500f26399f3ca970053524afd131478039353)
+
+
+
+## scene
+
+No additional information provided by the source.
+
+[^1]:Matthew R. Boutell, Jiebo Luo, Xipeng Shen, and Christopher M. Brown.  Learning multi-label scene classification.  *Pattern Recognition*, 37(9):1757-1771, 2004.
+
+## libras_move
+
+**Data Set Information:**
+
+The dataset (movement_libras) contains 15 classes of 24 instances each, where each class references to a hand movement type in LIBRAS. 
+
+In the video pre-processing, a time normalization is carried out selecting 45 frames from each video, in according to an uniform distribution. In each frame, the centroid pixels of the segmented objects (the hand) are found, which compose the discrete version of the curve F with 45 points. All curves are normalized in the unitary space. 
+
+In order to prepare these movements to be analysed by algorithms, we have carried out a mapping operation, that is, each curve F is mapped in a representation with 90 features, with representing the coordinates of movement. Some sub-datasets are offered in order to support comparisons of results. 
+
+**Attribute Information:**
+
+90 numeric (double) and 1 for the class (integer)
+
+**Relevant Papers:**
+
+[^1]:DIAS, D. B.; MADEO, R. C. B.; ROCHA, T.; BÍSCARO, H. H.; PERES, S. M..  
+Hand Movement Recognition for Brazilian Sign Language: A Study Using Distance-Based Neural Networks. In: 2009 International Joint Conference on Neural Networks, 2009, Atlanta, GA.  
+Proceedings of 2009 International Joint Conference on Neural Networks. Eau Claire, WI, USA : Documation LLC, 2009. p. 697-704.  Digital Object Identifier 10.1109/IJCNN.2009.5178917 
+
+## thyroid_sick
+
+Another of sick_thyroid data sets. For description, see at §12.6.
+
+## coil_2000
+
+**Data Set Information:**
+
+Information about customers consists of 86 variables  and includes product usage data and socio-demographic data derived from  zip area codes. The data was supplied by the Dutch data mining company  Sentient Machine Research and is based on a real world business problem. The training set contains over 5000 descriptions of customers,  including the information of whether or not they have a caravan  insurance policy. A test set contains 4000 customers of whom only the  organisers know if they have a caravan insurance policy.  
+
+The data dictionary at http://kdd.ics.uci.edu/databases/tic/dictionary.txt describes the variables used and their values.  
+
+Note: All the variables starting with M are zipcode variables. They  give information on the distribution of that variable, e.g. Rented  house, in the zipcode area of the customer.  
+
+One instance per line with tab delimited fields.  
+
+TICDATA2000.txt: Dataset to train and validate prediction models and build a description (5822 customer records). Each record consists of 86 attributes, containing sociodemographic data (attribute 1-43) and  product ownership (attributes 44-86).The sociodemographic data is  derived from zip codes. All customers living in areas with the same zip  code have the same sociodemographic attributes. Attribute 86,  "CARAVAN:Number of mobile home policies", is the target variable.  
+
+TICEVAL2000.txt: Dataset for predictions (4000 customer records). It has the same format as TICDATA2000.txt, only the target is missing.  Participants are supposed to return the list of predicted targets only.  All datasets are in tab delimited format. The meaning of the attributes  and attribute values is given below.  
+
+TICTGTS2000.txt Targets for the evaluation set.  
+
+**Attribute Information:**
+
+N/A
+
+**Relevant Papers:**
+
+[^1]:P. van der Putten and M. van Someren (eds). CoIL  Challenge 2000: The Insurance Company Case. Published by Sentient  Machine Research, Amsterdam. Also a Leiden Institute of Advanced  Computer Science Technical Report 2000-09. June 22, 2000. 
+
+## arrhythmia
+
+**Data Set Information:**
+
+This database contains 279 attributes, 206 of which are linear valued and the rest are nominal.  
+
+Concerning the study of H. Altay Guvenir: "The aim is to distinguish between the presence and absence of cardiac arrhythmia and to classify  it in one of the 16 groups. Class 01 refers to 'normal' ECG classes 02  to 15 refers to different classes of arrhythmia and class 16 refers to  the rest of unclassified ones. For the time being, there exists a  computer program that makes such a classification. However there are  differences between the cardiolog's and the programs classification.  Taking the cardiolog's as a gold standard we aim to minimise this  difference by means of machine learning tools." 
+
+The names and id numbers of the patients were recently removed from the database. 
+
+**Attribute Information:**
+
+Different attributes for ECG measurement.
+
+**Relevant Papers:**
+
+[^1]: H. Altay Guvenir, Burak Acar, Gulsen Demiroz, Ayhan  Cekin "A Supervised Machine Learning Algorithm for Arrhythmia Analysis."  Proceedings of the Computers in Cardiology Conference, Lund, Sweden,  1997. 
+
+## solar_flare_m0
+
+**Data Set Information:**
+
+Notes: 
+
+   -- The database contains 3 potential classes, one for the number  of times a certain type of solar flare occured in a 24 hour period. 
+   -- Each instance represents captured features for 1 active region on the sun. 
+   -- The data are divided into two sections. The second section  (flare.data2) has had much more error correction applied to the it, and  has consequently been treated as more reliable.
+
+
+
+**Attribute Information:**
+
+| Attribute                                                    | values                                                       |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Code for class (modified Zurich class)                       | (A,B,C,D,E,F,H)                                              |
+| Code for largest spot size                                   | (X,R,S,A,H,K)                                                |
+| Code for spot distribution                                   | (X,O,I,C)                                                    |
+| Activity                                                     | (1 = reduced, 2 = unchanged)                                 |
+| Evolution                                                    | (1 = decay, 2 = no growth, 3 = growth)                       |
+| Previous 24 hour flare activity code                         | (1 = nothing as big as an M1, 2 = one M1, 3 = more activity than one M1) |
+| Historically-complex                                         | (1 = Yes, 2 = No)                                            |
+| Did region become historically complex  on this pass across the sun's disk | (1 = yes, 2 = no)                                            |
+| Area                                                         | (1 = small, 2 = large)                                       |
+| Area of the largest spot                                     | (1 = <=5, 2 = >5)                                            |
+| **targets:**                                                 |                                                              |
+| C-class flares production by this region in the following 24 hours (common flares) | Number                                                       |
+| M-class flares production by this region in the following 24 hours (moderate flares) | Number                                                       |
+| X-class flares production by this region in the following 24 hours (severe flares) | Number                                                       |
+
+## oil
+
+**Data Set Information:**
+
+To the best of its authors' knowledge, this is the  first realistic and public dataset with rare undesirable real events in  oil wells that can be readily used as a benchmark dataset for  development of machine learning techniques related to inherent  difficulties of actual data. 
+
+More information about the theory behind this dataset is available  in the paper 'A realistic and public dataset with rare undesirable real  events in oil wells' published in the Journal of Petroleum Science and  Engineering. Specific challenges (benchmarks) that practitioners and researchers can use together with the 3W dataset are defined and proposed in this  paper. 
+
+The 3W dataset consists of 1,984 CSV files structured as follows.  Due to the limitation of GitHub, this dataset is kept in 7z files splitted automatically and saved in the data directory. Before using 3W  dataset, they must be decompressed. After that, the subdirectory names  are the instances' labels. Each file represents one instance. The  filename reveals its source. All files are standardized as follow. There are one observation per line and one series per column. Columns are  separated by commas and decimals are separated by periods. The first  column contains timestamps, the last one reveals the observations'  labels, and the other columns are the Multivariate Time Series (MTS)  (i.e. the instance itself). 
+
+The 3W dataset's files are in [[Web Link\]](https://github.com/ricardovvargas/3w_dataset), but we believe that the 3W dataset's publication in the UCI Machine  Learning Repository benefits the machine learning community.
+
+**Attribute Information:**
+
+Pressure at the Permanent Downhole Gauge (PDG); 
+Pressure at the Temperature and Pressure Transducer (TPT); 
+Temperature at the TPT; 
+Pressure upstream of the Production Choke (PCK); 
+Temperature downstream of the PCK; 
+Pressure downstream of the Gas Lift Choke (GLCK); 
+Temperature downstream of the GLCK; 
+Gas Lift flow.
+
+**Relevant Papers:**
+
+[^1]:Vargas, Ricardo Emanuel Vaz, et al. "A realistic and public dataset with rare undesirable real events in oil wells." *Journal of Petroleum Science and Engineering* 181 (2019): 106223. 
+
+## car_eval_4
+
+**Data Set Information:**
+
+The model evaluates cars according  to the following concept nested structure: 
+
+1. CAR: car acceptability
+   1. PRICE: overall price 
+      1. buying               buying price 
+      1. maint                price of the maintenance 
+   1. TECH                   technical characteristics 
+      1. COMFORT              comfort 
+         1. doors              number of doors 
+         1. persons            capacity in terms of persons to carry 
+         1. lug_boot           the size of luggage boot 
+      1. safety               estimated safety of the car 
+
+Input attributes are printed in lowercase. Besides the target  concept (CAR), the model includes three intermediate concepts: PRICE,  TECH, COMFORT. Every concept is in the original model related to its  lower level descendants by a set of examples. 
+
+The Car Evaluation Database contains examples with the structural  information removed, i.e., directly relates CAR to the six input  attributes: buying, maint, doors, persons, lug_boot, safety. 
+
+Because of known underlying concept structure, this database may be  particularly useful for testing constructive induction and structure  discovery methods. 
+
+**Attribute Information:**
+
+Class Values: : unacc, acc, good, vgood 
+
+Attributes: 
+
+| Attribute | values                |
+| --------- | --------------------- |
+| buying    | vhigh, high, med, low |
+| maint     | vhigh, high, med, low |
+| doors     | 2,3,4,5more           |
+| persons   | 2,4,more              |
+| lug_boot  | small, med, big       |
+| safety    | low, med, high        |
+
+**Relevant Papers:**
+
+[^1]: M. Bohanec and V. Rajkovic. Knowledge acquisition and  explanation for multi-attribute decision making. In 8th Intl Workshop on Expert Systems and their Applications, Avignon, France. pages 59-78,  1988. 
+[^2]: B. Zupan, M. Bohanec, I. Bratko, J. Demsar. Machine learning by function decomposition. ICML-97, Nashville, TN. 1997 (to appear) 
+
+## wine_quality
+
+**Data Set Information:**
+
+The two datasets are related to red and white variants of the Portuguese "Vinho Verde" wine.  Due to privacy and logistic  issues, only physicochemical (inputs) and sensory (the output) variables are available (e.g. there is no data about grape types, wine brand,  wine selling price, etc.).
+
+These datasets can be viewed as  classification or regression tasks.  The classes are ordered and not  balanced (e.g. there are many more normal wines than excellent or poor  ones). Outlier detection algorithms could be used to detect the few  excellent or poor wines. Also, we are not sure if all input variables  are relevant. So it could be interesting to test feature selection  methods.
+
+
+
+**Attribute Information:**
+
+For more information, read [Cortez et al., 2009]. 
+Input variables (based on physicochemical tests): 
+   1 - fixed acidity 
+   2 - volatile acidity 
+   3 - citric acid 
+   4 - residual sugar 
+   5 - chlorides 
+   6 - free sulfur dioxide 
+   7 - total sulfur dioxide 
+   8 - density 
+   9 - pH 
+   10 - sulphates 
+   11 - alcohol 
+Output variable (based on sensory data):  
+   12 - quality (score between 0 and 10)
+
+
+
+**Relevant Papers:****Data Set Information:**
+
+The objective is to identify each of a large number of black-and-white rectangular pixel displays as one of the 26 capital  letters in the English alphabet.  The character images were based on 20  different fonts and each letter within these 20 fonts was randomly  distorted to produce a file of 20,000 unique stimuli.  Each stimulus was converted into 16 primitive numerical attributes (statistical moments  and edge counts) which were then scaled to fit into a range of integer  values from 0 through 15.  We typically train on the first 16000 items  and then use the resulting model to predict the letter category for the  remaining 4000.  See the article cited above for more details.
+
+
+
+**Attribute Information:**
+
+​	 
+
+1.	lettr	capital letter	(26 values from A to Z) 
+2.	x-box	horizontal position of box	(integer) 
+3.	y-box	vertical position of box	(integer) 
+4.	width	width of box			(integer) 
+5.	high 	height of box			(integer) 
+6.	onpix	total # on pixels		(integer) 
+7.	x-bar	mean x of on pixels in box	(integer) 
+8.	y-bar	mean y of on pixels in box	(integer) 
+9.	x2bar	mean x variance			(integer) 
+10.	y2bar	mean y variance			(integer) 
+11.	xybar	mean x y correlation		(integer) 
+12.	x2ybr	mean of x * x * y		(integer) 
+13.	xy2br	mean of x * y * y		(integer) 
+14.	x-ege	mean edge count left to right	(integer) 
+15.	xegvy	correlation of x-ege with y	(integer) 
+16.	y-ege	mean edge count bottom to top	(integer) 
+17.	yegvx	correlation of y-ege with x	(integer)
+
+
+
+**Relevant Papers:**
+
+[^1]: P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91)
+[^2]: P. Cortez, A. Cerdeira, F. Almeida, T. Matos and J.  Reis. Modeling wine preferences by data mining from physicochemical  properties.  In Decision Support Systems, Elsevier, 47(4):547-553, 2009. 
+
+## letter_img
+
+**Data Set Information:**
+
+The objective is to identify each of a large number of black-and-white rectangular pixel displays as one of the 26 capital  letters in the English alphabet.  The character images were based on 20  different fonts and each letter within these 20 fonts was randomly  distorted to produce a file of 20,000 unique stimuli.  Each stimulus was converted into 16 primitive numerical attributes (statistical moments  and edge counts) which were then scaled to fit into a range of integer  values from 0 through 15.  We typically train on the first 16000 items  and then use the resulting model to predict the letter category for the  remaining 4000.  See the article cited above for more details.
+
+**Attribute Information:**
+
+	 1.	lettr	capital letter	(26 values from A to Z) 	 
+  	 2.	x-box	horizontal position of box	(integer) 
+    	 3.	y-box	vertical position of box	(integer) 
+      	 4.	width	width of box			(integer) 
+        	 5.	high 	height of box			(integer) 
+          	 6.	onpix	total # on pixels		(integer) 
+            	 7.	x-bar	mean x of on pixels in box	(integer)
+              	 8.	y-bar	mean y of on pixels in box	(integer) 
+                	 9.	x2bar	mean x variance			(integer) 
+                  	 10.	y2bar	mean y variance			(integer) 
+                    	 11.	xybar	mean x y correlation		(integer) 
+                      	 12.	x2ybr	mean of x * x * y		(integer)
+                        	 13.	xy2br	mean of x * y * y		(integer) 
+                          	 14.	x-ege	mean edge count left to right	(integer) 
+                            	 15.	xegvy	correlation of x-ege with y	(integer)
+                              	 16.	y-ege	mean edge count bottom to top	(integer) 
+                                	 17.	yegvx	correlation of y-ege with x	(integer)
+
+
+
+**Relevant Papers:**
+
+[^1]: P. W. Frey and D. J. Slate. "Letter Recognition Using Holland-style Adaptive Classifiers". (Machine Learning Vol 6 #2 March 91) 
+
+## yeast_me2
+
+a different version of the yeast_ml8 dataset, with a different number of variables.
+
+## webpage
+
+**Data Set Information:**
+
+One of the challenges faced by our research was the  unavailability of reliable training datasets. In fact this challenge  faces any researcher in the field. However, although plenty of articles  about predicting phishing websites have been disseminated these days, no reliable training dataset has been published publically, may be because there is no agreement in literature on the definitive features that  characterize phishing webpages, hence it is difficult to shape a dataset that covers all possible features.  
+In this dataset, we shed light on the important features that have  proved to be sound and effective in predicting phishing websites. In  addition, we propose some new features.
+
+**Attribute Information:**
+
+N/A
+
+**Relevant Papers:**
+
+[^1] Mohammad, Rami, McCluskey, T.L. and Thabtah, Fadi  (2012) An Assessment of Features Related to Phishing Websites using an  Automated Technique. In: International Conferece For Internet Technology And Secured Transactions. ICITST 2012 . IEEE, London, UK, pp. 492-497.  ISBN 978-1-4673-5325-0
+
+## ozone_level
+
+**Data Set Information:**
+
+For a list of attributes, please refer to those two .names files.  They use the following naming convention.  All the attribute start with T means the temperature measured at  different time throughout the day; and those starts with WS indicate the wind speed at various time. 
+
+WSR_PK:     continuous. peek wind speed -- resultant (meaning average of wind vector) 
+WSR_AV:     continuous. average wind speed 
+T_PK:     continuous. Peak T 
+T_AV:     continuous. Average T 
+T85:     continuous. T at 850 hpa level (or about 1500 m height) 
+RH85:     continuous. Relative Humidity at 850 hpa 
+U85:     continuous. (U wind - east-west direction wind at 850 hpa) 
+V85:     continuous. V wind - N-S direction wind at 850 
+HT85:     continuous. Geopotential height at 850 hpa, it is about the same as height at low altitude 
+T70:     continuous. T at 700 hpa level (roughly 3100 m height) 
+
+RH70:     continuous. 
+U70:     continuous. 
+V70:     continuous. 
+HT70:     continuous. 
+
+T50:     continuous. T at 500 hpa level (roughly at 5500 m height) 
+
+RH50:     continuous. 
+U50:     continuous. 
+V50:     continuous. 
+HT50:     continuous. 
+
+KI:     continuous. K-Index [[Web Link\]](http://www.weather.gov/glossary/index.php?letter=k) 
+TT:     continuous. T-Totals [[Web Link\]](http://www.theweatherprediction.com/habyhints/302/) 
+SLP:     continuous. Sea level pressure 
+SLP_:     continuous. SLP change from previous day 
+
+Precp:    continuous. -- precipitation
+
+
+
+**Attribute Information:**
+
+The following are specifications for several most  important attributes that are highly valued by Texas Commission on  Environmental Quality (TCEQ). More details can be found in the two  relevant papers. 
+
+| Attribute | Description                                               |
+| --------- | --------------------------------------------------------- |
+| O3        | Local ozone peak prediction                               |
+| Upwind    | Upwind ozone background level                             |
+| EmFactor  | Precursor emissions related factor                        |
+| Tmax      | Maximum temperature in degrees F                          |
+| Tb        | Base temperature where net ozone production begins (50 F) |
+| SRd       | Base temperature where net ozone production begins (50 F) |
+| WSa       | Wind speed near sunrise (using 09-12 UTC forecast mode)   |
+| WSp       | Wind speed mid-day (using 15-21 UTC forecast mode)        |
+
+**Relevant Papers:**
+
+[^1]: Forecasting skewed biased stochastic ozone days:  analyses, solutions and beyond, Knowledge and Information Systems, Vol.  14, No. 3, 2008. 
+
+## mammography
+
+**Data Set Information:**
+
+Mammography is the most effective method for breast cancer screening available today. However, the low positive predictive value of breast biopsy resulting from mammogram interpretation leads to approximately 70% unnecessary biopsies with benign outcomes. To reduce the high number of unnecessary breast biopsies, several computer-aided diagnosis (CAD) systems have been proposed in the last years.These systems help physicians in their decision to perform a breast biopsy on a suspicious lesion seen in a mammogram or to perform a short term follow-up 
+examination instead. 
+
+This data set can be used to predict the severity (benign or malignant) of a mammographic mass lesion from BI-RADS attributes and the patient's age. It contains a BI-RADS assessment, the patient's age and three BI-RADS attributes together with the ground truth (the severity field) for 516 benign and 445 malignant masses that have been identified on full field digital mammograms collected at the Institute of Radiology of the University Erlangen-Nuremberg between 2003 and 2006. 
+
+Each instance has an associated BI-RADS assessment ranging from 1 (definitely benign) to 5 (highly suggestive of malignancy) assigned in a double-review process by physicians. Assuming that all cases with BI-RADS assessments greater or equal a given value (varying from 1 to 5), are malignant and the other cases benign, sensitivities and associated specificities can be calculated. These can be an indication of how well a CAD system performs compared to the radiologists. 
+
+**Attribute Information:**
+
+6 Attributes in total (1 goal field, 1 non-predictive, 4 predictive attributes) 
+
+
+1. BI-RADS assessment: 1 to 5 (ordinal, non-predictive!)   
+1. Age: patient's age in years (integer) 
+1. Shape: mass shape: round=1 oval=2 lobular=3 irregular=4 (nominal) 
+1. Margin: mass margin: circumscribed=1 microlobulated=2 obscured=3 ill-defined=4 spiculated=5 (nominal) 
+1. Density: mass density high=1 iso=2 low=3 fat-containing=4 (ordinal) 
+1. Severity: benign=0 or malignant=1 (binominal, goal field!) 
+
+Missing Attribute Values: 
+    \- BI-RADS assessment :    2 
+    \- Age:                   	     5 
+    \- Shape:                         31 
+    \- Margin:                       48 
+    \- Density:                       76 
+    \- Severity:                       0 
+
+**Relevant Papers:**
+
+[^1]: M. Elter, R. Schulz-Wendtland and T. Wittenberg (2007)  The prediction of breast cancer biopsy outcomes using two CAD approaches that both emphasize an intelligible decision process. Medical Physics 34(11), pp. 4164-4172
+
+## protein_homo
+
+Despite being included  in the proposed benchmark dataset set, no information could be retrieved for this dataset.
+
+## abalone_19
+
+A different version of the abalone dataset.
