@@ -773,68 +773,6 @@ Testing ROSE under different datasets and algorithms showed that, in some cases,
 
 This is only the first part of ROSE development for Python. The algorithm still has unsolved issues, like incapacity of treating categorical data, or variables with limited support. Ideas for solutions have been discussed, and will be implemented in the future, but their implementation and validation were out of scope for this project.
 
-# Bibliography
-
-[^Yu, 2013]: Yu, H., Hong, S., Yang, X., Ni, J., Dan, Y., Qin, B.: Recognition of Multiple imbalanced cancer types based on DNA microarray data using ensemble classifiers. BioMed Res. Int. 2013, 1–13 (2013)
-[^Zhao, 2008]:Zhao, X.M., Li, X., Chen, L., Aihara, K.: Protein classification with imbalanced data. Proteins Struct. Funct. Bioinf. 70(4), 1125-1132(2008)
-[^Cerf, 2013]:Cerf, L., Gay, D., Selmaoui-Folcher, N., Crémilleux, B., Boulicaut, J.F.: Parameter-free classification in multi-class imbalanced data sets. Data Knowl. Eng. 87, 109–129 (2013)
-[^Gao, 2014]: Gao, X., Chen, Z., Tang, S., Zhang, Y., Li, J.: Adaptive weighted imbalance learning with application to abnormal activity recognition. Neurocomputing 173, 1927–1935 (2016)
-[^Razakarivony, 2016]: Razakarivony, S., Jurie, F.: Vehicle detection in aerial imagery: a small target detection benchmark. J. Vis. Commun. Image Represent. 34, 187–203 (2016)
-[^Efron, 1993]: Tibshirani, Robert J.; Efron, Bradley. An introduction to the bootstrap. *Monographs on statistics and applied probability*, 1993, 57: 1-436.
-[^Gao2, 2014]: Gao, Z., Zhang, L., Chen, M.-yu., Hauptmann, A.G., Zhang, H., Cai, A.N.: Enhanced and hierarchical structure algorithm for data imbalance problem in semantic extraction under massive video dataset. Multimed. Tools Appl. 68(3), 641–657 (2014)
-[^Wang, 2010]: Wang, S., Chen, H., Yao, X.: Negative correlation learning for classification ensembles. In: 2010 International Joint Conference on Neural Networks (IJCNN), pp. 1–8. IEEE (2010)
-[^Provost, 2001]: Provost, Foster & Fawcett, Tom. (2001). Robust Classification for Imprecise Environments. Machine Learning. 42. 203-231. 10.1023/A:1007601015854. 
-[^Ganganwar, 2012]: Ganganwar, Vaishali. (2012). An overview of classification algorithms for imbalanced datasets. International Journal of Emerging Technology and Advanced Engineering. 2. 42-47. 
-[^King, 2001]: King, Gary, and Langche Zeng. "Logistic regression in rare events data." *Political analysis* 9.2 (2001): 137-163.
-[^Menardi, 2014]: Menardi, Giovanna, and Nicola Torelli. "Training and assessing classification rules with imbalanced data." *Data Mining and Knowledge Discovery* 28.1 (2014): 92-122.
-[^Chawla, 2003]: Chawla, Nitesh V., et al. "SMOTEBoost: Improving prediction of the minority class in boosting." *European conference on principles of data mining and knowledge discovery*. Springer, Berlin, Heidelberg, 2003.
-[^Gue, 2003]:Gue, Kevin R. "A dynamic distribution model for combat logistics." *Computers & Operations Research* 30.3 (2003): 367-381.
-[^Ndour, 2012]: Ndour, Cheikh, Aliou Diop, and Simplice Dossou-Gbété. "Classification  approach based on association rules mining for unbalanced data." *arXiv preprint arXiv:1202.5514* (2012).
-[^Liu, 2006]:Liu, Xu-Ying, and Zhi-Hua Zhou. "The influence of class imbalance on cost-sensitive learning: An empirical study." *Sixth International Conference on Data Mining (ICDM'06)*. IEEE, 2006.
-[^Zhou, 2010]:Zhou, Zhi‐Hua, and Xu‐Ying Liu. "On multi‐class cost‐sensitive learning." *Computational Intelligence* 26.3 (2010): 232-257.
-[^He, 2009]: He, Haibo, and Edwardo A. Garcia. "Learning from imbalanced data." *IEEE Transactions on knowledge and data engineering* 21.9 (2009): 1263-1284.
-[^Weiss, 2003]:Weiss, Roger D., et al. "Long-term outcomes from the national drug abuse treatment clinical trials network prescription opioid addiction  treatment study." *Drug and alcohol dependence* 150 (2015): 112-119.
-[^Chawla, 2002]: N. V. Chawla, K. W. Bowyer, L. O.Hall, W. P. Kegelmeyer, “SMOTE: synthetic minority over-sampling technique,” Journal of artificial intelligence research, 321-357, 2002.
-[^Han, 2005]: Han, Hui, Wen-Yuan Wang, and Bing-Huan Mao. "Borderline-SMOTE: a new over-sampling method in imbalanced data sets learning." *International conference on intelligent computing*. Springer, Berlin, Heidelberg, 2005.
-[^Batista, 2004]: G. Batista, R. C. Prati, M. C. Monard. “A study of the behavior of several methods for balancing machine learning training data,” ACM Sigkdd Explorations Newsletter 6 (1), 20-29, 2004.
-[^Batista, 2003]:G. Batista, B. Bazzan, M. Monard, “Balancing Training Data for Automated Annotation of Keywords: a Case Study,” In WOB, 10-18, 2003.
-[^Wilson, 1972]: Wilson, Dennis L. "Asymptotic properties of nearest neighbor rules using edited data." *IEEE Transactions on Systems, Man, and Cybernetics* 3 (1972): 408-421.
-[^Hart, 1968]:P. Hart, “The condensed nearest neighbor rule,” In Information Theory, IEEE Transactions on, vol. 14(3), pp. 515-516, 1968.
-[^Kubat, 1997]: M. Kubat, S. Matwin, “Addressing the curse of imbalanced training sets: one-sided selection,” In ICML, vol. 97, pp. 179-186, 1997.
-[^Mani, 2003]: I. Mani, I. Zhang. “kNN approach to unbalanced data distributions: a case study involving information extraction,” In Proceedings of workshop on learning from imbalanced datasets, 2003.
-[^Smith, 2014]: D. Smith, Michael R., Tony Martinez, and Christophe Giraud-Carrier. “An instance level analysis of data complexity.” Machine learning 95.2 (2014): 225-256.
-[^Nguyen, 2009]:H. M. Nguyen, E. W. Cooper, K. Kamei, “Borderline over-sampling for imbalanced data classification,” International Journal of Knowledge Engineering and Soft Data Paradigms, 3(1), pp.4-21, 2009.
-[^Last, ArXiV]: Felix Last, Georgios Douzas, Fernando Bacao, “Oversampling for Imbalanced Learning Based on K-Means and SMOTE” https://arxiv.org/abs/1711.00837
-[^He, 2008]:He, Haibo, Yang Bai, Edwardo A. Garcia, and Shutao Li. “ADASYN: Adaptive synthetic sampling approach for imbalanced learning,” In IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), pp. 1322-1328, 2008.
-
-[^Hofmann, 2008]: Hofmann, Thomas, Bernhard Schölkopf, and Alexander J. Smola. "Kernel methods in machine learning." *The annals of statistics* (2008): 1171-1220.
-[^Bowman, 1997]: Bowman, Adrian W., and Adelchi Azzalini. *Applied smoothing techniques for data analysis: the kernel approach with S-Plus illustrations*. Vol. 18. OUP Oxford, 1997
-[^Silverman, 1986]:Silverman, Bernard W. *Density estimation for statistics and data analysis*. Vol. 26. CRC press, 1986.
-[^Mower, 2005]:Mower, Jeffrey P. "PREP-Mt: predictive RNA editor for plant mitochondrial genes." *BMC bioinformatics* 6.1 (2005): 96.
-[^Van Rijsbergen, 1986]:Van Rijsbergen, Cornelis J. "A new theoretical framework for information retrieval." *Acm Sigir Forum*. Vol. 21. No. 1-2. New York, NY, USA: ACM, 1986.
-[^Chicco, 2020]: Chicco, Davide, and Giuseppe Jurman. "The advantages of the Matthews  correlation coefficient (MCC) over F1 score and accuracy in binary  classification evaluation." *BMC genomics* 21.1 (2020): 6.
-[^Fowlkes, 1983]: Fowlkes, Edward B., and Colin L. Mallows. "A method for comparing two hierarchical clusterings." *Journal of the American statistical association* 78.383 (1983): 553-569.
-[^Henning, 1989]:Henning, Andersen. "Markedness: The First 150 Years." *Markedness in Synchrony and Diachrony, Olga M. Tomic (ed.), Mouton de Gruyter, Berlin–Germany* (1989): 11-46.
-[^Youden, 1950]:Youden, William J. "Index for rating diagnostic tests." *Cancer* 3.1 (1950): 32-35.
-[^Guilford, 1954]: Guilford, Joy Paul. "Psychometric methods." (1954).
-[^Baldi, 2000]:Baldi P, Brunak S, Chauvin Y, Andersen CA, Nielsen H. Assessing the  accuracy of prediction algorithms for classification: an overview.  Bioinformatics. 2000; 16(5):412–24.
-[^FDA, 2010]:The MicroArray Quality Control (MAQC) Consortium. The MAQC-II Project: a comprehensive study of common practices for the development and  validation of microarray-based predictive models. Nat Biotechnol. 2010;  28(8):827–38.
-[^Brown, 2018]: Brown JB. Classifiers and their metrics quantified. Mol Inform. 2018; 37:1700127
-[^Tague, 1992]: Tague-Sutcliffe J. The pragmatics of information retrieval experimentation, revisited. Informa Process Manag. 1992; 28:467–90.
-[^Flight, 2015]: Flight L, Julious SA. The disagreeable behaviour of the kappa statistic. Pharm Stat. 2015; 14:74–8.
-[^Sebastiani, 2015]:Sebastiani F. An axiomatically derived measure for the evaluation of  classification algorithms. In: Proceedings of ICTIR 2015 – the ACM SIGIR 2015 International Conference on the Theory of Information Retrieval.  New York City: ACM: 2015. p. 11–20.
-[^Powers, 2011]: Powers DMW. Evaluation: from precision, recall and F-measure to ROC,  informedness, markedness & correlation. J Mach Learn Technol. 2011;  2(1):37–63.
-[^ROSE CRAN]: Nicola Lunardon, Giovanna Menardi, Nicola Torelli: https://cran.r-project.org/web/packages/ROSE/ROSE.pdf
-[^imblearn]: https://imbalanced-learn.org/stable/
-[^sklearn]:https://scikit-learn.org/stable/
-[^PEP8]: https://www.python.org/dev/peps/pep-0008/
-[^commits]: https://github.com/scikit-learn-contrib/imbalanced-learn/pull/754
-
-[^Birch, 1995]: Birch, David L., Anne Haggerty, and William Parsons. *Who's creating jobs?: 1995*. Cognetics, Inc., 1995.
-[^Chianca, 2008]: Chianca, Thomaz. "The OECD/DAC criteria for international development evaluations: An assessment and ideas for improvement." *Journal of Multidisciplinary Evaluation* 5.9 (2008): 41-51.
-
-[^Coad, 2019]:Coad, A., Srhoj, S. Catching Gazelles with a Lasso: Big data techniques for the prediction of high-growth firms. *Small Bus Econ* **55,** 541–565 (2020).
-
 # Appendix 1: Univariate analysis
 
 ## Company informations
@@ -4385,3 +4323,68 @@ Despite being included  in the proposed benchmark dataset set, no information co
 ## abalone_19
 
 A different version of the abalone dataset.
+
+
+
+# Bibliography
+
+[^Yu, 2013]: Yu, H., Hong, S., Yang, X., Ni, J., Dan, Y., Qin, B.: Recognition of Multiple imbalanced cancer types based on DNA microarray data using ensemble classifiers. BioMed Res. Int. 2013, 1–13 (2013)
+[^Zhao, 2008]: Zhao, X.M., Li, X., Chen, L., Aihara, K.: Protein classification with imbalanced data. Proteins Struct. Funct. Bioinf. 70(4), 1125-1132(2008)
+[^Cerf, 2013]: Cerf, L., Gay, D., Selmaoui-Folcher, N., Crémilleux, B., Boulicaut, J.F.: Parameter-free classification in multi-class imbalanced data sets. Data Knowl. Eng. 87, 109–129 (2013)
+[^Gao, 2014]: Gao, X., Chen, Z., Tang, S., Zhang, Y., Li, J.: Adaptive weighted imbalance learning with application to abnormal activity recognition. Neurocomputing 173, 1927–1935 (2016)
+[^Razakarivony, 2016]: Razakarivony, S., Jurie, F.: Vehicle detection in aerial imagery: a small target detection benchmark. J. Vis. Commun. Image Represent. 34, 187–203 (2016)
+[^Efron, 1993]: Tibshirani, Robert J.; Efron, Bradley. An introduction to the bootstrap. *Monographs on statistics and applied probability*, 1993, 57: 1-436.
+[^Gao2, 2014]: Gao, Z., Zhang, L., Chen, M.-yu., Hauptmann, A.G., Zhang, H., Cai, A.N.: Enhanced and hierarchical structure algorithm for data imbalance problem in semantic extraction under massive video dataset. Multimed. Tools Appl. 68(3), 641–657 (2014)
+[^Wang, 2010]: Wang, S., Chen, H., Yao, X.: Negative correlation learning for classification ensembles. In: 2010 International Joint Conference on Neural Networks (IJCNN), pp. 1–8. IEEE (2010)
+[^Provost, 2001]: Provost, Foster & Fawcett, Tom. (2001). Robust Classification for Imprecise Environments. Machine Learning. 42. 203-231. 10.1023/A:1007601015854. 
+[^Ganganwar, 2012]: Ganganwar, Vaishali. (2012). An overview of classification algorithms for imbalanced datasets. International Journal of Emerging Technology and Advanced Engineering. 2. 42-47. 
+[^King, 2001]: King, Gary, and Langche Zeng. "Logistic regression in rare events data." *Political analysis* 9.2 (2001): 137-163.
+[^Menardi, 2014]: Menardi, Giovanna, and Nicola Torelli. "Training and assessing classification rules with imbalanced data." *Data Mining and Knowledge Discovery* 28.1 (2014): 92-122.
+[^Chawla, 2003]: Chawla, Nitesh V., et al. "SMOTEBoost: Improving prediction of the minority class in boosting." *European conference on principles of data mining and knowledge discovery*. Springer, Berlin, Heidelberg, 2003.
+[^Gue, 2003]: Gue, Kevin R. "A dynamic distribution model for combat logistics." *Computers & Operations Research* 30.3 (2003): 367-381.
+[^Ndour, 2012]: Ndour, Cheikh, Aliou Diop, and Simplice Dossou-Gbété. "Classification  approach based on association rules mining for unbalanced data." *arXiv preprint arXiv:1202.5514* (2012).
+[^Liu, 2006]: Liu, Xu-Ying, and Zhi-Hua Zhou. "The influence of class imbalance on cost-sensitive learning: An empirical study." *Sixth International Conference on Data Mining (ICDM'06)*. IEEE, 2006.
+[^Zhou, 2010]: Zhou, Zhi‐Hua, and Xu‐Ying Liu. "On multi‐class cost‐sensitive learning." *Computational Intelligence* 26.3 (2010): 232-257.
+[^He, 2009]: He, Haibo, and Edwardo A. Garcia. "Learning from imbalanced data." *IEEE Transactions on knowledge and data engineering* 21.9 (2009): 1263-1284.
+[^Weiss, 2003]: Weiss, Roger D., et al. "Long-term outcomes from the national drug abuse treatment clinical trials network prescription opioid addiction  treatment study." *Drug and alcohol dependence* 150 (2015): 112-119.
+[^Chawla, 2002]: N. V. Chawla, K. W. Bowyer, L. O.Hall, W. P. Kegelmeyer, “SMOTE: synthetic minority over-sampling technique,” Journal of artificial intelligence research, 321-357, 2002.
+[^Han, 2005]: Han, Hui, Wen-Yuan Wang, and Bing-Huan Mao. "Borderline-SMOTE: a new over-sampling method in imbalanced data sets learning." *International conference on intelligent computing*. Springer, Berlin, Heidelberg, 2005.
+[^Batista, 2004]: G. Batista, R. C. Prati, M. C. Monard. “A study of the behavior of several methods for balancing machine learning training data,” ACM Sigkdd Explorations Newsletter 6 (1), 20-29, 2004.
+[^Batista, 2003]: G. Batista, B. Bazzan, M. Monard, “Balancing Training Data for Automated Annotation of Keywords: a Case Study,” In WOB, 10-18, 2003.
+[^Wilson, 1972]: Wilson, Dennis L. "Asymptotic properties of nearest neighbor rules using edited data." *IEEE Transactions on Systems, Man, and Cybernetics* 3 (1972): 408-421.
+[^Hart, 1968]: P. Hart, “The condensed nearest neighbor rule,” In Information Theory, IEEE Transactions on, vol. 14(3), pp. 515-516, 1968.
+[^Kubat, 1997]: M. Kubat, S. Matwin, “Addressing the curse of imbalanced training sets: one-sided selection,” In ICML, vol. 97, pp. 179-186, 1997.
+[^Mani, 2003]: I. Mani, I. Zhang. “kNN approach to unbalanced data distributions: a case study involving information extraction,” In Proceedings of workshop on learning from imbalanced datasets, 2003.
+[^Smith, 2014]: D. Smith, Michael R., Tony Martinez, and Christophe Giraud-Carrier. “An instance level analysis of data complexity.” Machine learning 95.2 (2014): 225-256.
+[^Nguyen, 2009]: H. M. Nguyen, E. W. Cooper, K. Kamei, “Borderline over-sampling for imbalanced data classification,” International Journal of Knowledge Engineering and Soft Data Paradigms, 3(1), pp.4-21, 2009.
+[^Last, ArXiV]: Felix Last, Georgios Douzas, Fernando Bacao, “Oversampling for Imbalanced Learning Based on K-Means and SMOTE” https://arxiv.org/abs/1711.00837
+[^He, 2008]: He, Haibo, Yang Bai, Edwardo A. Garcia, and Shutao Li. “ADASYN: Adaptive synthetic sampling approach for imbalanced learning,” In IEEE International Joint Conference on Neural Networks (IEEE World Congress on Computational Intelligence), pp. 1322-1328, 2008.
+
+[^Hofmann, 2008]: Hofmann, Thomas, Bernhard Schölkopf, and Alexander J. Smola. "Kernel methods in machine learning." *The annals of statistics* (2008): 1171-1220.
+[^Bowman, 1997]: Bowman, Adrian W., and Adelchi Azzalini. *Applied smoothing techniques for data analysis: the kernel approach with S-Plus illustrations*. Vol. 18. OUP Oxford, 1997
+[^Silverman, 1986]: Silverman, Bernard W. *Density estimation for statistics and data analysis*. Vol. 26. CRC press, 1986.
+[^Mower, 2005]: Mower, Jeffrey P. "PREP-Mt: predictive RNA editor for plant mitochondrial genes." *BMC bioinformatics* 6.1 (2005): 96.
+[^Van Rijsbergen, 1986]: Van Rijsbergen, Cornelis J. "A new theoretical framework for information retrieval." *Acm Sigir Forum*. Vol. 21. No. 1-2. New York, NY, USA: ACM, 1986.
+[^Chicco, 2020]: Chicco, Davide, and Giuseppe Jurman. "The advantages of the Matthews  correlation coefficient (MCC) over F1 score and accuracy in binary  classification evaluation." *BMC genomics* 21.1 (2020): 6.
+[^Fowlkes, 1983]: Fowlkes, Edward B., and Colin L. Mallows. "A method for comparing two hierarchical clusterings." *Journal of the American statistical association* 78.383 (1983): 553-569.
+[^Henning, 1989]: Henning, Andersen. "Markedness: The First 150 Years." *Markedness in Synchrony and Diachrony, Olga M. Tomic (ed.), Mouton de Gruyter, Berlin–Germany* (1989): 11-46.
+[^Youden, 1950]: Youden, William J. "Index for rating diagnostic tests." *Cancer* 3.1 (1950): 32-35.
+[^Guilford, 1954]: Guilford, Joy Paul. "Psychometric methods." (1954).
+[^Baldi, 2000]: Baldi P, Brunak S, Chauvin Y, Andersen CA, Nielsen H. Assessing the  accuracy of prediction algorithms for classification: an overview.  Bioinformatics. 2000; 16(5):412–24.
+[^FDA, 2010]: The MicroArray Quality Control (MAQC) Consortium. The MAQC-II Project: a comprehensive study of common practices for the development and  validation of microarray-based predictive models. Nat Biotechnol. 2010;  28(8):827–38.
+[^Brown, 2018]: Brown JB. Classifiers and their metrics quantified. Mol Inform. 2018; 37:1700127
+[^Tague, 1992]: Tague-Sutcliffe J. The pragmatics of information retrieval experimentation, revisited. Informa Process Manag. 1992; 28:467–90.
+[^Flight, 2015]: Flight L, Julious SA. The disagreeable behaviour of the kappa statistic. Pharm Stat. 2015; 14:74–8.
+[^Sebastiani, 2015]: Sebastiani F. An axiomatically derived measure for the evaluation of  classification algorithms. In: Proceedings of ICTIR 2015 – the ACM SIGIR 2015 International Conference on the Theory of Information Retrieval.  New York City: ACM: 2015. p. 11–20.
+[^Powers, 2011]: Powers DMW. Evaluation: from precision, recall and F-measure to ROC,  informedness, markedness & correlation. J Mach Learn Technol. 2011;  2(1):37–63.
+[^ROSE CRAN]: Nicola Lunardon, Giovanna Menardi, Nicola Torelli: https://cran.r-project.org/web/packages/ROSE/ROSE.pdf
+[^imblearn]: https://imbalanced-learn.org/stable/
+[^sklearn]: https://scikit-learn.org/stable/
+[^PEP8]: https://www.python.org/dev/peps/pep-0008/
+[^commits]: https://github.com/scikit-learn-contrib/imbalanced-learn/pull/754
+
+[^Birch, 1995]: Birch, David L., Anne Haggerty, and William Parsons. *Who's creating jobs?: 1995*. Cognetics, Inc., 1995.
+[^Chianca, 2008]: Chianca, Thomaz. "The OECD/DAC criteria for international development evaluations: An assessment and ideas for improvement." *Journal of Multidisciplinary Evaluation* 5.9 (2008): 41-51.
+
+[^Coad, 2019]: Coad, A., Srhoj, S. Catching Gazelles with a Lasso: Big data techniques for the prediction of high-growth firms. *Small Bus Econ* **55,** 541–565 (2020).
+
