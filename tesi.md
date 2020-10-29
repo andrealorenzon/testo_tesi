@@ -12,47 +12,45 @@
 
 > *“It is the time you have wasted for your rose that makes your rose so important.”*  - Antoine de Saint-Exupery
 
-Imbalanced learning refers to a classification problems where the distribution of the target variable is extremely skewed: some classes are more frequent than others. Common examples of such problems are churn, fraud and anomaly detection and clinical data, when one of the classes is rare because problematic, costly,  unethical, dangerous to produce, or unexpected. Class unbalancing, specified as the proportion in the number of samples in different classes, can reach values in the orders of $10^2\div 10^4 : 1$ and up to $10^5:1$ [^Provost, 2001]
+Imbalanced learning refers to classification problems where the distribution of the target variable is extremely skewed: some classes are more frequent than others. Common examples of such problems are churn, fraud and anomaly detection and clinical data, when one of the classes is rare because problematic, costly,  unethical, dangerous to produce, or unexpected. Class unbalancing, specified as the proportion in the number of samples in different classes, can reach values in the orders of $10^2\div 10^4 : 1$ and up to $10^5:1$ [^Provost, 2001]
 
 ![image-20201013124846482](image-20201013124846482.png)
 
-![image-20201013124941427](image-20201013124941427.png)
+![image-20201013124941427](imbalanced.png)
 
 *Fig. 1 Examples of synthetic balanced and imbalanced datasets.*
 
-Most real datasets does not have exactly equal number of instances in each class, and while a small difference seldom matters, a heavy imbalance can quickly become a bottleneck in model training. Most learning methods have been conceived to identify the classification rules that better fits the data by some global accuracy criteria. Their target is to minimize the global error, that may not be influenced enough from the minority class. Some methods, like the broadly used logistic regression, is more vulnerable to this effect, but even non-parametric methods, like trees, and association rules, are not immune from this effect. For example tree generated from imbalanced datasets will have an high accuracy on the prevalent class and a very low precision in identifying the rare event. It appears evident how things become worse when the minority class is the event of interest, like a positive diagnosis of cancer in a patient.
+Most real datasets do not have exactly equal numbers of instances in each class, and while a small difference seldom matters, a heavy imbalance can quickly become a bottleneck in model training. Most learning methods have been conceived to identify the classification rules that better fit the data by some global accuracy criteria. Their target is to minimize the global error, that may not be influenced enough by the minority class. Some methods, like the broadly used logistic regression, are more vulnerable to this effect, but even non-parametric methods, like trees, and association rules, are not immune to this effect. For example, tree generated from imbalanced datasets will have an high accuracy on the prevalent class and a very low precision in identifying the rare event. It appears evident how things become worse when the minority class is the event of interest, like a positive diagnosis of cancer in a patient.
 
 A brief description of the sections of this work:
 
-**More data, less data.** The most heard sentence in machine learning community is "You need more data!". Still, a large dataset might indeed expose a different, and perhaps more balanced perspective on the classes: more minority examples can indeed be useful. Other strategies may include considering more than once one or more minority samples. Chapter 1 will review the bibliography about solution for this  problem, giving a view over cost-sensitive learning and different oversampling and undersampling methods, their advantages and disadvantage.
+**More data, less data.** The most heard sentence in machine learning community is "You need more data!". Still, a large dataset might indeed expose a different, and perhaps more balanced perspective on the classes: more minority examples can indeed be useful. Other strategies may include considering more than once one or more minority samples. Chapter 1 will review the bibliography about solutions for this problem, offering a view over cost-sensitive learning and different oversampling and undersampling methods, their advantages and disadvantages.
 
-**Random Over Sampling Examples** In chapter 2 we will focus on one of these techniques, henceforth named just by its acronym ROSE, that propose a smart, albeit simple, way to generate new data from existing ones.
+**Random Over Sampling Examples** In chapter 2 we will focus on one of these techniques, henceforth named just by its acronym ROSE, that proposes a smart, albeit simple, way to generate new data from existing ones.
 
-**The Accuracy Paradox**. To assess the performance of a solution a metric is needed. When a class represent almost the totality of a dataset, a learning algorithm can achieve a good accuracy by classifying every test sample as belonging to the majority class. To avoid this problem, different metrics has been developed to assess the real model utility and assessing capabilities. Chapter 3 will review available metrics that can be used to effectively evaluate performance of resampling methods.
+**The Accuracy Paradox**. To assess the performance of a solution a metric is needed. When a class represents almost the totality of a dataset, a learning algorithm can achieve a good accuracy by classifying every test sample as belonging to the majority class. To avoid this problem, different metrics have been developed to assess the real model utility and assessing capabilities. Chapter 3 will review available metrics that can be used to effectively evaluate performance of resampling methods.
 
 **A method is as good as it is available.** Rose is already available since 2014 with the R package ROSE, and it proved to be successful in many situations[^Menardi, 2014]. To make Rose available to a larger community of data scientists is one of the main goals of this work, and it involved incorporating it in the most used Python machine learning package, `scikit-learn` , and in particular in its sub-project `imbalanced-learn`. We will overview the development methods, CI/CD, software testing and documentation, in chapter 4.
 
-**But is it good?** In chapter 5 will set up a wide testing framework for evaluating performance of resampling methods over 27 different famous standard datasets commonly used for classification problems. Different supervised models has been trained and tested on imbalanced and balanced data, and their performance reported. But toy datasets are usually easier to balance. In chapter 6 we used ROSE to dramatically improve classification capabilities of some models for the analysis of a real-world dataset, with the aim of forecasting the economic outcome of small firms.
-
-**How can I use it?** In appendix 1 we will show code snippets, use cases and links to repositories that will facilitate user's experience with ROSE, and guarantee repeatability of all experiments included in the present world.
+**But is it good?** Chapter 5 will set up a wide testing framework for evaluating performance of resampling methods over 27 different famous standard datasets commonly used for classification problems. Different supervised models have been trained and tested on imbalanced and balanced data, and their performance reported. But toy datasets are usually easier to balance. In chapter 6 we used ROSE to dramatically improve classification capabilities of some models for the analysis of a real-world dataset, with the aim of forecasting the economic outcome of small firms.
 
 # Imbalanced learning
 
 ## Imbalanced dataset problem
 
-Despite the fact that in literature most imbalanced learning problems are traditionally referred to binary datasets, real world datasets can often be multiclass, as in microarray research[^Yu, 2013], protein classification [^Zhao, 2008], medical diagnostics[^Cerf, 2013], activity recognition[^Gao, 2014], target detection[^Razakarivony, 2016], and video mining[^Gao2, 2014]. Extending imbalanced classification to multi-class scenarios is a natural path, then. As the number of classes increases, so does the challenge of representing the whole problem space accurately, and the need for taking into account the presence of multi-minority and multi-majority classes [^Wang, 2010]. 
+Despite the fact that in literature most imbalanced learning problems are traditionally referred to binary datasets, real world datasets can often be multiclass, as in microarray research[^Yu, 2013], protein classification [^Zhao, 2008], medical diagnostics[^Cerf, 2013], activity recognition[^Gao, 2014], target detection[^Razakarivony, 2016], and video mining[^Gao2, 2014]. Extending imbalanced classification to multi-class scenarios is a natural path, then. As the number of classes increases, so does the challenge of representing the whole problem space accurately, and the need to take into account the presence of multi-minority and multi-majority classes [^Wang, 2010]. 
 
-In many problem, imbalancing is intrinsically tied to the nature of the data, and not due to lack of sampling, bias, or other sampling errors. In other cases no enough samples of a specific class exists at all.
+In many problems, imbalancing is intrinsically tied to the nature of the data, and not due to lack of sampling, bias, or other sampling errors. In other cases not enough samples of a specific class exist at all.
 
-Most learning methods' loss functions are supposed to be minimized globally, under the assumptions that all class have the same weight. When data are imbalanced, the learning process  often achieves this objective by focusing on majority class, leading to bad performance [^Ganganwar, 2012], with higher errors on minority classes. 
+Most learning methods' loss functions are supposed to be minimized globally, under the assumptions that all classes have the same weight. When data are imbalanced, the learning process often achieves this objective by focusing on the majority class, leading to bad performance [^Ganganwar, 2012], with higher errors on minority classes. 
 
-The lack of model effectiveness in prediction of rare classes has been deeply discussed in literature. Both parametric and non parametric methods appear to be sensitive to imbalancing. As an example in logistic regression, one of the most used for binary classification, this effect depends from an underestimation of conditional probability of the rare class [^King, 2001],[^Menardi, 2014]. 
+The lack of model effectiveness in prediction of rare classes has been deeply discussed in literature. Both parametric and non parametric methods appear to be sensitive to imbalancing. As an example in logistic regression, one of the most used for binary classification, this effect depends on an underestimation of conditional probability of the rare class [^King, 2001],[^Menardi, 2014]. 
 
-Even the more flexible non-parametric methods, like classification trees and association rules are immune from the effect of asymmetric class distribution. Trees, for example, are being grown finding the recursive divisions of the parameter space that maximize the impurity reduction. The imbalance found in the dataset will be often mirrored in the imbalance of the accuracy over different classes [^Menardi, 2014], [^Chawla, 2003]. Even association rules, being selected by their supports, tend to underperform[^Gue, 2003],[^Ndour, 2012].
+Even the more flexible non-parametric methods, like classification trees and association rules are not immune from the effect of asymmetric class distribution. Trees, for example, are grown finding the recursive divisions of the parameter space that maximize the impurity reduction. The imbalance found in the dataset will be often mirrored in the imbalance of the accuracy over different classes [^Menardi, 2014], [^Chawla, 2003]. Even association rules, being selected by their supports, tend to underperform[^Gue, 2003],[^Ndour, 2012].
 
 ## Treating imbalanced datasets
 
-Many solution has been advanced to treat imbalanced data problems. Most fall in one of the following two approaches: using cost-sensitive learning models, and resampling the data.
+Many solutions has been put forward to treat imbalanced data problems. Most fall in one of the following two approaches: using cost-sensitive learning models, and resampling the data.
 
 ### Cost-sensitive learning
 
@@ -62,36 +60,37 @@ For multiclass data, a cost matrix $\mathbf C$ is computed, where $\mathbf C_{i,
 
 ### Resampling
 
-A different, alternative approach against imbalancing can be tried by preprocessing the data, instead of modifying the learning rules, using sampling methods. This approach has consistently proven effective, with different degrees [^He, 2009],[^Weiss, 2003]. Different resampling methods has been proposed, falling in two categories:
+A different, alternative approach against imbalancing can be tried by preprocessing the data, instead of modifying the learning rules, using sampling methods. This approach has consistently proven effective, to different degrees [^He, 2009],[^Weiss, 2003]. Different resampling methods have been proposed, falling in two categories:
 
 * undersampling methods, where majority class samples are being randomly discarded to remove imbalancing, at the price of sample size, in a non-heuristic way;
-* oversampling methods, where different techniques can be used to generate new minority samples from the existing ones. The following sub-chapters (1.1.3 and 1.1.4) gives an overview of these methods.
+* oversampling methods, where different techniques can be used to generate new minority samples from the existing ones. The following sub-chapters (2.2.3 and 2.2.4) gives an overview of these methods.
 
-Oversampling and undersampling presents different pro and cons, leading to the need of an empirical comparison between different methodologies.
+Oversampling and undersampling present different pro and cons, leading to the need of an empirical comparison between different methodologies.
 
-| Methods       | Pros                                            | Cons                                                |
-| ------------- | ----------------------------------------------- | --------------------------------------------------- |
-| undersampling | faster learning                                 | loss of sample size                                 |
-| oversampling  | slower learning<br />higher computational costs | introduction of artifacts<br />possible overfitting |
-|               |                                                 |                                                     |
+| Methods             | Pros                                                  | Cons                                                |
+| ------------------- | ----------------------------------------------------- | --------------------------------------------------- |
+| <br />undersampling | <br />faster learning                                 | <br />loss of sample size                           |
+| oversampling        | <br />slower learning<br />higher computational costs | introduction of artifacts<br />possible overfitting |
+|                     |                                                       |                                                     |
+|                     |                                                       |                                                     |
 
 Despite those problems, resampling is more commonly used than cost-sensitive learning, that is not supported for all learning methods.
 
 ### Undersampling strategies
 
-Undersampling reduces the size of majority class to avoid imbalancing. In this paragraph we will provide an overview over commonly available undersampling strategies.
+Undersampling reduces the size of majority classes to avoid imbalancing. In this paragraph we will provide an overview of commonly available undersampling strategies.
 
 * **Random UnderSampler (RUS)**: it works by simply choosing random samples from the majority class.
-* **Condensed NN**: [^Hart, 1968] uses a 1-nearest neighbor rule to iteratively decide if a sample should be removed or not. It is sensitive to noise and will generate noisy samples. 
-* **One Sided Selection** [^Kubat, 1997]and **Tomek Links** instead tends to remove noisy samples. <img src="sphx_glr_plot_illustration_tomek_links_0011.png" alt="" style="zoom:70%;" />
+* **Condensed NN**: [^Hart, 1968] it uses a 1-nearest neighbor rule to iteratively decide if a sample should be removed or not. It is sensitive to noise and will generate noisy samples. 
+* **One Sided Selection** [^Kubat, 1997]and **Tomek Links** instead tend to remove noisy samples. <img src="sphx_glr_plot_illustration_tomek_links_0011.png" alt="" style="zoom:70%;" />
   *Fig 2: Tomek link strategy for undersampling. Tomek links nodes, classified as noise, can be removed.*
 
-* **Edited NN** and **Repeated Edited NN** [^Wilson, 1972]  apply (respectively one of more times) a nearest-neighbors algorithm and “edit” the dataset by removing samples which do not agree “enough” with their neighborhood. For each sample in the class to be under-sampled, the nearest-neighbors are computed and if the selection criterion is not fulfilled, the sample is removed. The criterium can be based on majority, or totality of nearest neighbors belonging to the same class of the inspected sample to be kept in the dataset.
-* **All KNN** is another iterative process that does the same of the latter, but incrementing at each iteration the number of  considered neighbors.
+* **Edited NN** and **Repeated Edited NN** [^Wilson, 1972]  apply (respectively one of more times) a nearest-neighbors algorithm and “edit” the dataset by removing samples which do not agree “enough” with their neighborhood. For each sample in the class to be under-sampled, the nearest-neighbors are computed and if the selection criterion is not fulfilled, the sample is removed. The criterion can be based on majority, or totality of nearest neighbors belonging to the same class of the inspected sample to be kept in the dataset.
+* **All KNN** is another iterative process that does the same, but incrementing at each iteration the number of  considered neighbors.
 * **Near Miss** [^Mani, 2003] is a collection of three different algorithms that respectively:
   * selects the majority samples for which the average distance to the $k$ *nearest* neighbors of the minority class is the *smallest*, or
   * selects the majority samples for which the average distance to the $k$ *farthest* neighbors of the minority class is the *smallest*, or
-  * first keel the $M$-nearest neighbors are kept, then, the majority samples selected are the one for which the average distance from the $k$ nearest neighbors is the  *largest*.
+  * first the $M$-nearest neighbors are kept, then, the majority samples selected are the ones for which the average distance from the $k$ nearest neighbors is the  *largest*.
 * **Neighborhood Cleaning Rule**[^Laurikkala, 2001] focuses on cleaning the data without condensing them.
 * **Instance Hardness Threshold** [^Smith, 2014] trains any classifier on the data, and the samples with lower probabilities are removed from the dataset. It is not guaranteed to output a balanced dataset, though.
 
@@ -99,7 +98,7 @@ Undersampling reduces the size of majority class to avoid imbalancing. In this p
 
 In this section we present the most commonly used oversampling techniques and their variants:
 
-* Synthetic Minority Oversampling TEchnique (SMOTE) based
+* Synthetic Minority Oversampling TEchnique (SMOTE) based methods
 * ADAptative SYNthetic sampling (ADASYN).
 
 #### SMOTE based methods
@@ -111,23 +110,23 @@ In this section we present the most commonly used oversampling techniques and th
 * lines are drawn from the original sample to the neighbors
 * new examples are drawn randomly along these lines, with $x_{new} =x_i +\lambda * (x_{nn}-x_i)$, where $\lambda$ is drawn from $Uniform(0,1)$, or other distributions.
 
-<img src="1*6UFpLFl59O9e3e38ffTXJQ.png" alt="Image for post" style="zoom: 50%;" />
+<img src="smote.png" alt="Image for post" style="zoom: 60%;" />
 
-*Fig. 3 : SMOTE general resampling concept. New samples are generated along the lines connecting minority sample, with different distributions and strategies.*
+*Fig. 3 : SMOTE general resampling concept. New samples are generated along the lines connecting minority samples, with different distributions and strategies.*
 
-There are many variants of SMOTE that has been developed to improve its performance. 
+There are many variants of SMOTE that have been developed to improve its performance. 
 
 **Borderline SMOTE** [^Han, 2005] will classify each sample $x_i$ to be:
 
 1. *noise*, when all k-neighbors are of a different class from $x_i$ 
-1. *in danger*, when at least half of the neighbors belongs to the same class
-1. *safe*, when all neighbors belongs to the same class.
+1. *in danger*, when at least half of the neighbors belong to the same class
+1. *safe*, when all neighbors belong to the same class.
 
 The algorithm will then use "*in danger*" samples to generate new samples, with the same procedure of SMOTE.
 
-**K-Means SMOTE** [^Last, ArXiV] uses a K-Means clustering method before to apply SMOTE. The clustering will group samples together and generate new samples depending of the cluster density.
+**K-Means SMOTE** [^Last, ArXiV] uses a K-Means clustering method before applying SMOTE. The clustering will group samples together and generate new samples depending on the cluster density.
 
-**SMOTENC** [^Chawla, 2002] slightly change the way a new sample is generated by performing something specific for the categorical features. In fact, the categories of a new generated sample are decided by picking the most frequent category of the nearest neighbors present during the generation.
+**SMOTENC** [^Chawla, 2002] slightly changes the way a new sample is generated by performing something specific for the categorical features. In fact, the categories of a new generated sample are decided by picking the most frequent category of the nearest neighbors present during the generation.
 
 **SVMSMOTE** [^Nguyen, 2009] fits a Support Vector Classifier to find support vectors and generate samples considering them. Tuning the $C$ parameter of the SVM classifier allows to select more or less support vectors.
 
@@ -150,7 +149,7 @@ Two methods used for this purpose are:
 
 * **Edited nearest-neighbors** [^Batista, 2003] uses asymptotic convergence properties of nearest neighbor rules that use an editing procedure to reduce the number of preclassified samples and to improve performance [^WIlson, 1972]
 
-Ensemble methods can be used generate undersampled subsets of many different oversampled datasets, or by bagging different undersamplers. Additionally, pipelines can be assembled, to chain different methods.
+Ensemble methods can be used to generate undersampled subsets of many different oversampled datasets, or by bagging different undersamplers. Additionally, pipelines can be assembled, to chain different methods.
 
 # Random over-sampling examples (ROSE)
 
@@ -172,19 +171,19 @@ Apart from enhancing learning, the generation of synthetic examples from an esti
 
 ## Assumptions
 
-ROSE requires that the resampled variables are of numeric type, being impossible to fit a multivariate kernel on unordered categorical variables. This can include variables with limited  numeric support (e.g. $\{0,1\}$, or percentage values. For the latter, problems rise near the extreme values 0 and 100).  In some cases, this problem can be solved using transformations, like taking the logarithm.
+ROSE requires the resampled variables to be numeric, being impossible to fit a multivariate kernel on unordered categorical variables. This can include variables with limited numeric support, e.g. $\{0,1\}$, or percentage values. For the latter, problems arise near the extreme values 0 and 100. In some cases, this problem can be solved using transformations, like taking the logarithm.
 
 Variables belonging to $\mathbb N$ could generate non-integer samples. This problem can be contained by rounding.
 
-Variables belonging to $\mathbb N^+$ or $\mathbb R^+$ domains poses another problem, since samples drawn from the kernel function are not guaranteed to be positive. This particular problem can be contained by a log-transform of the original dataset parameters.
+Variables belonging to $\mathbb N^+$ or $\mathbb R^+$ domains pose another problem, since samples drawn from the kernel function are not guaranteed to be positive. This particular problem can be contained by a log-transform of the original dataset parameters.
 
 Relatively to our work described in Chapter 4, future development of ROSE will consider the option to extend the class by including type inference or by collecting `numpy.array` and `pandas.DataFrame` dtypes data to dynamically change the random sampling function.
 
 ## Kernel methods
 
-Since 90s estimation and learning methods using positive definite kernels have become popular, particularly in machine learning [^Hofmann, 2008]. Real world analysis problems ofter require nonlinear methods to detect the kind of dependencies that allows successful prediction of properties of interests.
+Since the 90s estimation and learning methods using positive definite kernels have become popular, particularly in machine learning [^Hofmann, 2008]. Real world analysis problems ofter require nonlinear methods to detect the kind of dependencies that allows successful prediction of properties of interests.
 
-The operational use of ROSE requires a prior specification of the  $\mathbf H_j$  matrices. In principle this leads to a criticality, since different choices of the smoothing matrices leads to larger or smaller $K_{\mathbf  H_j}$, namely larger or smaller neighborhoods of the observations from which the synthetic samples are generated. There is a large body of literature on methods of choice of the smoothing parameters [^Silverman, 1986] , [^Bowman, 1997]. The idea beyond these methods is to minimize an optimality criterion, as the asymptotic mean integrated squared error (AMISE).
+The operational use of ROSE requires a prior specification of the $\mathbf H_j$ matrices. In principle this leads to a criticality, since different choices of the smoothing matrices lead to larger or smaller $K_{\mathbf  H_j}$, namely larger or smaller neighborhoods of the observations from which the synthetic samples are generated. There is a large body of literature on methods of choice of the smoothing parameters [^Silverman, 1986] , [^Bowman, 1997]. The idea beyond these methods is to minimize an optimality criterion, as the asymptotic mean integrated squared error (AMISE).
 $$
 \begin{equation}
 AMISE(h;r)=\frac{R(K^{(r)})}{nh^{2r+1}}+\frac{1}{4}h^4\mu_2^2(K)r(f^{(r+2)})
@@ -198,7 +197,7 @@ $$
 h_q^{(j)}=\left(\frac{4}{(d+2)n}\right)^{1/(d+4)}\hat\sigma_q^{(j)} (q=1,\dots,d; j=class)
 \end{equation}
 $$
-where $\hat\sigma_q^{(j)}$ is the sample estimate of the standard deviation of the $q$th dimension of the observation belonging to the class $\mathcal Y_j$. Despite the naivety of this approach, authors reports good results, since the only interest is producing a reasonable neighborhood where to sample the new data from, and happens to perform well even if $f(\mathbf x|y=\mathcal Y_j)$ is not $Normal$ , just unimodal.
+where $\hat\sigma_q^{(j)}$ is the sample estimate of the standard deviation of the $q$th dimension of the observation belonging to the class $\mathcal Y_j$. Despite the naivety of this approach, authors report good results, since the only interest is producing a reasonable neighborhood where to sample the new data from, and it happens to perform well even if $f(\mathbf x|y=\mathcal Y_j)$ is not $Normal$ , just unimodal.
 
 Choice of $\mathbf H_j$ smoothing matrix gives control on data generation:
 
@@ -214,7 +213,7 @@ In the next figure, we used ROSE to rebalance the datasets, and bring $n$ to a t
 
 *Fig 5 : rebalanced datasets. Original data points in fig. 4 are marked with gray crosses.*
 
-Rose can use a **shrink factor** vector, to shrink kernels independently for each class. The following figure show how, decreasing the shrink factors, new data will be more and more closely clustered around original data points.
+Rose can use a **shrink factor** vector, to shrink kernels independently for each class. The following figure shows how, decreasing the shrink factors, new data will be more and more closely clustered around original data points.
 
 ![image-20201013111732827](image-20201013111732827.png)
 
@@ -228,7 +227,7 @@ Evaluating performance is a critical part of building a machine learning model. 
 
 ## Confusion matrix
 
-Confusion Matrices (henceforth CM) are tables that can be used to describe the performance of a classifier on a test set of data for which true values are known. They are detailed and simple to understand, but does not summarize well the performance.
+Confusion Matrices (henceforth CM) are tables that can be used to describe the performance of a classifier on a test set of data for which true values are known. They are detailed and simple to understand, but do not summarize well the performance.
 
 |     n = 165 | Predicted: NO | Predicted: YES |
 | ----------: | :-----------: | :------------: |
@@ -237,13 +236,13 @@ Confusion Matrices (henceforth CM) are tables that can be used to describe the p
 
 *Table 1 : An example of a confusion matrix for a binary classifier.*
 
-On the diagonal we find correctly predicted samples (true negatives, or TN, and true positives, or TP), leaving misclassified data on other cells (false positives, or FP, and false negatives, or FN). Confusion matrices can be extended to multiclass classifiers, their size becoming $j\times j$, for classes in $\mathcal Y_j$. Sums over rows and column will describe the total of actual vs predicted predictions. We have seen how secondary indexes can be computed form these values and their ratios.
+On the diagonal we find correctly predicted samples (true negatives, or TN, and true positives, or TP), leaving misclassified data on other cells (false positives, or FP, and false negatives, or FN). Confusion matrices can be extended to multiclass classifiers, their size becoming $j\times j$, for classes in $\mathcal Y_j$. Sums over rows and columns will describe the total of actual vs predicted predictions. We have seen how secondary indexes can be computed from these values and their ratios.
 
 When describing a model's performance, the simplest yet most common classification metric is its $Accuracy$ , defined as 
 $$
 Accuracy = (TP + TN)/(TP + TN + FP + FN)
 $$
-This can be misleading, when the problem uses imbalanced data. Consider a sample with a 100:1 imbalance ratio. Classifying all values as the majority class will gives a $\sim 99\%  Accuracy$ score. [^Mower, 2005]. Different solutions has been proposed to solve this issue. For example, $Balanced Accuracy$ score, defined as 
+This can be misleading, when the problem uses imbalanced data. Consider a sample with a 100:1 imbalance ratio. Classifying all values as the majority class will give a $\sim 99\%  Accuracy$ score. [^Mower, 2005]. Different solutions have been proposed to solve this issue. For example, $Balanced Accuracy$ score, defined as 
 $$
 Balanced\ Accuracy = \frac{\frac{TP}{P}+\frac{TN}{TN+FP}}{2}
 $$
@@ -251,27 +250,27 @@ can help. Another metric is $Predicted\ positive\ condition\ rate$, defined as
 $$
 Predicted\ positive\ condition\ rate = \frac{TP+FP}{TP+FP+TN+FN}
 $$
-which identifies the proportion of the total population correctly identified. Two other commonly used index is $F1$ score and Matthews correlation coefficient. Is this case there is no need of considering a threshold for algorithms that outputs a probability score, instead of the guessed class.
+which identifies the proportion of the total population correctly identified. Two other commonly used index are $F1$ score and Matthews correlation coefficient. In this case there is no need to consider a threshold for algorithms that outputs a probability score, instead of the guessed class.
 
-More informative visualizations of model performances can be given not by indices, but by plots, like Receiver Operating Characteristics and $Precision$ vs $Recall$ plots and associated indexes like Area Unde the Curve (AUC), that deserve a dedicated description in the following sub-chapters.
+More informative visualizations of model performances can be provided not by indices, but by plots, like Receiver Operating Characteristics and $Precision$ vs $Recall$ plots and associated indexes like Area Under the Curve (AUC), that deserve a dedicated description in the following sub-chapters.
 
 Additional metrics that can be extracted from CM are 
 
 * Cohen's Kappa, that is a measure of how well the classifier performed as compared to how well it would have performed simply by chance. We left it out after bibliography reported unreliable results due to high sensitivity to the distribution of the marginal totals [^Flight, 2015]
-* Null Error Rate, that is how often you would have been wrong if you always predicted the majority class. This can be used as a useful baseline metric to compare a classifier against. Still, the Accuracy Paradox tells us that sometimes the best classifier will still have an high error rate than the null error rate.
-* $F_1$ score. Since we will use it in our test suite later, we will dedicate next sub-chapter to its description.
+* Null Error Rate, that is how often you would have been wrong if you always had predicted the majority class. This can be used as a useful baseline metric to compare a classifier against. Still, the Accuracy Paradox tells us that sometimes the best classifier will still have an higher error rate than the null error rate.
+* $F_1$ score. Since we will use it in our test suite later, we will dedicate the next sub-chapter to its description.
 * $K$ measure, a theoretically grounded measure that relies on a strong axiomatic base.[^Sebastiani, 2015]
 * confusion entropy, a statistical score comparable with Matthews correlation coefficient, treated below.
 * Power's informedness and markedness [^Powers, 2011], a couple of interesting alternative metrics that respectively describe how a binary predictor is informed in relation to the opposite condition, and the probability that the predictor correctly marks a specific condition.
 * Mattew's correlation Coefficient (MCC), exhaustively treated in a following sub-chapter.
 
-Despite their effectiveness, most of the aforementioned measures does not appear to have achieved such a diffusion in the literature to be considered a solid alternative to MCC and $F_1$ score. They are good single-valued indicators of performance, supported by a strong bibliography, and useful to compare large numbers of tests.
+Despite their effectiveness, most of the aforementioned measures do not appear to have achieved such a diffusion in the literature to be considered a solid alternative to MCC and $F_1$ score. They are good single-valued indicators of performance, supported by a strong bibliography, and useful to compare large numbers of tests.
 
-To have a deeper comprehension of a model's performance we used other two plotted tools: Receiving Operator Characteristic and Precision/Recall plots. The following sub-chapters will describe our four tools in depth.
+To have a deeper comprehension of a model's performance we used two other plotted tools: Receiving Operator Characteristic and Precision/Recall plots. The following sub-chapters will describe our four tools in depth.
 
 ## $F_1$ Score 
 
-Called also F-score or F-measure, is an accuracy metric, calculated from the precision and recall of the test. 
+Called also F-score or F-measure, it is an accuracy metric, calculated from the precision and recall of the test. 
 
 
 $$
@@ -292,13 +291,13 @@ F_\beta&=(1+\beta^2)\frac{precision *recall}{(\beta^2*precision)+recall}
 &=\frac{(1+\beta^2)*TP}{(1+\beta^2)*TP+\beta^2*FN+FP}
 \end{align}
 $$
-where recall is considered $\beta$ times as important as precision. a $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Mattews Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
+where recall is considered $\beta$ times as important as precision. A $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Mattews Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
 
 
 
 ## Matthews correlation coefficient (MCC)
 
-Accuracy and $F_1$ score computed on confusion matrices have been (and still are) among the most popular adopted metrics in binary classification task [^Chicco, 2020]. However these measures can show overoptimistic inflated results, especially on imbalanced datasets. The Mattews correlation coefficient (henceforth, MCC) is instead a more reliable statistical rate which encompass all for confusion matrix categories (TP, FP, TN, FN), proportionally both to the size of positive and negative elements in the dataset. 
+Accuracy and $F_1$ score computed on confusion matrices have been (and still are) among the most popular adopted metrics in binary classification tasks [^Chicco, 2020]. However these measures can show overoptimistic inflated results, especially on imbalanced datasets. The Mattews correlation coefficient (henceforth, MCC) is instead a more reliable statistical rate which encompasses all four confusion matrix categories (TP, FP, TN, FN), proportionally both to the size of positive and negative elements in the dataset. 
 
 
 
@@ -309,7 +308,7 @@ MCC &=  \frac{TP\times TN-FP\times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}} \\
 \end{align}
 $$
 
-It derives from Guilford's $\phi$ coefficient[^Guilford, 1954]. Originally developed by Mattews in 1975 for comparing chemical structures, it has been re-proposed by Baldi et al [^Baldi, 2000] as a standard performance metric in the multiclass case, and American Food and Drug Administration (FDA) employed it as main evaluation measure in Microarray II / Sequencing Quality Contro (MAQC/SEQC)[^FDA, 2010]. Nonetheless, it has been reported to suffers from instability in case of imbalanced outcomes. [^Brown, 2018]. Despite the existence of Bayesian based improvements and mathematical workarounds, they have not been adopted yet.
+It derives from Guilford's $\phi$ coefficient[^Guilford, 1954]. Originally developed by Mattews in 1975 for comparing chemical structures, it has been re-proposed by Baldi et al [^Baldi, 2000] as a standard performance metric in the multiclass case, and American Food and Drug Administration (FDA) employed it as main evaluation measure in Microarray II / Sequencing Quality Control (MAQC/SEQC)[^FDA, 2010]. Nonetheless, it has been reported to suffer from instability in the case of imbalanced outcomes. [^Brown, 2018]. Despite the existence of Bayesian based improvements and mathematical workarounds, they have not been adopted yet.
 
 ## Receiver Operating Characteristic (ROC) and AUC
 
@@ -319,9 +318,9 @@ A Receiver Operating Characteristic (ROC) curve is a plot that summarizes the pe
 
 *Fig 7 : Example of ROC curve. AUC (Area under the curve) are shown in the bottom-right legend.*
 
-A ROC gives an intuitive visualization of a classifier performance: the dotted diagonal represent a classifier with no discriminative power, and the more the curve tends to the upper-left corner, the better the classifier is. The area under the curve (AUC) gives a commonly used single-valued index of performance. The threshold is applied to the cut-off point in probability between the positive and negative classes, which by default for any classifier would be set at 0.5, halfway between each outcome (0 and 1) or in some cases, the observed proportions of 1s in the dataset. A trade-off exists between the TP rate an FP rate, such that changing the threshold of classification will change the balance of predictions towards improving the TP rate at the expense of FP rate, or the reverse case.
+A ROC gives an intuitive visualization of a classifier performance: the dotted diagonal represents a classifier with no discriminative power, and the more the curve tends to the upper-left corner, the better the classifier is. The area under the curve (AUC) gives a commonly used single-valued index of performance. The threshold is applied to the cut-off point in probability between the positive and negative classes, which by default for any classifier would be set at 0.5, halfway between each outcome (0 and 1) or in some cases, the observed proportions of 1s in the dataset. A trade-off exists between the TP rate an FP rate, such that changing the threshold of classification will change the balance of predictions towards improving the TP rate at the expense of FP rate, or vice versa.
 
-By evaluating the true positive and false positives for different threshold values, the ROC curve is drawn. An interesting property is that the ROC is unbiased towards model that performs well on the minority class at the expense of the majority class, or vice versa, making it an interesting choice when dealing with imbalanced data.
+By evaluating the true positives and false positives for different threshold values, the ROC curve is drawn. An interesting property is that the ROC is unbiased towards models that performs well on the minority class at the expense of the majority class, or vice versa, making it an interesting choice when dealing with imbalanced data.
 
 ## Precision-recall plots
 
@@ -333,9 +332,9 @@ Precision-recall plots are a powerful visualization tool to evaluate binary clas
 
 # Implementation of ROSE in the `imbalanced-learn` Python package
 
-As we said, a tool is useful only if it available. ROSE has an already available R implementation [^ROSE CRAN]. Despite R being the favored programming language among statistician, Python is quickly rising in popularity, and over the years tens of thousands of packages were offered to help researches in mathematic and statistic fields. We decided to avoid contributing on closed source, expensive or ineffective softwares like MatLab, Excel, Stata, SPSS, and contributing to the community by choosing Python.
+As we said, a tool is useful only if it is available. ROSE has an already available R implementation [^ROSE CRAN]. Despite R being the favored programming language among statistician, Python is quickly rising in popularity, and over the years tens of thousands of packages were offered to help researches in mathematic and statistic fields. We decided to avoid contributing on closed source, expensive or ineffective softwares like MatLab, Excel, Stata, SPSS, and contributing to the community by choosing Python.
 
-As of the date of this writing, the best way to start an argument in a group of data scientists is posing the question "So, Python or R?". This work will stay as far as possible from taking a side in this dilemma, both languages offering many pro and cons, opportunities and flaws.
+As of the date of this writing, the best way to start an argument in a group of data scientists is posing the question "So, Python or R?". This work will stay as far as possible from taking a side in this dilemma, both languages offering many pros and cons, opportunities and flaws.
 
 Instead of the simpler choice of publishing a stand-alone library, we decided to maximize the availability of the code extending the already-available `imbalanced-learn` library[^imblearn], that is a contributor of the well known `scikit-learn` project[^sklearn]. 
 
@@ -386,7 +385,7 @@ CI/CD is a modern DevOps tool. Code is automatically and continuously pushed to 
 
 When a code change is detected, the CI/CD pipeline starts:
 
-* the CI/CD cluster reads a YAML file, with a matrix of configurations: different operative systems, different versions of Python, different version of any used library.
+* the CI/CD cluster reads a YAML file, with a matrix of configurations: different operative systems, different versions of Python, different versions of any used library.
 * for every combination, a virtual machine (deployed as Kubernetes containers, in our case) are instantiated.
 * at the launch, the pod loads the configuration, and runs all the code test units
 * the results of the test units are fed back to the repository
@@ -396,15 +395,15 @@ Our implementation has been correctly merged, and will be published with the nex
 
 ## Documentation
 
-Documentation correctness is integral part of the review process. Functions API are automatically harvested from the code by the `sphinx` documentation library, while theoretical descriptions, application and user guide has been written by the author, and can be found at the official website of the project's documentation, at https://imbalanced-learn.readthedocs.io .
+Documentation correctness is integral part of the review process. Functions API are automatically harvested from the code by the `sphinx` documentation library, while theoretical descriptions, application and user guide have been written by the author, and can be found on the official website of the project's documentation, at https://imbalanced-learn.readthedocs.io .
 
 # Empirical analysis
 
-With the aim of obtaining benchmark the real effectiveness of ROSE, a simple test suite has been written, in a Jupyter Notebook.
+With the aim to benchmark the real effectiveness of ROSE, a simple test suite has been written, in a Jupyter Notebook.
 
 ## Materials & methods
 
-The pipeline evaluates the performance every combination on a grid of models, resampling methods, and parameters.
+The pipeline evaluates the performance of every combination of a grid of models, resampling methods, and parameters.
 
 ### Datasets
 
@@ -412,7 +411,7 @@ A total of 27 datasets has been used. All datasets come from the following repos
 
 | Short name | Source                                                       | Website                                                  |
 | ---------- | ------------------------------------------------------------ | -------------------------------------------------------- |
-| UCI        | UCI Machine Learning Repository, University of Californa, School of Information and Computer Science | http://archive.ics.uci.edu/ml                            |
+| UCI        | UCI Machine Learning Repository, University of California, School of Information and Computer Science | http://archive.ics.uci.edu/ml                            |
 | LIBSVM     | National Taiwan University                                   | https://www.csie.ntu.edu.tw/~cjlin/libsvmtools/datasets/ |
 | KDD        | SIGKDD International Conference on Knowledge Discovery and Data Mining | https://www.biostat.wisc.edu/~craven/kddcup/index.html   |
 
@@ -493,9 +492,9 @@ We have tested the following already described resamplers:
 * ADASYN
 * and, of course, ROSE.
 
-### Chosen metrics
+### Choice of metrics
 
-The following metrics has been collected, for every model/dataset/resampler combination:
+The following metrics have been measured, for every model/dataset/resampler combination:
 
 * precision
 * recall
@@ -536,7 +535,7 @@ For different algorithms we can observe different effects of using Rose, compare
 
 Some algorithms are not improved by Rose resampling, like support vector machines, on most datasets.
 
-For neural network based models like multi-layer perceptrons, decision tree classifiers, ADABoost classifiers, and quadratic discriminant analysis instead, Rose performs equally or even better that state-of-the-art resamplers, independently from cardinality, sample size, with a tendency to perform better for high imbalance ratio problems, in the lower part of the tables reported above. For some problems, nonetheless, Rose perform inexplicably much better or much worse than other resamplers. This effect nudge to the commonly shared knowledge that asserts than, in these kinds of problems, different resamplers should be tested and benchmarked, and the absence of a universally better algorithm.
+For neural network based models like multi-layer perceptrons, decision tree classifiers, ADABoost classifiers, and quadratic discriminant analysis instead, Rose performs equally or even better that state-of-the-art resamplers, independently from cardinality, sample size, with a tendency to perform better for high imbalance ratio problems, in the lower part of the tables reported above. For some problems, nonetheless, Rose perform inexplicably much better or much worse than other resamplers. This effect nudges to the commonly accepted idea that, in this kind of problems, different resamplers should be tested and benchmarked, and the absence of a universally better algorithm.
 
 # ORBIS Dataset: a real world ROSE application
 
@@ -766,13 +765,13 @@ To better visualize the tradeoff between precision and recall in both models, we
 
 This work's first objective, ROSE implementation in Python's package `imbalanced-learn` has been successfully achieved, and with the next release it will be available for all users.
 
-Binary classifier metrics evaluation and choice has proven a big challenge. Matthews correlation coefficient has proven a severe judge, performing better than $F_1$ score in describing, in a single number, the model performance.
+Binary classifier metrics evaluation and choice have proven to be a big challenge. Matthews correlation coefficient has proven a severe judge, performing better than $F_1$ score in describing, in a single number, the model performance.
 
 Additional models could have been tested, like bigger ANNs, different NN architectures, or Gaussian Process classifiers, but additional computational power is required to do that, given the number of models to train and compare. By expanding the set, given the high repeatability of the tests, we could be able to propose a standard suite for testing resamplers.
 
-Testing ROSE under different datasets and algorithms shown that, in some cases, its performance can equal and even be better than other resamplers. The difference is exacerbated when the imbalance ratio of the dataset is higher.
+Testing ROSE under different datasets and algorithms showed that, in some cases, its performance can equal and even be better than other resamplers. The difference is exacerbated when the imbalance ratio of the dataset is higher.
 
-This is only the first part of ROSE development for Python. The algorithm still have unsolved issues, like incapacity of treating categorical data, or variables with limited support. Ideas for solution has been discussed, and will be implemented in the future, but their implementation and validation was out of scope for this project.
+This is only the first part of ROSE development for Python. The algorithm still has unsolved issues, like incapacity of treating categorical data, or variables with limited support. Ideas for solutions have been discussed, and will be implemented in the future, but their implementation and validation were out of scope for this project.
 
 # Bibliography
 
@@ -940,7 +939,7 @@ All caps name of the firm's city. Missing in 88 entries.
 - Level 3: 272 groups identified by three-digit numerical codes (01.1 to 99.0);
 - Level 4: 615 classes identified by four-digit numerical codes (01.11 to 99.00).
 
-The first four digits of the code, which is the first four levels of the classification system, are the same in all European countries. National implementations may introduce additional levels. The fifth digit might vary from country to country and further digits are sometimes placed by  suppliers of databases.
+The first four digits of the code, which are the first four levels of the classification system, are the same in all European countries. National implementations may introduce additional levels. The fifth digit might vary from country to country and further digits are sometimes placed by  suppliers of databases.
 
 links: [Reference to all NACE codes](https://ec.europa.eu/competition/mergers/cases/index/nace_all.html) , [Wikipedia: NACE codes](https://en.wikipedia.org/wiki/Statistical_Classification_of_Economic_Activities_in_the_European_Community). 
 
@@ -1043,7 +1042,7 @@ Bankscape Consolidation Code. It indicates the level of consolidation for the di
 - **C1**: statement of a mother company integrating the statements of its controlled subsidiaries or branches with no unconsolidated companion,
 - **C2**: statement of a mother company integrating the statements of its controlled subsidiaries or branches with an unconsolidated companion,
 - **U1**: statement not integrating the statements of the possible controlled subsidiaries or branches of the concerned company with no consolidated companion.
-- **U2**: statement not integrating the statements of the possible controlled subsidiaries or branches of the concerned company  with an consolidated companion.
+- **U2**: statement not integrating the statements of the possible controlled subsidiaries or branches of the concerned company with a consolidated companion.
 - **LF**: limited financials: information based on rounded figures officially available, sometimes collected from other directories or websites.
 
 ```
@@ -1184,7 +1183,7 @@ degrees of freedom = 1
 
 4 level factor stating the dimension of the company. It was impossible to retrieve information about objective inclusion criteria anywhere. Different legislations use different criteria, and despite their similarity, this does not allow a unequivocal definition.
 
-To give an approximation of this classification, we will report Australian's definition of large company. A company is considered large if it satisfies at least two of the following criteria:
+To give an approximation of this classification, we will report Australian definition of large company. A company is considered large if it satisfies at least two of the following criteria:
 
 *  the consolidated revenue for the financial year of the company and the companies it controls is AU$50 millions or more,
 *  the value of the consolidated gross assets at the end of the financial year of the company and any entities it controls is AU$25 millions or more, and
@@ -1621,7 +1620,7 @@ Categories (4, object): [Figurative, No, Other, Word]
 
 ### lat / lon
 
-Geographic coordinates of the firm. Not available for ~8000 samples.
+Geographical coordinates of the firm. Not available for ~8000 samples.
 
 ![image-20200624121029091](image-20200624121029091.png)
 
@@ -2279,7 +2278,7 @@ style sf fill:#fcc
 
 ![img](data:image/png;base64,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)
 
-![image-20200624142754096](/home/andrea/.config/Typora/typora-user-images/image-20200624142754096.png)
+![image-20200624142754096](image-20200624142754096.png)
 
 ```
 outlier:
@@ -2346,7 +2345,7 @@ style Ca fill:#fcc
 
 ![img](data:image/png;base64,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)
 
-![image-20200624142543360](/home/andrea/.config/Typora/typora-user-images/image-20200624142543360.png)
+![image-20200624142543360](image-20200624142543360.png)
 
 outlier: 
 
@@ -2413,7 +2412,7 @@ style osf fill:#fcc
 
 ![image-20200624142847135](image-20200624142847135.png)
 
-42359 companies has negative values in the range (-)
+42359 companies have negative values in the range (-)
 
 outlier:
 
@@ -2872,7 +2871,7 @@ OCL        -9.186e-05   5.11e-05     -1.797      0.072      -0.000    8.33e-06
 
 ## Income statement
 
-Income statement is a company core financial statement that shows they profit and loss (P&L) over a period of time, defined as the composition of all expenses, profits and revenues, from operating and non-operating activities. It can has different granularity (year, month, season). For our dataset, yearly data are aggregated. It includes the Earnings Before Interest and Taxes (EBIT) and taxation. The following graph represent the composition of different variables belonging to the income statement.
+Income statement is a company core financial statement that shows its profit and loss (P&L) over a period of time, defined as the composition of all expenses, profits and revenues, from operating and non-operating activities. It can have different granularity (year, month, season). For our dataset, yearly data are aggregated. It includes Earnings Before Interest and Taxes (EBIT) and taxation. The following graph represent the composition of different variables belonging to the income statement.
 
 ```mermaid
 graph TB
@@ -2957,7 +2956,7 @@ style Rt fill:#fcc, stroke:#000
 
 
 
-![image-20200624143439652](/home/andrea/.config/Typora/typora-user-images/image-20200624143439652.png)
+![image-20200624143439652](image-20200624143439652.png)
 
 ```
 HGF vs non-HGF for Operating.revenue..Turnover..th.EUR.2010
@@ -3028,7 +3027,7 @@ style Sal fill:#fcc, stroke:#000
 
 ![img](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAEICAYAAACktLTqAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAADh0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uMy4yLjEsIGh0dHA6Ly9tYXRwbG90bGliLm9yZy+j8jraAAAYTElEQVR4nO3df5Rc5X3f8fcnAkGqlQUGzoZIKhIRkaOg2EYbYxrX3c0vpNjCjg8nkapi48pWcaqkaXyaSCFpcRInjk/ID7AcLAcCqVWtVYKREHKEE7N1jkttUBKQZFmOcOUiFbSAzOIlqo3wt3/cZ61hmNm9O3tnd+bx53XOnJ373Huf53tndr979zt3n6uIwMzM8vI9Mx2AmZlVz8ndzCxDTu5mZhlycjczy5CTu5lZhpzczcwy5ORuM07SUUk/2eYx+iUda+cYZp3Eyd0qI+lNkv6npBFJJyV9XtKPzlAsIWnJFPY/KumUpNGax0fSupskfWK8MSUNSfp/ab9nJN0j6eImY/2gpJ2Snk6v215JS+u2+Y+SnpL0vKQ7JJ1Ts+63Je2XdFrSTQ36/9eSvibpBUn3Snp1q6+LdQ8nd6uEpFcBu4FbgVcD84EPAN+cybimaHVE9NQ8Nk5y/40R0QMsAXqAP2iy3XnALmAp0At8Edg5tlLS1cAm4CeAS4BLKV7bMUeAXwXur+9Y0g8DHwOuS33/E/DRSR6HdSEnd6vKDwJExPaIeCkiTkXEAxHxmKQfkPRZSc+ms9htks5r1Imk75G0SdLjafsdY2eaks6V9InU/pykhyX1Nujjc+npo+nM+edr1r1f0rCkJyW9uw2vwytExHPAvcDrmqz/YkTcHhEnI+JF4I+ApZIuSJu8C7g9Ig5GxNeB3waur9n/roj4NPCNBt2vA+6LiM9FxCjwm8A7JM2t6visMzm5W1W+Arwk6S5JqySdX7NOwO8B3w/8ELAQuKlJP78IvB34V2n7rwNb0rp3AfPS/hcANwCn6juIiDenp69NZ9yfTMvfl/afD6wHttTF2RYpSb+D4gy7jDcDT0XEs2n5h4FHa9Y/CvTWJP/xvGzfiHgc+Bbpl7Hly8ndKhERzwNvAgL4OPC0pF2SeiPiSER8JiK+GRFPA39IkbwbuQG4MSKORcQ3KX4JXCvpLOBFiqS+JP11sC+NW9aLwG9FxIsRsQcYpSiFNHNv+gth7PHeSYwFcIukEeAZ4EKKX1zjkrSA4pfZr9Q09wAjNctjz8ucfdfvO7a/z9wz5+RulYmIQxFxfUQsAC6nOPP+Y0m9kgYlHZf0PPAJimTXyCXAp8YSKnAIeImiXvxfgb3AoKT/K+nDks6eRIjPRsTpmuV/okh+zbw9Is6reXw8tZ8GXjZuTRwv1jT/UkTMA34EOB9YMF5wki4CHgA+GhHba1aNAq+qWR573qgMU69+37H9y+xrXczJ3doiIr4M3EmR5H+X4ox+eUS8Cvg3FKWaRp4AVtUl1XMj4ng64/5ARCwD/gXwVuCdbT+YV/o/wKK6tsUUSf94/cYRsR/4HYoyUMPjTuWhB4BdEfHButUHgdfWLL8WOFFTthnPy/aVdClwDkUZzTLm5G6VkPSa9GHlgrS8EFgL/C+KEsAoMCJpPvCfxunqNuCDki5J/Vwk6W3p+YCk5ZJmAc9TnCV/u0k/JyiuKmmHvwJeI+k6SWenD3x/F/jLur8Mat1F8dfHNfUr0pVGe4HPR8SmBvv+BbBe0rL0QfRvUPziHNv/bEnnUvw8n5U+eJ6VVm8DVkv6l5LmAL8F3BMRPnPPnJO7VeUbwJXAFyS9QJHUDwDvp7hs7wqKWu/9wD3j9PMnFJcFPiDpG6mfK9O67wPupkjsh4D/QVGqQdJtkm6r6ecm4K5U3vm5iYKX9OuSPl3XfJ9efp37pwAiYhhYBfw7YDgd53PA+5r1HxHfSsf2m2m8T0v69bT6Z4EfBd5dN94/T/v+FfBh4EGKvxq+BvyXmu4/TvHB8lrgxvT8urTvQYrPMbalWOcCvzDR62HdT75Zh5lZfnzmbmaWISd3M7MMObmbmWXIyd3MLENnzXQAABdeeGEsWrSopX1feOEF5syZU21AbeA4q9MNMYLjrFo3xDndMe7bt++ZiLio4cqImPHHihUrolUPPvhgy/tOJ8dZnW6IMcJxVq0b4pzuGIFHokledVnGzCxDTu5mZhlycjczy5CTu5lZhpzczcwyVHlyV3GX+b9NEzn1V92/mZlNrFRyT3dbH5Z0oK59paTDko5IGpuqNCimdz0XOFZtuGZmVkbZM/c7gZW1DWm+6C0UU58uA9ZKWgb8bUSsAn6Nl9+h3czMpkmp/1CNiM9JWlTX/AbgSER8FUDSIPC2iPhSWv91iju+tNX+4yNcv+n+Cbc7+qG3tDsUM7OOUXo+95Tcd0fE5Wn5WmBlRLwnLV9HcVOFzwJXA+cBfxoRQ0362wBsAOjt7V0xODjY0gEMnxzhxKmJt1s+f15L/VdldHSUnp7xbtfZGbohzm6IERxn1bohzumOcWBgYF9E9DVaV/ncMhFxD+PfaWdsu62SngRWz507d0V/f39L4926bSc375/4MI6ua63/qgwNDdHqMU6nboizG2IEx1m1boizk2KcytUyx4GFNcsLaHBz4PFExH0RsWHevJk9qzYzy81UkvvDwGWSFkuaDayhuPdlaZJWS9o6MjIyhTDMzKxe2UshtwMPAUslHZO0Poq7vG+kuGv7IWBHFDfjLc1n7mZm7VH2apm1Tdr3AHsqjcjMzKZsRqcfcFnGzKw9ZjS5uyxjZtYePnM3M8uQz9zNzDLkKX/NzDLk5G5mliHX3M3MMuSau5lZhlyWMTPLkMsyZmYZclnGzCxDLsuYmWXIyd3MLENO7mZmGfIHqmZmGfIHqmZmGXJZxswsQ07uZmYZcnI3M8uQk7uZWYac3M3MMuRLIc3MMuRLIc3MMuSyjJlZhpzczcwy5ORuZpYhJ3czsww5uZuZZcjJ3cwsQ07uZmYZaktylzRH0iOS3tqO/s3MbHylkrukOyQNSzpQ175S0mFJRyRtqln1a8COKgM1M7Pyyp653wmsrG2QNAvYAqwClgFrJS2T9FPAl4DhCuM0M7NJUESU21BaBOyOiMvT8lXATRFxdVrenDbtAeZQJPxTwM9GxLcb9LcB2ADQ29u7YnBwsKUDGD45wolTE2+3fP7MTnEwOjpKT0/PjMZQRjfE2Q0xguOsWjfEOd0xDgwM7IuIvkbrzppCv/OBJ2qWjwFXRsRGAEnXA880SuwAEbEV2ArQ19cX/f39LQVx67ad3Lx/4sM4uq61/qsyNDREq8c4nbohzm6IERxn1bohzk6KcSrJfVwRcedE20haDaxesmRJu8IwM/uuNJWrZY4DC2uWF6S20jwrpJlZe0wluT8MXCZpsaTZwBpg12Q68HzuZmbtUfZSyO3AQ8BSScckrY+I08BGYC9wCNgREQcnM7jP3M3M2qNUzT0i1jZp3wPsaXVw19zNzNrDd2IyM8uQ55YxM8uQb5BtZpYhl2XMzDLksoyZWYZcljEzy5DLMmZmGXJZxswsQ07uZmYZcs3dzCxDrrmbmWXIZRkzsww5uZuZZcjJ3cwsQ/5A1cwsQ/5A1cwsQy7LmJllyMndzCxDTu5mZhlycjczy5CTu5lZhnwppJlZhnwppJlZhlyWMTPLkJO7mVmGnNzNzDLk5G5mliEndzOzDDm5m5llqPLkLumHJN0m6W5J76u6fzMzm1ip5C7pDknDkg7Uta+UdFjSEUmbACLiUETcAPwc8GPVh2xmZhMpe+Z+J7CytkHSLGALsApYBqyVtCytuwa4H9hTWaRmZlZaqeQeEZ8DTtY1vwE4EhFfjYhvAYPA29L2uyJiFbCuymDNzKwcRUS5DaVFwO6IuDwtXwusjIj3pOXrgCuBu4F3AOcAj0XElib9bQA2APT29q4YHBxs6QCGT45w4tTE2y2fP7NTHIyOjtLT0zOjMZTRDXF2Q4zgOKvWDXFOd4wDAwP7IqKv0bqzqh4sIoaAoRLbbZX0JLB67ty5K/r7+1sa79ZtO7l5/8SHcXRda/1XZWhoiFaPcTp1Q5zdECM4zqp1Q5ydFONUrpY5DiysWV6Q2krzxGFmZu0xleT+MHCZpMWSZgNrgF2T6cBT/pqZtUfZSyG3Aw8BSyUdk7Q+Ik4DG4G9wCFgR0QcnMzgPnM3M2uPUjX3iFjbpH0PvtzRzKzj+E5MZmYZ8p2YzMwy5DN3M7MM+czdzCxDnvLXzCxDLsuYmWXIZRkzswy5LGNmliEndzOzDLnmbmaWIdfczcwy5LKMmVmGnNzNzDLk5G5mliF/oGpmliF/oGpmliGXZczMMuTkbmaWISd3M7MMObmbmWXIyd3MLEO+FNLMLEO+FNLMLEMuy5iZZcjJ3cwsQ07uZmYZcnI3M8uQk7uZWYac3M3MMuTkbmaWobPa0amktwNvAV4F3B4RD7RjHDMza6z0mbukOyQNSzpQ175S0mFJRyRtAoiIeyPivcANwM9XG7KZmU1kMmWZO4GVtQ2SZgFbgFXAMmCtpGU1m/xGWm9mZtNIEVF+Y2kRsDsiLk/LVwE3RcTVaXlz2vRD6fGZiPjrJn1tADYA9Pb2rhgcHGzpAIZPjnDi1MTbLZ8/s1McjI6O0tPTM6MxlNENcXZDjOA4q9YNcU53jAMDA/sioq/RuqnW3OcDT9QsHwOuBH4R+ElgnqQlEXFb/Y4RsRXYCtDX1xf9/f0tBXDrtp3cvH/iwzi6rrX+qzI0NESrxziduiHObogRHGfVuiHOToqxLR+oRsQtwC0TbSdpNbB6yZIl7QjDzOy71lST+3FgYc3ygtRWSkTcB9zX19f33inGMaFFm+4vve3RD72ljZGYmbXfVK9zfxi4TNJiSbOBNcCusjt7Pnczs/aYzKWQ24GHgKWSjklaHxGngY3AXuAQsCMiDpbt0/O5m5m1R+myTESsbdK+B9jTyuCuuZuZtYfvxGRmliHPLWNmliHfINvMLEMuy5iZZchlGTOzDLksY2aWIZdlzMwy5LKMmVmGnNzNzDLkmruZWYZcczczy1Bb5nPvdmWnB/bUwGbWqVxzNzPLkJO7mVmG/IGqmVmG/IGqmVmGXJYxM8uQk7uZWYac3M3MMuTkbmaWISd3M7MM+VJIM7MM+VJIM7MMeW6ZKfAcNGbWqVxzNzPLkJO7mVmGnNzNzDLk5G5mliEndzOzDFWe3CVdKul2SXdX3beZmZVTKrlLukPSsKQDde0rJR2WdETSJoCI+GpErG9HsGZmVk7ZM/c7gZW1DZJmAVuAVcAyYK2kZZVGZ2ZmLVFElNtQWgTsjojL0/JVwE0RcXVa3gwQEb+Xlu+OiGvH6W8DsAGgt7d3xeDgYEsHMHxyhBOnWtp12iyfP4/R0VF6enpmOpQJdUOc3RAjOM6qdUOc0x3jwMDAvojoa7RuKv+hOh94omb5GHClpAuADwKvl7R5LNnXi4itwFaAvr6+6O/vbymIW7ft5Ob9nf2PtkfX9TM0NESrxziduiHObogRHGfVuiHOToqx8qwYEc8CN5TZVtJqYPWSJUuqDsPM7LvaVK6WOQ4srFlekNpK88RhZmbtMZXk/jBwmaTFkmYDa4Bdk+nAU/6ambVH2UshtwMPAUslHZO0PiJOAxuBvcAhYEdEHJzM4D5zNzNrj1I194hY26R9D7Cn0ojMzGzKZvQyE3+g+nKeH97MquI7MZmZZcj3UDUzy5DP3M3MMuQpf83MMuSyjJlZhlyWMTPLkMsyZmYZcnI3M8uQ/4lpGizadD/vX36a60v+k1KZ/tplojj9D1Rm3cE1dzOzDLksY2aWISd3M7MMObmbmWXI/8RkZpYhf6BqZpYhl2XMzDLk5G5mliEndzOzDDm5m5llyMndzCxDnlvGJqXqeW3KzlVTO+548990w9w3vhG6TQdfCmlmliGXZczMMuTkbmaWISd3M7MMObmbmWXIyd3MLENO7mZmGXJyNzPLUOX/xCRpDvBR4FvAUERsq3oMMzMbX6kzd0l3SBqWdKCufaWkw5KOSNqUmt8B3B0R7wWuqTheMzMroWxZ5k5gZW2DpFnAFmAVsAxYK2kZsAB4Im32UjVhmpnZZCgiym0oLQJ2R8Tlafkq4KaIuDotb06bHgO+HhG7JQ1GxJom/W0ANgD09vauGBwcbOkAhk+OcOJUS7tOq97vxXE2sHx+uakn9h8/cyvGTn0t649ldHSUnp6eV2xXeyyT6a9dmsU5kbLHMRnjHXOrcU6nsRgn89pM5X0eGBjYFxF9jdZNpeY+nzNn6FAk9SuBW4CPSHoLcF+znSNiK7AVoK+vL/r7+1sK4tZtO7l5/4zOf1bK+5efdpwNHF3XX2q76+smDuvE17L+WIaGhmj0fd1s0rOJ+muXZnFOpOxxTMZ4x9xqnNNpLMbJvDbtep8r/wmJiBeAd5fZ1rNCmpm1x1QuhTwOLKxZXpDaSvOskGZm7TGV5P4wcJmkxZJmA2uAXZPpQNJqSVtHRqqv3ZmZfTcreynkduAhYKmkY5LWR8RpYCOwFzgE7IiIg5MZ3GfuZmbtUarmHhFrm7TvAfa0Orhr7mZm7eE7MZmZZchzy5iZZWhGk7s/UDUza4/S/6Ha1iCkp4Gvtbj7hcAzFYbTLo6zOt0QIzjOqnVDnNMd4yURcVGjFR2R3KdC0iPN/v22kzjO6nRDjOA4q9YNcXZSjK65m5llyMndzCxDOST3rTMdQEmOszrdECM4zqp1Q5wdE2PX19zNzOyVcjhzNzOzOk7uZmY5ioiufVDc+u8wcATY1KYx7gCGgQM1ba8GPgP8Y/p6fmoXxc1KjgCPAVfU7POutP0/Au+qaV8B7E/73MKZUlnDMcaJcyHwIPAl4CDwHzotVuBc4IvAoynGD6T2xcAXUr+fBGan9nPS8pG0flFNX5tT+2Hg6om+J5qNMcFrOgv4e4o7kHVknMDR9J78A/BIp73nNf2cB9wNfJliosGrOilOYGl6DccezwO/3EkxTjp3VdHJTDwofvAeBy4FZlMkjGVtGOfNwBW8PLl/eOwHEtgE/H56/jPAp9Mb/0bgCzVv3lfT1/PT87Fvki+mbZX2XTXeGOPEefHYNxgwF/gKxb1tOybWtF9Pen42RRJ7I7ADWJPabwPel57/AnBber4G+GR6viy93+dQJMPH0/dD0++JZmNM8Jr+CvDfOJPcOy5OiuR+YV1bx7znNTHdBbwnPZ9Nkew7Ls6a3PIUcEmnxlgqd1WVBKf7QfGbf2/N8mZgc5vGWsTLk/th4OL0/GLgcHr+MWBt/XbAWuBjNe0fS20XA1+uaf/Ods3GmETMO4Gf6tRYgX8G/B3FrRmfAc6qf18pppO+Kj0/K22n+vd6bLtm3xNpn4ZjjBPfAuBvgB8Hdo/XxwzHeZRXJveOes+BecD/Jp2pdmqcNfv/NPD5To6xzKOba+6N7uE6f5rG7o2IJ9Pzp4DeCWIar/1Yg/bxxphQupn56ynOjDsqVkmzJP0DRanrMxRnsM9FcX+A+n6/E0taPwJc0ELsF4wzRjN/DPwq8O20PF4fMxlnAA9I2pduOg8d9p5T/NXyNPDnkv5e0p9JmtOBcY5ZA2yfYP+ZjnFC3ZzcO0IUv26jU8aQ1AP8JfDLEfF8q/20aqIxIuKliHgdxZnxG4DXtDOeVkh6KzAcEftmOpYS3hQRVwCrgH8v6c21KzvhPaf4a+YK4E8j4vXACxTlh8n0MWVlxkh3lbsG+O+t7D9VVY7Rzcl9yvdwnYITki4GSF+HJ4hpvPYFDdrHG6MpSWdTJPZtEXFPJ8caEc9RfAB8FXCepLEbx9T2+51Y0vp5wLMtxP7sOGM08mPANZKOAoMUpZk/6cA4iYjj6esw8CmKX5id9p4fA45FxBfS8t0Uyb7T4oTil+TfRcSJCfaf0Z+fMro5uU/5Hq5TsIviE3HS15017e9U4Y3ASPpzay/w05LOl3Q+RU1vb1r3vKQ3ShLwzrq+Go3RUNr/duBQRPxhJ8Yq6SJJ56Xn30vxmcAhiiR/bZMYx/q9FvhsOrPZBayRdI6kxcBlFB9WNfyeSPs0G+MVImJzRCyIiEWpj89GxLpOi1PSHElzx55TvFcH6KD3PL2eTwFPSFqamn6C4qqujoozWcuZksx4+89kjOVUUbifqQfFJ9Zfoajb3timMbYDTwIvUpyBrKeojf4NxaVLfw28Om0rYEuKZz/QV9PPv6W4BOoI8O6a9j6KH8jHgY9w5vKohmOME+ebKP6ce4wzl3P9TCfFCvwIxaWFj6V+/nNqv5Qi6R2h+HP4nNR+blo+ktZfWtPXjSmOw6SrDsb7nmg2Ron3v58zV8t0VJxp20c5c2npjeO9HzPxntf08zrgkfTe30txJUlHxQnMofjraV5NW0fFOJmHpx8wM8tQN5dlzMysCSd3M7MMObmbmWXIyd3MLENO7mZmGXJyNzPLkJO7mVmG/j/fnv6m/AXP8AAAAABJRU5ErkJggg==)
 
-![image-20200624143528781](/home/andrea/.config/Typora/typora-user-images/image-20200624143528781.png)
+![image-20200624143528781](image-20200624143528781.png)
 
 outliers:
 
@@ -3741,7 +3740,7 @@ In this section we will show tables of results, analogue to the ones shown in Ch
 
 # Appendix 3: benchmark datasets descriptions
 
-This appendix includes the information on the benchmark datasets, as reported from the source websites. Descriptions has been written by the dataset's author, so every "we" here is referred to the original authors.
+*NOTE: This appendix includes the information on the benchmark datasets, as reported from the source websites. Descriptions have been written by the dataset author, so every "we" here is referred to the original authors.*
 
 ## ecoli
 
