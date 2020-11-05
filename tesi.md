@@ -1,8 +1,6 @@
-<img src="frontespizio.jpg" alt="frontespizio" style="zoom:200%;" />
-
 ------
 
-
+![frontespizio.jpg](frontespizio.jpg)
 
 **Table of contents**
 
@@ -50,7 +48,7 @@ Even the more flexible non-parametric methods, like classification trees and ass
 
 ## Treating imbalanced datasets
 
-Many solutions has been put forward to treat imbalanced data problems. Most fall in one of the following two approaches: using cost-sensitive learning models, and resampling the data.
+Many solutions has been put forward to treat imbalanced data problems for labeled datasets in supervised learning. Most fall in one of the following two approaches: using cost-sensitive learning models, and resampling the data.
 
 ### Cost-sensitive learning
 
@@ -84,7 +82,6 @@ Undersampling reduces the size of majority classes to avoid imbalancing. In this
 * **Condensed NN**: [^Hart, 1968] it uses a 1-nearest neighbor rule to iteratively decide if a sample should be removed or not. It is sensitive to noise and will generate noisy samples. 
 * **One Sided Selection** [^Kubat, 1997]and **Tomek Links** instead tend to remove noisy samples. <img src="sphx_glr_plot_illustration_tomek_links_0011.png" alt="" style="zoom:70%;" />
   *Fig 2: Tomek link strategy for undersampling. Tomek links nodes, classified as noise, can be removed.*
-
 * **Edited NN** and **Repeated Edited NN** [^Wilson, 1972]  apply (respectively one of more times) a nearest-neighbors algorithm and “edit” the dataset by removing samples which do not agree “enough” with their neighborhood. For each sample in the class to be under-sampled, the nearest-neighbors are computed and if the selection criterion is not fulfilled, the sample is removed. The criterion can be based on majority, or totality of nearest neighbors belonging to the same class of the inspected sample to be kept in the dataset.
 * **All KNN** is another iterative process that does the same, but incrementing at each iteration the number of  considered neighbors.
 * **Near Miss** [^Mani, 2003] is a collection of three different algorithms that respectively:
@@ -93,6 +90,10 @@ Undersampling reduces the size of majority classes to avoid imbalancing. In this
   * first the $M$-nearest neighbors are kept, then, the majority samples selected are the ones for which the average distance from the $k$ nearest neighbors is the  *largest*.
 * **Neighborhood Cleaning Rule**[^Laurikkala, 2001] focuses on cleaning the data without condensing them.
 * **Instance Hardness Threshold** [^Smith, 2014] trains any classifier on the data, and the samples with lower probabilities are removed from the dataset. It is not guaranteed to output a balanced dataset, though.
+
+
+
+
 
 ### Oversampling and synthetic data generations
 
@@ -106,7 +107,7 @@ In this section we present the most commonly used oversampling techniques and th
 **SMOTE**[^Chawla, 2002] is a class of resampling algorithms that use the following approach:
 
 * a random sample from the minority class is chosen
-* his $k$-neighbors are found (default k=5)
+* his $k$-neighbors are found (default $k=5$)
 * lines are drawn from the original sample to the neighbors
 * new examples are drawn randomly along these lines, with $x_{new} =x_i +\lambda * (x_{nn}-x_i)$, where $\lambda$ is drawn from $Uniform(0,1)$, or other distributions.
 
@@ -189,7 +190,7 @@ $$
 AMISE(h;r)=\frac{R(K^{(r)})}{nh^{2r+1}}+\frac{1}{4}h^4\mu_2^2(K)r(f^{(r+2)})
 \end{equation}
 $$
-Among all possible alternatives, Menardi and Torelli's proposal is to start by using   a Gaussian Kernel with diagonal smoothing matrices $\mathbf H_j = diag(h_1^{(j)},\dots,h_d^{(d)})$ , and minimize AMISE.
+Among all possible alternatives, Menardi and Torelli's proposal is to start by using   a Gaussian Kernel with diagonal smoothing matrices $\mathbf H_j = diag(h_1^{(j)},\dots,h_d^{(j)})$ , and minimize AMISE.
 
 This leads to:
 $$
@@ -262,7 +263,7 @@ Additional metrics that can be extracted from CM are
 * $K$ measure, a theoretically grounded measure that relies on a strong axiomatic base.[^Sebastiani, 2015]
 * confusion entropy, a statistical score comparable with Matthews correlation coefficient, treated below.
 * Power's informedness and markedness [^Powers, 2011], a couple of interesting alternative metrics that respectively describe how a binary predictor is informed in relation to the opposite condition, and the probability that the predictor correctly marks a specific condition.
-* Mattew's correlation Coefficient (MCC), exhaustively treated in a following sub-chapter.
+* Matthews correlation Coefficient (MCC), exhaustively treated in a following sub-chapter.
 
 Despite their effectiveness, most of the aforementioned measures do not appear to have achieved such a diffusion in the literature to be considered a solid alternative to MCC and $F_1$ score. They are good single-valued indicators of performance, supported by a strong bibliography, and useful to compare large numbers of tests.
 
@@ -291,13 +292,13 @@ F_\beta&=(1+\beta^2)\frac{precision *recall}{(\beta^2*precision)+recall}
 &=\frac{(1+\beta^2)*TP}{(1+\beta^2)*TP+\beta^2*FN+FP}
 \end{align}
 $$
-where recall is considered $\beta$ times as important as precision. A $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Mattews Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
+where recall is considered $\beta$ times as important as precision. A $\beta\gt1$ will increase recall importance, while $0\lt\beta\lt1$ will weight recall lower than precision [^Van Rijsbergen, 1986]. It has recently been criticized as less informative and truthful than Matthews Correlation Coefficient (see below), especially for imbalanced classes.[^Chicco, 2020], and the adoption of new metrics is being suggested, like Informedness (Youden's J statistic)[^Youden, 1950] and Markedness[^Henning, 1989], in fields like biology and linguistics. When using geometric mean instead of harmonic mean of recall and precision it is known as Fowlkes-Mallows index [^Fowlkes, 1983]. In multiclass cases, researchers can employ the $F_1$ micro-macro averaging procedure. [^Tague, 1992]. Micro-averaging puts more emphasis on common labels in the dataset, since it gives each sample the same importance, measuring $F_1$ score of the aggregated contribution of all classes. In macro-averaging the same importance is instead given at every class, regardless of their frequency: a separate $F_1$ score is computed for each class, and then they are averaged. It may overestimate the score for imbalanced problems.
 
 
 
 ## Matthews correlation coefficient (MCC)
 
-Accuracy and $F_1$ score computed on confusion matrices have been (and still are) among the most popular adopted metrics in binary classification tasks [^Chicco, 2020]. However these measures can show overoptimistic inflated results, especially on imbalanced datasets. The Mattews correlation coefficient (henceforth, MCC) is instead a more reliable statistical rate which encompasses all four confusion matrix categories (TP, FP, TN, FN), proportionally both to the size of positive and negative elements in the dataset. 
+Accuracy and $F_1$ score computed on confusion matrices have been (and still are) among the most popular adopted metrics in binary classification tasks [^Chicco, 2020]. However these measures can show overoptimistic inflated results, especially on imbalanced datasets. The Matthews correlation coefficient (henceforth, MCC) is instead a more reliable statistical rate which encompasses all four confusion matrix categories (TP, FP, TN, FN), proportionally both to the size of positive and negative elements in the dataset. 
 
 
 
@@ -308,7 +309,7 @@ MCC &=  \frac{TP\times TN-FP\times FN}{\sqrt{(TP+FP)(TP+FN)(TN+FP)(TN+FN)}} \\
 \end{align}
 $$
 
-It derives from Guilford's $\phi$ coefficient[^Guilford, 1954]. Originally developed by Mattews in 1975 for comparing chemical structures, it has been re-proposed by Baldi et al [^Baldi, 2000] as a standard performance metric in the multiclass case, and American Food and Drug Administration (FDA) employed it as main evaluation measure in Microarray II / Sequencing Quality Control (MAQC/SEQC)[^FDA, 2010]. Nonetheless, it has been reported to suffer from instability in the case of imbalanced outcomes. [^Brown, 2018]. Despite the existence of Bayesian based improvements and mathematical workarounds, they have not been adopted yet.
+It derives from Guilford's $\phi$ coefficient[^Guilford, 1954]. Originally developed by Matthews in 1975 for comparing chemical structures, it has been re-proposed by Baldi et al [^Baldi, 2000] as a standard performance metric in the multiclass case, and American Food and Drug Administration (FDA) employed it as main evaluation measure in Microarray II / Sequencing Quality Control (MAQC/SEQC)[^FDA, 2010]. Nonetheless, it has been reported to suffer from instability in the case of imbalanced outcomes. [^Brown, 2018]. Despite the existence of Bayesian based improvements and mathematical workarounds, they have not been adopted yet.
 
 ## Receiver Operating Characteristic (ROC) and AUC
 
@@ -359,7 +360,7 @@ It uses the well known `numpy` library for matrix calculations and sampling.
 
 ## `scikit-learn` context
 
-`scikit-learn` (also known as `sklearn`) is a free software machine learning library for Python. It features algorithms for classification, regression, and clustering, including Support vector machines, tree-based models, boosted models, k-means, and DBSCAN. It is built around the famous `numpy` and `scipy` packages, with some routines written in Cython, to improve performance. Some functions are just wrapping other libraries, like LIBSVM or LIBLINEAR.
+`scikit-learn` (also known as `sklearn`) is an open source software machine learning library for Python. It features algorithms for classification, regression, and clustering, including Support vector machines, tree-based models, boosted models, k-means, and DBSCAN. It is built around the famous `numpy` and `scipy` packages, with some routines written in Cython, to improve performance. Some functions are just wrapping other libraries, like LIBSVM or LIBLINEAR.
 
 It was born in 2007 for the Google Summer of Code competition as "SciKit" (SciPy Toolkit), a third party extension of `SciPy`. The original codebase has been rewritten in 2010 by Fabian  Pedregosa, Gael Varoquaux, Alexandre Gramfort and Vincent Michel.
 
@@ -381,17 +382,17 @@ Extra test units verify PEP-8[^PEP8] compliance about linting and code style. Co
 
 ## Github and Azure CI/CD
 
-CI/CD is a modern DevOps tool. Code is automatically and continuously pushed to the master branch of the project's repository (we used Github, but Gitlab and other repositories offer the same service). `imbalanced-learn` employs an Azure pipeline.
+CI/CD is a modern DevOps process. Code is automatically and continuously pushed to the master branch of the project's repository (we used Github, but Gitlab and other repositories offer the same service). `imbalanced-learn` employs an Azure pipeline.
 
 When a code change is detected, the CI/CD pipeline starts:
 
 * the CI/CD cluster reads a YAML file, with a matrix of configurations: different operative systems, different versions of Python, different versions of any used library.
-* for every combination, a virtual machine (deployed as Kubernetes containers, in our case) are instantiated.
+* for every combination, a pod (deployed Kubernetes containers, in our case) is instantiated.
 * at the launch, the pod loads the configuration, and runs all the code test units
 * the results of the test units are fed back to the repository
 * if all tests are passed, the code can be merged.
 
-Our implementation has been correctly merged, and will be published with the next release of the library. Meanwhile, it can be imported from the `ROSE` branch of the official `imbalanced-learn` repository. All details about test operative systems, library versions and virtual machine setup can be found at https://github.com/scikit-learn-contrib/imbalanced-learn/pull/754/checks  Automatic code review is performed through https://lgtm.com services.
+Our implementation has been correctly merged, and will be published with the next release of the library. Meanwhile, it can be imported from the `ROSE` branch of the official `imbalanced-learn` repository. All details about test operative systems, library versions and pod setup can be found at https://github.com/scikit-learn-contrib/imbalanced-learn/pull/754/checks  Automatic code review is performed through https://lgtm.com services.
 
 ## Documentation
 
@@ -539,21 +540,23 @@ For neural network based models like multi-layer perceptrons, decision tree clas
 
 # ORBIS Dataset: a real world ROSE application
 
-Benchmark test datasets usually are convenient. The data are clean, there is an actual relationship, all the variables are used.
+Benchmark test toy datasets are usually convenient: the data are clean, there is are actual relationships, all the variables are used.
 
 We decided to test ROSE in a real world problem belonging to a field considered difficult to handle: econometrics. 
 
 ## Problem description
 
-In this particular project the Client asked the following question:
+In this particular project we are trying to answer the following question:
 
 > Is it possible to foresee which firm have potential for becoming an High Growth Firm, given their economic status at the first year of activity?
 
-It is generally understood that the outcome of such prevision is not feasible with 100% accuracy, but over last years many techniques were advanced to improve forecast from economic datasets.[^Coad, 2019] One of the main issues about this topic is the imbalanced nature of the problem. Without the aim of generating the best model, we want to explore the effect of data rebalancing using ROSE on this dataset, when training some basic, unoptimized model. Model choice and parameter optimization has been left on for future work, being out of scope for this project.
+In other words we want to know if, for a firm, a good beginning leads to a good ending. It is generally understood that the outcome of such prevision is not feasible with 100% accuracy, but over last years many techniques were advanced to improve forecast from economic datasets.[^Coad, 2019] One of the main issues about this topic is the imbalanced nature of the problem. Without the aim of generating the best model, we want to explore the effect of data rebalancing using ROSE on this dataset, when training some basic, unoptimized model. Model choice and parameter optimization has been left on for future work, being out of scope for this project. 
+
+The original ORBIS dataset included informations for 5 years (2000-2004). We have been provided the first year (2000) data, and a label computed from HGF function on the data of all 5 years, with the objective of being able to infer it.
 
 ## Dataset description
 
-The Client provided a dataset that is a subset of ORBIS database, a collection of information on listed company across the globe, curated  by Bureau Van Djik (henceforth BvD), a Moody's Analytics controlled private society. BvD collects information from about 375 millions of public and private firms in a standardized way, allowing for comparison and analytics. ORBIS data comes from more than 160 providers and hundreds of internal sources. The firm activity itself revolves about the reconstruction of proprietary assets and recognition of effective owners, providing firm structure hierarchy diagrams to rebuild dependencies among groups and controlled societies. Those data can be used to find informations about a firm, can be filtered to find firms that satisfy certain criteria, analyze peer groups, retrieve market informations about competitors and potential collaborations, and analyze stakeholders interdependence and financial strength.
+The provided dataset that is a subset of ORBIS database, a collection of information on listed company across the globe, curated  by Bureau Van Djik (henceforth BvD), a Moody's Analytics controlled private society. BvD collects information from about 375 millions of public and private firms in a standardized way, allowing for comparison and analytics. ORBIS data comes from more than 160 providers and hundreds of internal sources. The firm activity itself revolves about the reconstruction of proprietary assets and recognition of effective owners, providing firm structure hierarchy diagrams to rebuild dependencies among groups and controlled societies. Those data can be used to find informations about a firm, can be filtered to find firms that satisfy certain criteria, analyze peer groups, retrieve market informations about competitors and potential collaborations, and analyze stakeholders interdependence and financial strength.
 
 ORBIS is used by enterprise, governments and public administrations, academic entities, financial institutes and professional studies, and is focused on efficiency aimed at decisional processes. Different targets can be optimized by ORBIS data:
 
@@ -565,7 +568,7 @@ ORBIS is used by enterprise, governments and public administrations, academic en
 * M&A and corporate finance
 * Master Data Management projects
 
-We had no direct source to the original data, that were provided as a comma separated values (CSV) archived version with the data of 115840 firms. Being expensive data, we are not allowed to publish them for repeatability, but we included a MD5 checksum of the provided file.
+We had no direct source to the original data, that were provided as a comma separated values (CSV) archived version with the data of 115840 firms. With data being non-free, commercial, and protected by intellectual property rights, we are not allowed to publish them for repeatability, but we included a MD5 checksum of the provided file.
 
 ```
 HGFfinal.merge.csv
@@ -599,13 +602,13 @@ A report for univariate analysis can be read in Appendix 1. Every variable has b
 
 ## High Growth Firms
 
-The first issue to track was negotiating with the Client an objective definition of High Growth Firm (henceforth, HGF). HGF is a dichotomic variable, defining whether a firm is a good performer.
+The first issue to track was negotiating an objective definition of High Growth Firm (henceforth, HGF). HGF is a dichotomic variable, defining whether a firm is a good performer. HGF function has been evaluated on the data coming from 5 years (2000-2004), and used to label data from first year, that compose our dataset itself. We had no access to raw data of other years, just to the HGF boolean output.
 
 There are multiple definition of HGF in literature, that leads to the choice of our metric.
 
 ### HGF metrics
 
-There are three different accepted definition of HGF:
+ There are three different accepted definition of HGF:
 
 1. **Compound Annual Growth Rate (CAGR)**. Companies with an average growth rate $\ge$20% for the first 5 years:
    $$
@@ -641,7 +644,7 @@ The uneven distribution of the variable frequency on different countries, especi
 
 We applied ROSE on the dataset, and checked the performance of different models pre- and post- resampling. To be able to do that, we cleaned the dataset, assigning correct data types, filtering typos, dropping redundant columns. The entire process is explained in this sub-chapter.
 
-### data cleaning
+### Data cleaning
 
 From bibliography, consultation with financial experts and understanding the dataset we recognized that a lot of columns where just sum of other columns. The graphs in variable descriptions (Appendix 1) helps understanding this collinearity. It was judged safe to just drop derived variables, keeping only original ones. The following variables were dropped:
 
@@ -701,15 +704,15 @@ for var in ["Country.ISO.Code",
     df = df.drop(var, axis=1)
 ```
 
-After the cleaning, the dataset's shape was 90711 examples, with 832 variables, most of them due to the one-hot-encoding. Of these, in 2343 samples $HGF=True$, while in 88368 $HGF=False$.
+Before cleaning, dataset was composed by 115840 examples, with 59 variables. After the cleaning, it included 90711 examples, with 832 variables, most of them due to the one-hot-encoding. Of these, in 2343 samples $HGF=True$, while in 88368 $HGF=False$.
 
 ### Data visualization
 
-Given the high dimensionality, we used $t$-distributed stochastic neighbor embedding ($t$-SNE) to plot a representation of the original data. The parameters of the $t$-SNE were: $perplexity=100, iterations = 250, n\_components=2$. Extra iteration and different perplexities has been tested, withtout significant improvement. 
+Given the high dimensionality, we used $t$-distributed stochastic neighbor embedding ($t$-SNE) to plot a representation of the original data. The parameters of the $t$-SNE were: $perplexity=100, iterations = 250, n\_components=2$. Extra iteration and different perplexities has been tested, without significant improvement. 
 
 ![image-20201014140225746](image-20201014140225746.png)
 
-Fig _ $t$-SNE of original dataset. Green sample ($HGF=True$) size has been exaggerated on purpose. 
+$t$-SNE of original dataset. Green sample ($HGF=True$) size has been exaggerated on purpose. 
 
 
 
@@ -719,7 +722,7 @@ A default `imblearn.over_sampling.ROSE()` instance has been generated, with `ran
 
 ![image-20201014124045802](image-20201014124045802.png)
 
-Fig _ $t$-SNE plot of resampled dataset
+$t$-SNE plot of resampled dataset
 
 The resampler was used to even the classes, and different models has been tested, without optimization. To begin, we tested a Gaussian Naive Bayes model:
 
@@ -765,11 +768,11 @@ To better visualize the tradeoff between precision and recall in both models, we
 
 This work's first objective, ROSE implementation in Python's package `imbalanced-learn` has been successfully achieved, and with the next release it will be available for all users.
 
-Binary classifier metrics evaluation and choice have proven to be a big challenge. Matthews correlation coefficient has proven a severe judge, performing better than $F_1$ score in describing, in a single number, the model performance.
+Binary classifier metrics evaluation and choice have proven to be a big challenge. Matthews correlation coefficient has proven to be a severe judge, performing better than $F_1$ score in describing, in a single number, the model performance.
 
 Additional models could have been tested, like bigger ANNs, different NN architectures, or Gaussian Process classifiers, but additional computational power is required to do that, given the number of models to train and compare. By expanding the set, given the high repeatability of the tests, we could be able to propose a standard suite for testing resamplers.
 
-Testing ROSE under different datasets and algorithms showed that, in some cases, its performance can equal and even be better than other resamplers. The difference is exacerbated when the imbalance ratio of the dataset is higher.
+Testing ROSE under different datasets and algorithms showed that, in some cases, its performance can equal and even be better than other resamplers. The difference is exacerbated when the imbalance ratio of the dataset is higher, with an apparent better performance on more imbalanced datasets.
 
 This is only the first part of ROSE development for Python. The algorithm still has unsolved issues, like incapacity of treating categorical data, or variables with limited support. Ideas for solutions have been discussed, and will be implemented in the future, but their implementation and validation were out of scope for this project.
 
