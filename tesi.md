@@ -512,23 +512,41 @@ We report the tables of Matthews Correlation Coefficient for each model.
 
 ![image-20201013165631877](image-20201013165631877.png)
 
+<img src="image-20201111093249283.png" alt="image-20201111093249283" style="zoom:67%;" />
+
 ![image-20201013165826295](image-20201013165826295.png)
+
+<img src="image-20201111093324559.png" alt="image-20201111093324559" style="zoom:67%;" />
 
 ![image-20201013165834607](image-20201013165834607.png)
 
+<img src="image-20201111093405327.png" alt="image-20201111093405327" style="zoom:67%;" />
+
 ![image-20201013165843620](image-20201013165843620.png)
+
+<img src="image-20201111093437628.png" alt="image-20201111093437628" style="zoom:67%;" />
 
 ![image-20201013165853579](image-20201013165853579.png)
 
+<img src="image-20201111093503280.png" alt="image-20201111093503280" style="zoom:67%;" />
+
 ![image-20201013165904876](image-20201013165904876.png)
+
+<img src="image-20201111093530591.png" alt="image-20201111093530591" style="zoom:67%;" />
 
 
 
 ![image-20201013165915415](image-20201013165915415.png)
 
+<img src="image-20201111093602412.png" alt="image-20201111093602412" style="zoom:67%;" />
+
 ![image-20201013165926426](image-20201013165926426.png)
 
+<img src="image-20201111093628557.png" alt="image-20201111093628557" style="zoom:67%;" />
+
 ![image-20201013165932412](image-20201013165932412.png)
+
+<img src="image-20201111093656327.png" alt="image-20201111093656327" style="zoom:67%;" />
 
 Other metrics are reported in Appendix 2, for completeness.
 
@@ -3639,47 +3657,83 @@ In this section we will show tables of results, analogue to the ones shown in Ch
 
 ![image-20201014143318500](image-20201014143318500.png)
 
+<img src="image-20201111094038089.png" alt="image-20201111094038089" style="zoom:67%;" />
+
 
 
 ![image-20201014143338517](image-20201014143338517.png)
+
+<img src="image-20201111094113171.png" alt="image-20201111094113171" style="zoom:67%;" />
 
 
 
 ![image-20201014143524698](image-20201014143524698.png)
 
+<img src="image-20201111094139625.png" alt="image-20201111094139625" style="zoom:67%;" />
+
 ![image-20201014143547873](image-20201014143547873.png)
+
+<img src="image-20201111094201281.png" alt="image-20201111094201281" style="zoom:67%;" />
 
 ![image-20201014143620848](image-20201014143620848.png)
 
+<img src="image-20201111094223975.png" alt="image-20201111094223975" style="zoom:67%;" />
+
 ![image-20201014143643155](image-20201014143643155.png)
+
+<img src="image-20201111094348262.png" alt="image-20201111094348262" style="zoom:67%;" />
 
 ![image-20201014143712787](image-20201014143712787.png)
 
+<img src="image-20201111094411928.png" alt="image-20201111094411928" style="zoom:67%;" />
+
 ![image-20201014143745004](image-20201014143745004.png)
 
+<img src="image-20201111094444627.png" alt="image-20201111094444627" style="zoom:67%;" />
+
 ![image-20201014143808817](image-20201014143808817.png)
+
+<img src="image-20201111094515644.png" alt="image-20201111094515644" style="zoom:67%;" />
 
 ## $F_1$ score (mean of the two classes)
 
 ![image-20201014143957776](image-20201014143957776.png)
 
+<img src="image-20201111094632843.png" alt="image-20201111094632843" style="zoom:67%;" />
+
 ![image-20201014144022459](image-20201014144022459.png)
+
+<img src="image-20201111094658800.png" alt="image-20201111094658800" style="zoom:67%;" />
 
 ![image-20201014144048673](image-20201014144048673.png)
 
+<img src="image-20201111094736589.png" alt="image-20201111094736589" style="zoom:67%;" />
+
 ![image-20201014144114626](image-20201014144114626.png)
+
+<img src="image-20201111094759246.png" alt="image-20201111094759246" style="zoom:67%;" />
 
 ![image-20201014144139178](image-20201014144139178.png)
 
+<img src="image-20201111094825682.png" alt="image-20201111094825682" style="zoom:67%;" />
+
 ![image-20201014144200000](image-20201014144200000.png)
+
+<img src="image-20201111094849718.png" alt="image-20201111094849718" style="zoom:67%;" />
 
 ![image-20201014144226257](image-20201014144226257.png)
 
+<img src="image-20201111094910050.png" alt="image-20201111094910050" style="zoom:67%;" />
+
 ![image-20201014144251158](image-20201014144251158.png)
+
+<img src="image-20201111094931189.png" alt="image-20201111094931189" style="zoom:67%;" />
 
 ![image-20201014144314407](image-20201014144314407.png)
 
-# Appendix 3: benchmark datasets descriptions
+<img src="image-20201111094950899.png" alt="image-20201111094950899" style="zoom:67%;" />
+
+# Appendix 3: details about benchmark datasets
 
 *NOTE: This appendix includes the information on the benchmark datasets, as reported from the source websites. Descriptions have been written by the dataset author, so every "we" here is referred to the original authors.*
 
