@@ -510,47 +510,29 @@ The following metrics have been measured, for every model/dataset/resampler comb
 
 We report the tables of Matthews Correlation Coefficient for each model.
 
-![image-20201013165631877](image-20201013165631877.png)
+![image-20201117172057455](image-20201117172057455.png)
 
-<img src="image-20201111093249283.png" alt="image-20201111093249283" style="zoom:67%;" />
+![image-20201117172124956](image-20201117172124956.png)
 
-![image-20201013165826295](image-20201013165826295.png)
+![image-20201117172144930](image-20201117172144930.png)
 
-<img src="image-20201111093324559.png" alt="image-20201111093324559" style="zoom:67%;" />
+![image-20201117172209078](image-20201117172209078.png)
 
-![image-20201013165834607](image-20201013165834607.png)
+![image-20201117172242765](image-20201117172242765.png)
 
-<img src="image-20201111093405327.png" alt="image-20201111093405327" style="zoom:67%;" />
+![image-20201117172303523](image-20201117172303523.png)
 
-![image-20201013165843620](image-20201013165843620.png)
+![image-20201117172328162](image-20201117172328162.png)
 
-<img src="image-20201111093437628.png" alt="image-20201111093437628" style="zoom:67%;" />
+![image-20201117172401787](image-20201117172401787.png)
 
-![image-20201013165853579](image-20201013165853579.png)
-
-<img src="image-20201111093503280.png" alt="image-20201111093503280" style="zoom:67%;" />
-
-![image-20201013165904876](image-20201013165904876.png)
-
-<img src="image-20201111093530591.png" alt="image-20201111093530591" style="zoom:67%;" />
-
-
-
-![image-20201013165915415](image-20201013165915415.png)
-
-<img src="image-20201111093602412.png" alt="image-20201111093602412" style="zoom:67%;" />
-
-![image-20201013165926426](image-20201013165926426.png)
-
-<img src="image-20201111093628557.png" alt="image-20201111093628557" style="zoom:67%;" />
-
-![image-20201013165932412](image-20201013165932412.png)
-
-<img src="image-20201111093656327.png" alt="image-20201111093656327" style="zoom:67%;" />
+![image-20201117172427765](image-20201117172427765.png)
 
 Other metrics are reported in Appendix 2, for completeness.
 
-For different algorithms we can observe different effects of using Rose, compared to other algorithms, for resampling. For K-neighbors classifiers, random forest classifiers, or Gaussian naive Bayes, we observe no difference due to resampling methods.
+As expected, all over-samplers improves most model performances.
+
+For different algorithms we can observe different effects of using Rose, compared to other algorithms, for resampling. For K-neighbors classifiers, random forest classifiers, or Gaussian naive Bayes, we observe no difference due to resampling methods. 
 
 Some algorithms are not improved by Rose resampling, like support vector machines, on most datasets.
 
@@ -3655,83 +3637,45 @@ In this section we will show tables of results, analogue to the ones shown in Ch
 
 ## ROC-AUC
 
-![image-20201014143318500](image-20201014143318500.png)
+![image-20201117172917560](image-20201117172917560.png)
 
-<img src="image-20201111094038089.png" alt="image-20201111094038089" style="zoom:67%;" />
+![image-20201117172937753](image-20201117172937753.png)
 
+![image-20201117173024863](image-20201117173024863.png)
 
+![image-20201117173046938](image-20201117173046938.png)
 
-![image-20201014143338517](image-20201014143338517.png)
+![image-20201117173107434](image-20201117173107434.png)
 
-<img src="image-20201111094113171.png" alt="image-20201111094113171" style="zoom:67%;" />
+![image-20201117173130136](image-20201117173130136.png)
 
+![image-20201118100118880](image-20201118100118880.png)
 
+![image-20201118100140611](image-20201118100140611.png)
 
-![image-20201014143524698](image-20201014143524698.png)
-
-<img src="image-20201111094139625.png" alt="image-20201111094139625" style="zoom:67%;" />
-
-![image-20201014143547873](image-20201014143547873.png)
-
-<img src="image-20201111094201281.png" alt="image-20201111094201281" style="zoom:67%;" />
-
-![image-20201014143620848](image-20201014143620848.png)
-
-<img src="image-20201111094223975.png" alt="image-20201111094223975" style="zoom:67%;" />
-
-![image-20201014143643155](image-20201014143643155.png)
-
-<img src="image-20201111094348262.png" alt="image-20201111094348262" style="zoom:67%;" />
-
-![image-20201014143712787](image-20201014143712787.png)
-
-<img src="image-20201111094411928.png" alt="image-20201111094411928" style="zoom:67%;" />
-
-![image-20201014143745004](image-20201014143745004.png)
-
-<img src="image-20201111094444627.png" alt="image-20201111094444627" style="zoom:67%;" />
-
-![image-20201014143808817](image-20201014143808817.png)
-
-<img src="image-20201111094515644.png" alt="image-20201111094515644" style="zoom:67%;" />
+![image-20201118100205625](image-20201118100205625.png)
 
 ## $F_1$ score (mean of the two classes)
 
-![image-20201014143957776](image-20201014143957776.png)
+![image-20201117173323938](image-20201117173323938.png)
 
-<img src="image-20201111094632843.png" alt="image-20201111094632843" style="zoom:67%;" />
+![image-20201117173343732](image-20201117173343732.png)
 
-![image-20201014144022459](image-20201014144022459.png)
+![image-20201117173402165](image-20201117173402165.png)
 
-<img src="image-20201111094658800.png" alt="image-20201111094658800" style="zoom:67%;" />
+![image-20201117173421265](image-20201117173421265.png)
 
-![image-20201014144048673](image-20201014144048673.png)
+![image-20201117173443806](image-20201117173443806.png)
 
-<img src="image-20201111094736589.png" alt="image-20201111094736589" style="zoom:67%;" />
+![image-20201117173505942](image-20201117173505942.png)
 
-![image-20201014144114626](image-20201014144114626.png)
+![image-20201117173522346](image-20201117173522346.png)
 
-<img src="image-20201111094759246.png" alt="image-20201111094759246" style="zoom:67%;" />
+![image-20201117173541265](image-20201117173541265.png)
 
-![image-20201014144139178](image-20201014144139178.png)
+![image-20201117173558886](image-20201117173558886.png)
 
-<img src="image-20201111094825682.png" alt="image-20201111094825682" style="zoom:67%;" />
 
-![image-20201014144200000](image-20201014144200000.png)
-
-<img src="image-20201111094849718.png" alt="image-20201111094849718" style="zoom:67%;" />
-
-![image-20201014144226257](image-20201014144226257.png)
-
-<img src="image-20201111094910050.png" alt="image-20201111094910050" style="zoom:67%;" />
-
-![image-20201014144251158](image-20201014144251158.png)
-
-<img src="image-20201111094931189.png" alt="image-20201111094931189" style="zoom:67%;" />
-
-![image-20201014144314407](image-20201014144314407.png)
-
-<img src="image-20201111094950899.png" alt="image-20201111094950899" style="zoom:67%;" />
 
 # Appendix 3: details about benchmark datasets
 
