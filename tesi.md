@@ -6,6 +6,16 @@
 
 [TOC]
 
+# Abstract [ITA]
+
+L'apprendimento sbilanciato si riferisce ad una classe di problemi in cui la distribuzione della variabile bersaglio è estremamente asimmetrica: alcune classi sono più rappresentate di altre. A titolo di esempio, tale problema è spesso osservato in dati clinici, economici, assicurativi o genomici in cui gli esempi della classe di minoranza sono rari, costosi, poco etici da produrre o semplicemente inesistenti. Quest'asimmetria si può ripercuote duramente sulle prestazioni dei classificatori, fino alla paradossale genesi di classificatori spesso corretti, ma completamente inutili nel dare risposte utili rispondere alle domande poste sui dati.
+
+Al fine di contenere il problema, una classe di algoritmi si pone l'obiettivo di ribilanciare questi set di dati, sia ottimizzando lo scarto di dati della classe più rappresentata, sia generando nuovi dati sintetici a partire da quelli esistenti. Esistono già varie tecniche comunemente usate, quale SMOTE e ADASYN, per la generazione di dati sintetici.. Nel 2014 Menardi e Torelli hanno pubblicato un articolo in cui propongono un nuovo algoritmo: ROSE, acronimo di *Random Over Sampling Examples*, un ricampionatore che genera nuovi dati sintetici usando un approcio di *smoothed bootstrap* dai dati esistenti nella classe di minoranza, tramite estrazione dalla distribuzione generata da uno stimatore di kernel Gaussiano.
+
+Essendo già disponibile come libreria all'interno del software statistico **R**, questo lavoro si pone come obiettivo principale l'implementazione di ROSE all'interno del package Python `imbalanced-learn`, con lo scopo di renderlo più accessibile alla comunità scientifica. Una volta implementato, a scopo di convalidarne l'efficacia, verrà allestito un framework di test su un insieme di dataset standard, attraverso il quale ROSE verrà confrontato con gli altri algoritmi di resampling già presenti nella libreria qualora venisse usato con differenti modelli di apprendimento.
+
+Infine, per validarne l'uso anche su dati reali, ROSE verrà usato per ricampionare i dati di ORBIS, un dataset sbilanciato contenente informazioni economiche di decine di migliaia di aziende, e verrà misurato il vantaggio apportato nelle prestazioni di alcuni semplici modelli statistici.
+
 # Introduction
 
 > *“It is the time you have wasted for your rose that makes your rose so important.”*  - Antoine de Saint-Exupery
@@ -612,12 +622,12 @@ There are multiple definition of HGF in literature, that leads to the choice of 
 
 1. **Compound Annual Growth Rate (CAGR)**. Companies with an average growth rate $\ge$20% for the first 5 years:
    $$
-   CAGR =\left(\frac{turnover_{2014}}{turnover_{2010}}\right)^{1/4}-1 \ge 20\%​$
+   CAGR =\left(\frac{turnover_{2014}}{turnover_{2010}}\right)^{1/4}-1 \ge 20\%
    $$
 
 1. **Gazelle**[^Birch, 1995] gazelles are firm with a growth rate that remains $\gt$20% for the first 5 years
    $$
-   Gazele = all \left( \frac{turnover_t}{turnover_{t-1}}\ge 20\% \right), for\ t=2010,\dots,2014
+   Gazelle = all \left( \frac{turnover_t}{turnover_{t-1}}\ge 20\% \right), for\ t=2010,\dots,2014
    $$
 
 1. **Eurostat**[^Chianca, 2008], employed by Eurostat, being HGF means having a growth rate $\ge$20% for 3 consecutive years.
